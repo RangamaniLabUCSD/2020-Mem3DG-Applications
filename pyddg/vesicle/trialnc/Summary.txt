@@ -1,0 +1,37 @@
+Input Mesh: input-file/prolate.ply
+Final parameter: 
+
+Kb:     0.01
+H0:     1.2
+Kse:    0
+Ksl:    0
+Ksg:    2
+Kv:     2.2
+gamma:  100
+Vt:     0.69
+kt:     -0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    0.0001
+T:     2
+
+States: 
+
+Bending Energy:   1078.48
+Total Energy:   4.55663e+08
+L2 error norm:1.04186e+06
+Volume:           80.2664 = 19.4429 reduced volume
+Surface area:     75316.8 = 6051.9 target surface area
+COM (x, y, z):		-2885.33 -4868.36     2728
+
+Errors: 
+
+Bending error:       64.7583%
+Volume error:        2717.81%
+Surface area error:  605090%
+Face area error:     0%
