@@ -35,6 +35,7 @@ if not os.path.exists(ODir):
 
 # copy the config.json to outputDir
 shutil.copyfile(args.config, geo["outputDir"] + "config.json" )
+shutil.copyfile("viewer.py", geo["outputDir"] + "viewer.py")
 
 # create starting mesh
 if geo["generateGeometry"] == True:
@@ -53,8 +54,12 @@ pymem3dg.driver(inputMesh = geo["inputMesh"],
             isTuftedLaplacian = opt["isTuftedLaplacian"],
             mollifyFactor = opt["mollifyFactor"],
             isVertexShift = opt["isVertexShift"],
+            isProtein = opt["isProtein"],
 
+            epsilon = var["epsilon"],
             H0 = var["H0*R"] / geo["R"],
+            sharpness = var["sharpness"],
+            r_H0 = var["r_H0"],
             Vt = var["Vt"],
             ptInd = var["ptInd"],  
             Kf = var["Kf"],

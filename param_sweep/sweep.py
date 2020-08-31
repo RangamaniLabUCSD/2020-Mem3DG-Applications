@@ -12,6 +12,8 @@ import subprocess
 from tqdm.contrib.concurrent import process_map
 import numpy as np
 
+import concurrent.futures
+
 def worker(args):
     kb = args[0]
     oPath = args[1]
@@ -27,8 +29,12 @@ def worker(args):
                 isTuftedLaplacian = False,
                 mollifyFactor = 1e-3,
                 isVertexShift = False,
+                isProtein = False,
 
+                epsilon = 0.01,
                 H0 = 0,
+                sharpness = 10,
+                r_H0 = 0.5,
                 Vt = 0.65,
                 ptInd = 0,  
                 Kf = 0,
@@ -55,9 +61,13 @@ def worker(args):
 def runSims():
     jobs = []
     for i, kb in enumerate(np.arange(0,0.1,0.01)):
-        for replicate in np.arange(0,10000):
+        for replicate in np.arange(0,1):
             path = f'run_{i}_{replicate}/'
-            jobs.append((kb,path,))
+            jobs.append((kb,path))
+
+    # with concurrent.futures.ProcessPoolExecutor() as executor:
+    #     results = executor.map(worker, jobs)     
+
     r = process_map(worker, jobs, max_workers=4)
 
 if __name__ == "__main__":

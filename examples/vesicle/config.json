@@ -11,7 +11,9 @@
             "generateGeometry": false,
             "R" : 1,
             "nSub" : 10,
+
             "radiusOfIntegration" : 10,
+            
             "refMesh" : "input-file/slightlyOblate.ply",
             "inputMesh" : "input-file/slightlyOblate.ply",
             "outputDir" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/vesicle/testing0822/"
@@ -21,13 +23,18 @@
         {
             "isTuftedLaplacian" : false,
             "mollifyFactor" : 1e-3,
-            "isVertexShift" : false
+            "isVertexShift" : false,
+            "isProtein" : true
         },
 
         "variables":
         {
-            "H0*R" : 0,
+            "epsilon" : 0.01,
+            "H0*R" : 5,
+            "sharpness" : 10,
+            "r_H0" : 0.5,
             "Vt" : 0.65,
+
             "ptInd" : 0,
             "Kf" : 0,
             "conc" : 25,
@@ -37,11 +44,13 @@
         "properties":
         {
             "Kb" : 0.01,
+            "Kv"  : [3,5],
+            "Ksg" : [15,100],
+
             "Kse" : 0,     
             "Ksl" : 0.1,
-            "Kst" : 0.01,		
-            "Ksg" : [15,100],		
-            "Kv"  : [15,100],
+            "Kst" : 0.01,			
+
             "kt" : 0,
             "gamma" : 10
         },
@@ -50,8 +59,10 @@
         {
             "h" : 0.0001,
             "T" : 5000,
+
             "eps" : 0.02,
             "closeZone" : 10000,
+
             "increment" : 0.1,
             "tSave" : 1,
             "tMollify" : 10
