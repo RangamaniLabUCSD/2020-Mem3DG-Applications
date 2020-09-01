@@ -29,7 +29,7 @@
 
         "variables":
         {
-            "epsilon" : 0.01,
+            "epsilon" : 0.1,
             "H0*R" : 5,
             "sharpness" : 10,
             "r_H0" : 0.5,
