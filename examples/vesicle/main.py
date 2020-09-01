@@ -57,6 +57,7 @@ pymem3dg.driver(inputMesh = geo["inputMesh"],
             isProtein = opt["isProtein"],
 
             epsilon = var["epsilon"],
+            Bc = var["Bc"],
             H0 = var["H0*R"] / geo["R"],
             sharpness = var["sharpness"],
             r_H0 = var["r_H0"],

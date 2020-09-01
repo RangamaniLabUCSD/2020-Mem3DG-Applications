@@ -29,12 +29,13 @@ def worker(args):
                 isTuftedLaplacian = False,
                 mollifyFactor = 1e-3,
                 isVertexShift = False,
-                isProtein = False,
+                isProtein = true,
 
-                epsilon = 0.01,
-                H0 = 0,
+                epsilon = 8e-5,
+                Bc = 20,
+                H0 = 4,
                 sharpness = 10,
-                r_H0 = 0.5,
+                r_H0 = 3,
                 Vt = 0.65,
                 ptInd = 0,  
                 Kf = 0,
@@ -43,24 +44,24 @@ def worker(args):
                 
                 Kb  = kb,
                 Kse = 0,     
-                Ksl = 0.1,
-                Kst = 0.01,		
-                Ksg = [15,100],		
-                Kv  = [15,100], 	
+                Ksl = 0.01,
+                Kst = 0,		
+                Ksg = [0.15,1],		
+                Kv  = [0.05,0.1], 	
                 kt = 0, 
                 gamma = 10, 
                 
-                h = 0.0001,
-                T = 20,
-                eps = 0.02,
-                closeZone = 10000,
+                h = 1e-3,
+                T = 1000,
+                eps = 0.002,
+                closeZone = 1000,
                 increment = 0.1,
                 tSave = 10,
-                tMollify = 10)
+                tMollify = 100)
     
 def runSims():
     jobs = []
-    for i, kb in enumerate(np.arange(0,0.1,0.01)):
+    for i, kb in enumerate(np.arange(1e-5,0.1,1e-4)):
         for replicate in np.arange(0,1):
             path = f'run_{i}_{replicate}/'
             jobs.append((kb,path))

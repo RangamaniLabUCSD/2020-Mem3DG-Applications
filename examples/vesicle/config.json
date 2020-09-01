@@ -1,5 +1,9 @@
 {
     "parameters":{
+        "comments":
+        {
+            "units": "micron, gram, second, nanonewton"
+        },
 
         "dependencies":
         {
@@ -29,10 +33,11 @@
 
         "variables":
         {
-            "epsilon" : 0.01,
-            "H0*R" : 5,
+            "epsilon" : 8e-5,
+            "Bc" : 10,
+            "H0*R" : 4,
             "sharpness" : 10,
-            "r_H0" : 0.5,
+            "r_H0" : 3,
             "Vt" : 0.65,
 
             "ptInd" : 0,
@@ -43,29 +48,29 @@
 
         "properties":
         {
-            "Kb" : 0.01,
-            "Kv"  : [3,5],
-            "Ksg" : [15,100],
+            "Kb" : 8.22e-5,
+            "Kv"  : [0.05,0.1],
+            "Ksg" : [0.15, 1],
 
             "Kse" : 0,     
-            "Ksl" : 0.1,
-            "Kst" : 0.01,			
+            "Ksl" : 0.01,
+            "Kst" : 0,			
 
             "kt" : 0,
-            "gamma" : 10
+            "gamma" : 0.1
         },
 
         "integration":
         {
-            "h" : 0.0001,
-            "T" : 5000,
+            "h" : 1e-3,
+            "T" : 10000,
 
-            "eps" : 0.02,
-            "closeZone" : 10000,
+            "eps" : 0.002,
+            "closeZone" : 1000,
 
             "increment" : 0.1,
-            "tSave" : 1,
-            "tMollify" : 10
+            "tSave" : 10,
+            "tMollify" : 100
         }
 }
     
