@@ -11,10 +11,15 @@
             "generateGeometry": false,
             "R" : 1,
             "nSub" : 3,
+
             "radiusOfIntegration" : 0.8,
+            
             "refMesh" : "input-file/patch.ply",
             "inputMesh" : "trial12/t=80.ply",
-            "outputDir" : "trial13/"
+            "outputDir" : "trial13/",
+
+            "trajFile" : "",
+            "startingFrame": 0
         },
 
         "options":
