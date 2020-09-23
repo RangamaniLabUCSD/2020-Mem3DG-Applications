@@ -1,5 +1,9 @@
 {
     "parameters":{
+        "comments":
+        {
+            "units": "micron, gram, second, nanonewton"
+        },
 
         "dependencies":
         {
@@ -12,11 +16,11 @@
             "R" : 1,
             "nSub" : 10,
 
-            "radiusOfIntegration" : 10,
+            "radiusOfIntegration" : 1,
             
-            "refMesh" : "input-file/slightlyOblate.ply",
-            "inputMesh" : "input-file/slightlyOblate.ply",
-            "outputDir" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/vesicle/testing0822/"
+            "refMesh" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications\\examples\\vesicle\\input-file\\finerForTubeSphere.ply",
+            "inputMesh" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications\\examples\\vesicle\\input-file\\finerForTubeSphere.ply",
+            "outputDir" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/vesicle/testingForVertexDataInNetcdf0909/"
         },
 
         "options":
@@ -24,18 +28,21 @@
             "isTuftedLaplacian" : false,
             "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
-            "isProtein" : true
+            "isProtein" : false
         },
 
         "variables":
         {
-            "epsilon" : 0.1,
-            "H0*R" : 5,
-            "sharpness" : 10,
-            "r_H0" : 0.5,
-            "Vt" : 0.65,
+            "epsilon" : 15e-5,
+            "Bc" : 40,
 
-            "ptInd" : 0,
+            "H0*R" : 40,
+            "sharpness" : 100,
+            "r_H0" : 0.1,
+
+            "Vt" : 1,
+
+            "ptInd" : 809,
             "Kf" : 0,
             "conc" : 25,
             "height" : 0
@@ -43,29 +50,29 @@
 
         "properties":
         {
-            "Kb" : 0.01,
-            "Kv"  : [3,5],
-            "Ksg" : [15,100],
+            "Kb" : 8.22e-5,
+            "Kv"  : [5e-2,5e-1],
+            "Ksg" : [0.1, 1],
 
             "Kse" : 0,     
-            "Ksl" : 0.1,
-            "Kst" : 0.01,			
+            "Ksl" : 0,
+            "Kst" : 0,			
 
             "kt" : 0,
-            "gamma" : 10
+            "gamma" : 1
         },
 
         "integration":
         {
-            "h" : 0.0001,
-            "T" : 5000,
+            "h" : 1e-5,
+            "T" : 0.2,
 
-            "eps" : 0.02,
-            "closeZone" : 10000,
+            "eps" : 0.002,
+            "closeZone" : 1000,
 
             "increment" : 0.1,
-            "tSave" : 1,
-            "tMollify" : 10
+            "tSave" : 1e-1,
+            "tMollify" : 100
         }
 }
     
