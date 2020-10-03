@@ -18,7 +18,8 @@ def worker(args):
     r_H0 = args[0]
     oPath = args[1]
     # print(oPath)
-    os.mkdir(oPath)
+    if not os.path.exists(oPath):
+        os.mkdir(oPath)
 
     # run simulation
     pymem3dg.driver_ply(inputMesh = 'input-file\\patch.ply',
