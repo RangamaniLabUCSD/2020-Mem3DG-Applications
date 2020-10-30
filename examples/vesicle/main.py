@@ -54,6 +54,7 @@ if (options.ply != None):
     pymem3dg.driver_ply(inputMesh = geo["inputMesh"],
                 outputDir = geo["outputDir"],
                 refMesh = geo["refMesh"],
+                nSub = geo["nSub"],
                 radius = geo["radiusOfIntegration"],
 
                 isTuftedLaplacian = opt["isTuftedLaplacian"],

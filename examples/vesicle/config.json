@@ -14,16 +14,16 @@
         {
             "generateGeometry": false,
             "R" : 1,
-            "nSub" : 10,
-
-            "radiusOfIntegration" : 10,
             
-            "refMesh" : "G:\\My Drive\\Work\\graduate_research\\Manuscripts_in_process\\DDG\\simulationResult\\logs\\08172020_ravi_meeting\\H0_0p0_Vt_0p65_oblate\\t=0.ply",
-            "inputMesh" : "G:\\My Drive\\Work\\graduate_research\\Manuscripts_in_process\\DDG\\simulationResult\\logs\\08172020_ravi_meeting\\H0_0p0_Vt_0p65_oblate\\t=2700.ply",
-            "outputDir" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/vesicle/figuresformolssi/",
+            "refMesh" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/examples/vesicle/input-file/patch.ply",
+            "inputMesh" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/examples/vesicle/input-file/patch.ply",
+            "outputDir" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/vesicle/patch2_continuation/",
+            "nSub" : 0,
 
-            "trajFile" : " ",
-            "startingFrame": 0
+            "radiusOfIntegration" : 0.9,
+
+            "trajFile" :  "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/vesicle/patch2/traj.nc",
+            "startingFrame": 20
         },
 
         "options":
@@ -39,13 +39,13 @@
             "epsilon" : 15e-5,
             "Bc" : 40,
 
-            "H0*R" : 0,
-            "sharpness" : 10,
-            "r_H0" : 10,
+            "H0*R" : 40,
+            "sharpness" : 100,
+            "r_H0" : 0.1,
 
             "Vt" : 1,
 
-            "ptInd" : 0,
+            "ptInd" : 672,
             "Kf" : 0,
             "conc" : 25,
             "height" : 0
@@ -54,27 +54,27 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "Kv"  : [5e-2,5e-1],
-            "Ksg" : [0.1, 1],
+            "Kv"  : [5e-2, 5e-1],
+            "Ksg" : [0.1, 0.1],
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 0,			
+            "Kst" : 100,			
 
             "kt" : 0,
-            "gamma" : 1
+            "gamma" : 2
         },
 
         "integration":
         {
-            "h" : 1e-5,
-            "T" : 2e-5,
+            "h" : 5e-5,
+            "T" : 3,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
             "increment" : 0,
-            "tSave" : 1e-1,
+            "tSave" : 5e-1,
             "tMollify" : 100
         }
 }
