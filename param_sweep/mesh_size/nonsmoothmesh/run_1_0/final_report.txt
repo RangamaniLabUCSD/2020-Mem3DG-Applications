@@ -1,0 +1,49 @@
+Input Mesh: ../input-file/slightlyOblate.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     0
+Kse:    0
+Ksl:    0
+Kst:    0
+Ksg:    0.1
+Kv:     0.05
+gamma:  0
+Vt:     0.7
+kt:     0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    1e-06
+T:     5
+Frame: 50
+
+States: 
+
+Bending Energy:   0.00122089
+Surface Energy:   0.00821817
+Pressure Work:    0.00255827
+Kinetic Work:    0.00235229
+Chemical Energy:  0
+Total Energy:     0.0143496
+L2 error norm:    0.168189
+Volume:           3.44836 = 0.831418 reduced volume
+Surface area:     11.0514 = 0.885256 target surface area
+COM (x, y, z):		  0.000801989  -0.00215964 -0.000180404
+
+Errors: 
+
+Bending error:       0.262258%
+Volume error:        18.774%
+Surface area error:  11.4744%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    0
+Is considering protein: 0
+Is vertex shift: 0
