@@ -1,0 +1,42 @@
+Input Mesh: C:\Users\Kieran\Dev\2020-Mem3DG-Applications/results/vesicle/H0_0p0_Vt_0p65_oblate/t=2500.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     40
+Kse:    0
+Ksl:    0.05
+Kst:    0
+Ksg:    0.1
+Kv:     0.05
+gamma:  2
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  672
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    5e-05
+T:     0.0001
+
+States: 
+
+Bending Energy:   0.00534003
+Total Energy:     0.0156
+L2 error norm:    0.178026
+Volume:           2.74965 = 0.681151 reduced volume
+Surface area:     12.2605 = 1 target surface area
+COM (x, y, z):		  -0.0551574  -0.0425779 -0.00232699
+
+Errors: 
+
+Bending error:       5.79461e-07%
+Volume error:        31.8849%
+Surface area error:  1.04592e-09%
+Face area error:     1.98458e-09%
+
+Options: 
+
+Is tufted laplacian: 0

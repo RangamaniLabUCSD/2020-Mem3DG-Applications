@@ -1,0 +1,22 @@
+Physical parameters used: 
+
+Kb:     0.01
+H0:     0
+Kse:    0
+Ksl:    1
+Ksg:    2
+Kv:     0
+gamma:  1
+Vt:     0.7
+kt:     0.0001
+sigma:  1.41421
+ptInd:  0
+extF:   0.2
+conc:   25
+
+Integration parameters used: 
+
+dt:    0.0001
+T:     4
+eps:		1e-09
+tSave: 0.25

@@ -1,0 +1,48 @@
+Input Mesh: input-file\patch.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     40
+Kse:    0
+Ksl:    0.05
+Kst:    0
+Ksg:    0.1
+Kv:     0.05
+gamma:  2
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  672
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    5e-05
+T:     100
+Frame: 1000
+
+States: 
+
+Bending Energy:   1.37324e+08
+Surface Energy:   8.98782e+12
+Pressure Work:    1.57308e+15
+Chemical Energy:  0
+Total Energy:     1.58207e+15
+L2 error norm:    3.54317e+12
+Volume:           3.14617e+16 = inf reduced volume
+Surface area:     8.98782e+13 = 2.86395e+13 target surface area
+COM (x, y, z):		 -1.23167e+07  7.66829e+07  -2.1573e+06
+
+Errors: 
+
+Bending error:       0.741505%
+Volume error:        0%
+Surface area error:  0%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    1
+Is considering protein: 0
+Is vertex shift: 0

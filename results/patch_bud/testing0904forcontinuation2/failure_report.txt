@@ -1,0 +1,46 @@
+Input Mesh: C:\Users\Kieran\Dev\2020-Mem3DG-Applications/results/patch_bud/testing0904/t=10000.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     40
+Kse:    0
+Ksl:    0.05
+Kst:    0
+Ksg:    0.1
+Kv:     0.05
+gamma:  2
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  672
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    5e-05
+T:     0.5
+frame: 5
+
+States: 
+
+Bending Energy:   0.0012837
+Surface Energy:   0.00802786
+Pressure Work:    -0.0239181
+Chemical Energy:  0
+Total Energy:     -0.0146065
+L2 error norm:    0.532501
+Volume:           0.0444032 = 0.0849391 reduced volume
+Surface area:     3.21854 = 1.02558 target surface area
+COM (x, y, z):		  0.0177211   0.034506 -0.0457463
+
+Errors: 
+
+Bending error:       0.502482%
+Volume error:        91.5061%
+Surface area error:  2.55806%
+Face area error:     7.70426%
+
+Options: 
+
+Is tufted laplacian: 1
