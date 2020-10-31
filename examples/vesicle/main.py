@@ -4,6 +4,7 @@ import os
 import optparse
 import shutil
 import pymem3dg
+from pathlib import Path
 
 # parse the config file and options
 optparser = optparse.OptionParser()
@@ -28,6 +29,12 @@ inte = data["parameters"]["integration"]
 dep = data["parameters"]["dependencies"]
 opt = data["parameters"]["options"]
 
+# configure path for different platforms 
+geo['refMesh'] = os.fspath(Path(geo['refMesh']));
+geo['inputMesh'] = os.fspath(Path(geo['inputMesh']));
+geo['outputDir'] = os.fspath(Path(geo['outputDir']));
+geo['trajFile'] = os.fspath(Path(geo['trajFile']));
+
 # make I/O directories if not exist
 cwd = os.getcwd()
 IDir = os.path.join(cwd, os.path.split(geo["inputMesh"])[0])
@@ -38,8 +45,8 @@ if not os.path.exists(ODir):
     os.mkdir(ODir)
 
 # copy the config.json & viewer to the outputDir
-shutil.copyfile(configFile, geo["outputDir"] + "config.json" )
-shutil.copyfile("viewer.py", geo["outputDir"] + "viewer.py")
+shutil.copyfile(configFile, os.path.join(geo["outputDir"], "config.json") )
+shutil.copyfile("viewer.py", os.path.join(geo["outputDir"], "viewer.py"))
 
 # create starting mesh
 if geo["generateGeometry"] == True:
