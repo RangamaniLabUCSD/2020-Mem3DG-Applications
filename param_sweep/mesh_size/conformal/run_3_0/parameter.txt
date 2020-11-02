@@ -20,7 +20,7 @@ height: 0
 
 Integration parameters used: 
 
-dt:       1e-06
+dt:       5e-08
 T:        5
 eps:		   0.002
 tSave:    0.1

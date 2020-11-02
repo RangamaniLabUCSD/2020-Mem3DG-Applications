@@ -54,7 +54,7 @@ def worker(args):
                 kt = 0, 
                 gamma = 0, 
                 
-                h = 1e-6,
+                h = 5e-8,
                 T = 5,
                 eps = 0.002,
                 closeZone = 1000,
@@ -64,9 +64,9 @@ def worker(args):
     
 def runSims():
     jobs = []
-    for i, nSub in enumerate(np.arange(0,4,1)):
+    for i, nSub in enumerate(np.arange(2,4,1)):
         for replicate in np.arange(0,1):
-            path = f'run_{i}_{replicate}/'
+            path = f'run_{i+2}_{replicate}/'
             jobs.append((nSub,path))
 
     with concurrent.futures.ProcessPoolExecutor() as executor:
@@ -76,4 +76,3 @@ def runSims():
 
 if __name__ == "__main__":
     runSims()
-    print('hello')
