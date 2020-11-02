@@ -2,7 +2,7 @@
 
 import sys
 import os
-
+from pathlib import Path
 import argparse
 import shutil
 import pymem3dg
@@ -14,6 +14,9 @@ import numpy as np
 
 import concurrent.futures
 
+inPath = os.fspath(Path('../input-file/patch.ply'))
+refPath = os.fspath(Path('../input-file/patch.ply'))
+
 def worker(args):
     H0 = args[0]
     oPath = args[1]
@@ -22,10 +25,11 @@ def worker(args):
         os.mkdir(oPath)
 
     # run simulation
-    pymem3dg.driver_ply(inputMesh = '../input-file/patch.ply',
+    pymem3dg.driver_ply(inputMesh = inPath,
                 outputDir = oPath,
-                refMesh = '../input-file/patch.ply',
+                refMesh = refPath,
                 radius = 0.9,
+                nSub = 0,
 
                 isTuftedLaplacian = False,
                 mollifyFactor = 1e-3,

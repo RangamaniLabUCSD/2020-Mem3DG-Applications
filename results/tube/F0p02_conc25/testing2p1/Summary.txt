@@ -1,0 +1,34 @@
+Final parameter: 
+
+Kb:     0.01
+H0:     0
+Kse:    0.2
+Ksl:    6
+Ksg:    2.09958
+Kv:     0
+gamma:  100
+Vt:     0.7
+kt:     0
+sigma:  14.1421
+ptInd:  809
+extF:   0.02
+conc:   25
+
+Integration: 
+
+dt:    0.0001
+T:     8
+
+States: 
+
+Bending Energy:   0.192175
+Volume:           3.98914 = 0.964668 reduced volume
+Surface area:     12.4333 = 0.997935 target surface area
+COM (x, y, z):		-0.000553666 -0.000604345     0.588721
+
+Errors: 
+
+Bending error:       0.242803%
+Volume error:        0%
+Surface area error:  0.206451%
+Face area error:     3.60651%

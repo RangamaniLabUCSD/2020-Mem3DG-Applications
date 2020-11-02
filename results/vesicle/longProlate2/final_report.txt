@@ -1,0 +1,49 @@
+Input Mesh: C:\Users\Kieran\Dev\2020-Mem3DG-Applications/results/vesicle/longProlate/traj.nc
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     1.2
+Kse:    0
+Ksl:    0
+Kst:    0.05
+Ksg:    0.1
+Kv:     0.005
+gamma:  0.2
+Vt:     0.53
+kt:     0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    0.0005
+T:     200
+Frame: 200
+
+States: 
+
+Bending Energy:   0.000132163
+Surface Energy:   3.28439e-05
+Pressure Work:    0.000683194
+Kinetic Work:    4.05156e-06
+Chemical Energy:  0
+Total Energy:     0.000852253
+L2 error norm:    0.00236896
+Volume:           2.96127 = 0.717307 reduced volume
+Surface area:     12.3547 = 0.992735 target surface area
+COM (x, y, z):		   0.0249648  -0.0728889 -0.00170659
+
+Errors: 
+
+Bending error:       0.0786328%
+Volume error:        35.3409%
+Surface area error:  0.726512%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    0
+Is considering protein: 0
+Is vertex shift: 0

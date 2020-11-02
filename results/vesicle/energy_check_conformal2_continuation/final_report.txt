@@ -1,0 +1,49 @@
+Input Mesh: C:\Users\Kieran\Dev\2020-Mem3DG-Applications/results/vesicle/energy_check_conformal/traj.nc
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     0
+Kse:    0
+Ksl:    0
+Kst:    2
+Ksg:    0.1
+Kv:     0.05
+gamma:  0
+Vt:     0.7
+kt:     0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    1e-05
+T:     20
+Frame: 200
+
+States: 
+
+Bending Energy:   0.00414542
+Surface Energy:   0.000665028
+Pressure Work:    0.000634015
+Kinetic Work:    0.0123755
+Chemical Energy:  0
+Total Energy:     0.01782
+L2 error norm:    0.157753
+Volume:           2.63195 = 0.634577 reduced volume
+Surface area:     12.8913 = 1.03264 target surface area
+COM (x, y, z):		 -0.00646648 -0.00400672 3.35744e-05
+
+Errors: 
+
+Bending error:       1.37737%
+Volume error:        9.34618%
+Surface area error:  3.26409%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    1
+Is considering protein: 0
+Is vertex shift: 0

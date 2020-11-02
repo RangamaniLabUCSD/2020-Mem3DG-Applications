@@ -1,0 +1,48 @@
+Input Mesh: G:\My Drive\Work\graduate_research\Manuscripts_in_process\DDG\simulationResult\logs\08172020_ravi_meeting\H0_0p0_Vt_0p65_oblate\t=2700.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     0
+Kse:    0
+Ksl:    0
+Kst:    0
+Ksg:    0.1
+Kv:     0.05
+gamma:  1
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    1e-05
+T:     2e-05
+Frame: 1
+
+States: 
+
+Bending Energy:   0.00176284
+Surface Energy:   0.000190872
+Pressure Work:    0.0117399
+Chemical Energy:  0
+Total Energy:     0.0136936
+L2 error norm:    0.0707401
+Volume:           2.74968 = 0.663404 reduced volume
+Surface area:     12.26 = 0.982509 target surface area
+COM (x, y, z):		  -0.0597728  -0.0464029 -0.00247275
+
+Errors: 
+
+Bending error:       1.9809e-10%
+Volume error:        33.6596%
+Surface area error:  1.74908%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    0
+Is considering protein: 0
+Is vertex shift: 0

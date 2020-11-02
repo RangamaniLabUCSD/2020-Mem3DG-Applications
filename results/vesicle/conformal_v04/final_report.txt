@@ -1,0 +1,49 @@
+Input Mesh: C:\Users\Kieran\Dev\2020-Mem3DG-Applications/examples/vesicle/input-file/slightlyOblate.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     0
+Kse:    0
+Ksl:    0
+Kst:    0.05
+Ksg:    0.1
+Kv:     0.005
+gamma:  0.2
+Vt:     0.4
+kt:     0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    0.0005
+T:     100
+Frame: 100
+
+States: 
+
+Bending Energy:   0.00268312
+Surface Energy:   1.72327e-05
+Pressure Work:    0.000474369
+Kinetic Work:    0.00138209
+Chemical Energy:  0
+Total Energy:     0.00455681
+L2 error norm:    0.0231596
+Volume:           2.22009 = 0.535276 reduced volume
+Surface area:     12.4182 = 0.994746 target surface area
+COM (x, y, z):		  0.0834283  -0.165733 0.00127982
+
+Errors: 
+
+Bending error:       1.11115%
+Volume error:        33.819%
+Surface area error:  0.525434%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    0
+Is considering protein: 0
+Is vertex shift: 0
