@@ -17,7 +17,7 @@
             
             "refMesh" : "./input-file/oblate.ply",
             "inputMesh" : "./input-file/oblate.ply",
-            "outputDir" : "../../results/vesicle/cup_continue2/",
+            "outputDir" : "../../results/vesicle/biconcave/",
             "nSub" : 0,
 
             "radiusOfIntegration" : 100000,
@@ -43,7 +43,7 @@
             "sharpness" : 10,
             "r_H0" : 10,
 
-            "Vt" : 0.4,
+            "Vt" : 0.65,
 
             "ptInd" : 0,
             "Kf" : 0,
@@ -68,7 +68,7 @@
         "integration":
         {
             "h" : 5e-4,
-            "T" : 200,
+            "T" : 300,
 
             "eps" : 0.002,
             "closeZone" : 1000,
