@@ -23,7 +23,7 @@
             "radiusOfIntegration" : 100000,
 
             "trajFile" : "../../results/vesicle/cup/traj.nc",
-            "startingFrame": 120 
+            "startingFrame": 49 
         },
 
         "options":
