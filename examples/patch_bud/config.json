@@ -15,13 +15,13 @@
             "generateGeometry": false,
             "R" : 1,
             
-            "refMesh" : "input-file\\patch.ply",
-            "inputMesh" : "input-file\\patch.ply",
-            "outputDir" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/patch_bud/test_subdivision1014/",
+            "refMesh" : "./input-file/patch.ply",
+            "inputMesh" : "./input-file/patch.ply",
+            "outputDir" : "../../results/patch_bud/r_p15",
+            
+            "nSub" : 0,
 
-            "nSub" : 1,
-
-            "radiusOfIntegration" : 100,
+            "radiusOfIntegration" : 0.9,
             
             "trajFile" : "",
             "startingFrame": 0
@@ -41,7 +41,7 @@
             "Bc" : 40,
 
             "H0*R" : 40,
-            "sharpness" : 100,
+            "sharpness" : 50,
             "r_H0" : 0.1,
 
             "Vt" : 1,
@@ -55,27 +55,27 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "Kv"  : [5e-2,5e-2],
+            "Kv"  : [5e-3,5e-2],
             "Ksg" : [0.1, 0.1],
 
             "Kse" : 0,     
-            "Ksl" : 0.05,
-            "Kst" : 0,			
+            "Ksl" : 0,
+            "Kst" : 10,			
 
             "kt" : 0,
-            "gamma" : 2
+            "gamma" : 3
         },
 
         "integration":
         {
-            "h" : 5e-5,
-            "T" : 10e-5,
+            "h" : 1e-6,
+            "T" : 5,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
-            "increment" : 0.1,
-            "tSave" : 1e-1,
+            "increment" : 0,
+            "tSave" : 1e-3,
             "tMollify" : 100
         }
 }
