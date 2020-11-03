@@ -1,0 +1,49 @@
+Input Mesh: /home/cuzhu/2020-Mem3DG-Applications/examples/vesicle/input-file/sphere.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     0
+Kse:    0
+Ksl:    0
+Kst:    0.1
+Ksg:    0.1
+Kv:     0.1
+gamma:  2
+Vt:     0.95
+kt:     0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    0.0005
+T:     300
+Frame: 300
+
+States: 
+
+Bending Energy:   0.00102641
+Surface Energy:   0.000124346
+Pressure Work:    0.000158957
+Kinetic Work:    3.61242e-11
+Chemical Energy:  0
+Total Energy:     0.00130971
+L2 error norm:    1.37882e-05
+Volume:           4.05345 = 0.97698 reduced volume
+Surface area:     12.3104 = 0.985887 target surface area
+COM (x, y, z):		 -0.000758259  0.000304643   5.4913e-05
+
+Errors: 
+
+Bending error:       4.08569e-06%
+Volume error:        2.84003%
+Surface area error:  1.41127%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    0
+Is considering protein: 0
+Is vertex shift: 0

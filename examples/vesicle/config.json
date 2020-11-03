@@ -15,9 +15,9 @@
             "generateGeometry": false,
             "R" : 1,
             
-            "refMesh" : "./input-file/oblate.ply",
-            "inputMesh" : "./input-file/oblate.ply",
-            "outputDir" : "../../results/vesicle/biconcave/",
+            "refMesh" : "./input-file/prolate.ply",
+            "inputMesh" : "./input-file/prolate.ply",
+            "outputDir" : "../../results/vesicle/prolate_sc/",
             "nSub" : 0,
 
             "radiusOfIntegration" : 100000,
@@ -39,11 +39,11 @@
             "epsilon" : 15e-5,
             "Bc" : 40,
 
-            "H0*R" : 0,
+            "H0*R" : 1.2,
             "sharpness" : 10,
             "r_H0" : 10,
 
-            "Vt" : 0.65,
+            "Vt" : 0.69,
 
             "ptInd" : 0,
             "Kf" : 0,
@@ -54,7 +54,7 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "Kv"  : [1e-2,5e-1],
+            "Kv"  : [10e-2,5e-1],
             "Ksg" : [0.1, 1],
 
             "Kse" : 0,     
