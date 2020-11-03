@@ -30,10 +30,10 @@ dep = data["parameters"]["dependencies"]
 opt = data["parameters"]["options"]
 
 # configure path for different platforms 
-geo['refMesh'] = os.fspath(Path(geo['refMesh']));
-geo['inputMesh'] = os.fspath(Path(geo['inputMesh']));
-geo['outputDir'] = os.fspath(Path(geo['outputDir']));
-geo['trajFile'] = os.fspath(Path(geo['trajFile']));
+geo['refMesh'] = os.fspath(os.path.abspath(Path(geo['refMesh'])));
+geo['inputMesh'] = os.fspath(os.path.abspath(Path(geo['inputMesh'])));
+geo['outputDir'] = os.fspath(os.path.abspath(Path(geo['outputDir'])));
+geo['trajFile'] = os.fspath(os.path.abspath(Path(geo['trajFile'])));
 
 # make I/O directories if not exist
 cwd = os.getcwd()
