@@ -17,14 +17,14 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../../results/patch_bud/r_p15",
+            "outputDir" : "../../results/patch_bud/r_p15_continue_1",
             
             "nSub" : 0,
 
             "radiusOfIntegration" : 0.9,
             
-            "trajFile" : "",
-            "startingFrame": 0
+            "trajFile" : "../../results/patch_bud/r_p15/traj.nc",
+            "startingFrame": 147
         },
 
         "options":
