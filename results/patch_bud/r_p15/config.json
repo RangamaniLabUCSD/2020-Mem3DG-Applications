@@ -68,14 +68,14 @@
 
         "integration":
         {
-            "h" : 1e-6,
+            "h" : 5e-6,
             "T" : 5,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
             "increment" : 0,
-            "tSave" : 1e-3,
+            "tSave" : 1e-2,
             "tMollify" : 100
         }
 }
