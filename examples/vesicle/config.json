@@ -15,9 +15,9 @@
             "generateGeometry": false,
             "R" : 1,
             
-            "refMesh" : "",
-            "inputMesh" : "C:/Users/Kieran/Dev/2020-Mem3DG-Applications/examples/vesicle/input-file/patch.ply",
-            "outputDir" : "C:/Users/Kieran/Dev/2020-Mem3DG-Applications/results/vesicle/testing_path/",
+            "refMesh" : "C:/Users/Kieran/Dev/2020-Mem3DG-Applications/examples/vesicle/input-file/icosphere.ply",
+            "inputMesh" : "C:/Users/Kieran/Dev/2020-Mem3DG-Applications/examples/vesicle/input-file/icosphere.ply",
+            "outputDir" : "C:/Users/Kieran/Dev/2020-Mem3DG-Applications/results/vesicle/chris_sphere/",
             "nSub" : 0,
 
             "radiusOfIntegration" : 0.9,
@@ -68,13 +68,13 @@
         "integration":
         {
             "h" : 5e-5,
-            "T" : 3,
+            "T" : 10e-4,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
             "increment" : 0,
-            "tSave" : 5e-1,
+            "tSave" : 10e-5,
             "tMollify" : 100
         }
 }
