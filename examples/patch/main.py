@@ -46,7 +46,8 @@ if not os.path.exists(ODir):
 
 # copy the config.json & viewer to the outputDir
 shutil.copyfile(configFile, os.path.join(geo["outputDir"], "config.json") )
-shutil.copyfile("viewer.py", os.path.join(geo["outputDir"], "viewer.py"))
+shutil.copyfile(dep["viewer.py"], os.path.join(geo["outputDir"], "viewer.py"))
+shutil.copyfile(dep["plots.py"], os.path.join(geo["outputDir"], "plots.py"))
 
 # create starting mesh
 if geo["generateGeometry"] == True:
