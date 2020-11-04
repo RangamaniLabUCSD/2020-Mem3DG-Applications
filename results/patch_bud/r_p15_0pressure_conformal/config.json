@@ -1,0 +1,85 @@
+{
+    "parameters":{
+        "comments":
+        {
+            "units": "micron, gram, second, nanonewton"
+        },
+
+        "dependencies":
+        {
+            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
+            "viewer.py" : "../../visualization/viewer.py",
+            "plots.py" : "../../visualization/plots.py"
+        },
+
+        "geometry":
+        {
+            "generateGeometry": false,
+            "R" : 1,
+            
+            "refMesh" : "./input-file/patch.ply",
+            "inputMesh" : "./input-file/patch.ply",
+            "outputDir" : "../../results/patch_bud/r_p15_0pressure_conformal",
+            
+            "nSub" : 0,
+
+            "radiusOfIntegration" : 0.9,
+            
+            "trajFile" : "../../results/patch_bud/r_p15_0pressure/traj.nc",
+            "startingFrame": 245
+        },
+
+        "options":
+        {
+            "isTuftedLaplacian" : false,
+            "mollifyFactor" : 1e-3,
+            "isVertexShift" : false,
+            "isProtein" : false
+        },
+
+        "variables":
+        {
+            "epsilon" : 15e-5,
+            "Bc" : 40,
+
+            "H0*R" : 40,
+            "sharpness" : 50,
+            "r_H0" : 0.15,
+
+            "Vt" : 1,
+
+            "ptInd" : 672,
+            "Kf" : 0,
+            "conc" : 25,
+            "height" : 0
+        },
+
+        "properties":
+        {
+            "Kb" : 8.22e-5,
+            "Kv"  : [0,0],
+            "Ksg" : [0.1, 0.1],
+
+            "Kse" : 0,     
+            "Ksl" : 0,
+            "Kst" : 10,			
+
+            "kt" : 0,
+            "gamma" : 3
+        },
+
+        "integration":
+        {
+            "h" : 2e-5,
+            "T" : 10,
+
+            "eps" : 0.002,
+            "closeZone" : 1000,
+
+            "increment" : 0,
+            "tSave" : 1e-1,
+            "tMollify" : 100
+        }
+}
+    
+}
