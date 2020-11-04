@@ -1,0 +1,27 @@
+Mem3DG Version: v0.0.3-alpha3-18-g68fcb1b-dirty
+Input Mesh:     /home/cuzhu/2020-Mem3DG-Applications/results/patch_bud/r_p17/traj.nc
+Physical parameters used: 
+
+Kb:     8.22e-05
+H0:     40
+Kse:    0
+Ksl:    0
+Kst:    10
+Ksg:    0.1
+Kv:     0.005
+gamma:  3
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  672
+Kf:     0
+conc:   25
+height: 0
+
+Integration parameters used: 
+
+dt:       5e-06
+T:        15
+eps:		   0.002
+tSave:    0.01
+no. non-integrated: 156
