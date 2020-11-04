@@ -25,8 +25,8 @@
 
             "radiusOfIntegration" : 0.9,
             
-            "trajFile" : "../../results/patch_bud/r_p15_continue_1/traj.nc",
-            "startingFrame": 346
+            "trajFile" : "../../results/patch_bud/r_p15_0pressure/traj.nc",
+            "startingFrame": 245
         },
 
         "options":
@@ -44,7 +44,7 @@
 
             "H0*R" : 40,
             "sharpness" : 50,
-            "r_H0" : 0.1,
+            "r_H0" : 0.15,
 
             "Vt" : 1,
 
