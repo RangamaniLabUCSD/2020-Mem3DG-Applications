@@ -19,7 +19,7 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../../results/patch_bud/r_p15_0pressure",
+            "outputDir" : "../../results/patch_bud/r_p15_0pressure_conformal_no_masked",
             
             "nSub" : 0,
 
@@ -70,14 +70,14 @@
 
         "integration":
         {
-            "h" : 1e-5,
+            "h" : 2e-5,
             "T" : 10,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
             "increment" : 0,
-            "tSave" : 1e-2,
+            "tSave" : 1e-1,
             "tMollify" : 100
         }
 }

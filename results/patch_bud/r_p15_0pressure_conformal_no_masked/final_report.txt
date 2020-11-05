@@ -1,0 +1,49 @@
+Input Mesh: /home/cuzhu/2020-Mem3DG-Applications/examples/patch_bud/input-file/patch.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     40
+Kse:    0
+Ksl:    0
+Kst:    10
+Ksg:    0.1
+Kv:     0
+gamma:  3
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  672
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    2e-05
+T:     9.99998
+Frame: 100
+
+States: 
+
+Bending Energy:   0.0110785
+Surface Energy:   0.02771
+Pressure Work:    -0
+Kinetic Work:    2.16828e-05
+Chemical Energy:  0
+Total Energy:     0.0388102
+L2 error norm:    0.655626
+Volume:           0.17333 = inf reduced volume
+Surface area:     3.41536 = 1.0883 target surface area
+COM (x, y, z):		  0.000136218 -0.000508822     -0.12639
+
+Errors: 
+
+Bending error:       0.424885%
+Volume error:        0%
+Surface area error:  0%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    1
+Is considering protein: 0
+Is vertex shift: 0
