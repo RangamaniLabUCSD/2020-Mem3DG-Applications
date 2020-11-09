@@ -17,7 +17,7 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 2,
+            "verbosity": 1,
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
