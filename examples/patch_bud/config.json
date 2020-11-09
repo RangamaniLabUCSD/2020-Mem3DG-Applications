@@ -17,18 +17,18 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 1,
+            "verbosity": 2,
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../../results/patch_bud/r_p15_0pressure_conformal_no_masked",
+            "outputDir" : "../../results/patch_bud/testing_new_traj",
             
             "nSub" : 0,
 
-            "radiusOfIntegration" : 0.9,
+            "radiusOfIntegration" : 100,
             
-            "trajFile" : "../../results/patch_bud/r_p15_0pressure/traj.nc",
-            "startingFrame": 245
+            "trajFile" : "../../results/patch_bud/r_p15_0pressure_conformal_no_mask/traj.nc",
+            "startingFrame": 3
         },
 
         "options":
@@ -79,7 +79,7 @@
             "closeZone" : 1000,
 
             "increment" : 0,
-            "tSave" : 1e-1,
+            "tSave" : 1e-2,
             "tMollify" : 100
         }
 }
