@@ -27,7 +27,7 @@
 
             "radiusOfIntegration" : 100,
             
-            "trajFile" : "../../results/patch_bud/r_p15_0pressure_conformal_no_mask/traj.nc",
+            "trajFile" : "../../results/patch_bud/r_p15_0pressure_conformal_no_masked/traj.nc",
             "startingFrame": 3
         },
 
@@ -60,7 +60,7 @@
         {
             "Kb" : 8.22e-5,
             "Kv"  : [0,0],
-            "Ksg" : [0.1, 0.1],
+            "Ksg" : [0.01, 0.1],
 
             "Kse" : 0,     
             "Ksl" : 0,
@@ -79,7 +79,7 @@
             "closeZone" : 1000,
 
             "increment" : 0,
-            "tSave" : 1e-1,
+            "tSave" : 2e-1,
             "tMollify" : 100
         }
 }
