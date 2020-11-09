@@ -1,0 +1,49 @@
+Input Mesh: /home/cuzhu/2020-Mem3DG-Applications/results/patch_bud/testing_new_traj_continue2/traj.nc
+Final parameter: 
+
+Kb:     8.22e-06
+H0:     0
+Kse:    0
+Ksl:    0
+Kst:    10
+Ksg:    0.05
+Kv:     0
+gamma:  3
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  672
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    2e-05
+T:     5.09998
+Frame: 25
+
+States: 
+
+Bending Energy:   8.8159e-05
+Surface Energy:   0.0291766
+Pressure Work:    -0
+Kinetic Work:    0.00233718
+Chemical Energy:  0
+Total Energy:     0.031602
+L2 error norm:    0.3553
+Volume:           0.217917 = inf reduced volume
+Surface area:     3.71611 = 1.18413 target surface area
+COM (x, y, z):		 0.00139894 -0.0021614  -0.195576
+
+Errors: 
+
+Bending error:       2.71783%
+Volume error:        0%
+Surface area error:  0%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    1
+Is considering protein: 0
+Is vertex shift: 0
