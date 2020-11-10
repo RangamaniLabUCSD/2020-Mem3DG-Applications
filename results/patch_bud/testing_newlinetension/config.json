@@ -80,7 +80,8 @@
 
             "increment" : 0,
             "tSave" : 2e-1,
-            "tMollify" : 100
+            "tMollify" : 100,
+            "errorJumpLim" : 6
         }
 }
     
