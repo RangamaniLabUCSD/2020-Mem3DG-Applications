@@ -98,7 +98,8 @@ if (options.ply != None):
                         closeZone=inte["closeZone"],
                         increment=inte["increment"],
                         tSave=inte["tSave"],
-                        tMollify=inte["tMollify"])
+                        tMollify=inte["tMollify"],
+                        errorJumpLim=inte["errorJumpLim"])
 
 elif (options.nc != None):
     pymem3dg.driver_nc(verbosity=geo["verbosity"],
@@ -138,4 +139,5 @@ elif (options.nc != None):
                        closeZone=inte["closeZone"],
                        increment=inte["increment"],
                        tSave=inte["tSave"],
-                       tMollify=inte["tMollify"])
+                       tMollify=inte["tMollify"],
+                       errorJumpLim=inte["errorJumpLim"])
