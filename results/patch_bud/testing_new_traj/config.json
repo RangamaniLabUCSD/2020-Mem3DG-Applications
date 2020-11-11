@@ -27,8 +27,8 @@
 
             "radiusOfIntegration" : 100,
             
-            "trajFile" : "../../results/patch_bud/r_p15_0pressure_conformal_no_masked/traj.nc",
-            "startingFrame": 3
+            "trajFile" : "../../results/patch_bud/testing_new_traj/traj.nc",
+            "startingFrame": 4
         },
 
         "options":
@@ -60,7 +60,7 @@
         {
             "Kb" : 8.22e-5,
             "Kv"  : [0,0],
-            "Ksg" : [0.01, 0.1],
+            "Ksg" : [0.05, 0.1],
 
             "Kse" : 0,     
             "Ksl" : 0,

@@ -27,8 +27,8 @@
 
             "radiusOfIntegration" : 100,
             
-            "trajFile" : "../../results/patch_bud/testing_new_traj_continue/traj.nc",
-            "startingFrame": 37
+            "trajFile" : "../../results/patch_bud/no_tension_pure_sc/traj.nc",
+            "startingFrame": 30
         },
 
         "options":
