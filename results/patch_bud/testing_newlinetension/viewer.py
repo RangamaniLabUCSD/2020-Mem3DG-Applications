@@ -30,8 +30,8 @@ if ext == "nc":
                         mean_curvature = 1,  spon_curvature = 1,
                        ext_pressure = 1, physical_pressure = 1,
                        capillary_pressure = 1,
-                       bending_pressure = 1, mask = 1, H_H0 = 1)
+                       bending_pressure = 1, line_pressure = 1, mask = 1, H_H0 = 1)
 elif ext == "ply": 
     pymem3dg.viewer(args.vis_file, mean_curvature = 1, spon_curvature = 1,
          ext_pressure = 1, physical_pressure = 1, capillary_pressure = 1,
-           bending_pressure = 1)
+           bending_pressure = 1, line_pressure = 1)

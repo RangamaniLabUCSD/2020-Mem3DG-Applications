@@ -26,6 +26,12 @@ import pymem3dg
 
 # run viewer 
 if ext == "nc":
-    pymem3dg.view_animation(args.vis_file)
+    pymem3dg.view_animation(args.vis_file, ref_coord = 0, velocity = 1,
+                        mean_curvature = 1,  spon_curvature = 0,
+                       ext_pressure = 0, physical_pressure = 0,
+                       capillary_pressure = 0,
+                       bending_pressure = 0)
 elif ext == "ply": 
-    pymem3dg.viewer(args.vis_file)
+    pymem3dg.viewer(args.vis_file, mean_curvature = 0, spon_curvature = 0,
+         ext_pressure = 0, physical_pressure = 0, capillary_pressure = 0,
+           bending_pressure = 0)

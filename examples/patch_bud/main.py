@@ -84,6 +84,7 @@ if (options.ply != None):
                         height=var["height"],
 
                         Kb=prop["Kb"],
+                        eta = prop["eta"],
                         Kse=prop["Kse"],
                         Ksl=prop["Ksl"],
                         Kst=prop["Kst"],
