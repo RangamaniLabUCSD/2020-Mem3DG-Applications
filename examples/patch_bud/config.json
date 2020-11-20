@@ -27,8 +27,8 @@
 
             "radiusOfIntegration" : 100,
             
-            "trajFile" : "../../results/patch_bud/testing_new_traj_continue2/traj.nc",
-            "startingFrame": 82
+            "trajFile" : "../../results/patch_bud/testing_new_traj_continue2_no_conformal/traj.nc",
+            "startingFrame": 1
         },
 
         "options":
@@ -59,13 +59,13 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "eta" : 1,
+            "eta" : 0.1,
             "Kv"  : [0,0],
-            "Ksg" : [0.1, 0.1],
+            "Ksg" : [0.05, 0.1],
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 20,			
+            "Kst" : 0,			
 
             "kt" : 0,
             "gamma" : 3
@@ -73,16 +73,16 @@
 
         "integration":
         {
-            "h" : 2e-5,
+            "h" : 1e-5,
             "T" : 30,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
             "increment" : 0,
-            "tSave" : 2e-1,
+            "tSave" : 3e-3,
             "tMollify" : 100,
-            "errorJumpLim" : 6
+            "errorJumpLim" : 600000
         }
 }
     
