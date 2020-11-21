@@ -1,5 +1,8 @@
-# result folder
-results/
+# log files
+t=*
+
+# polyscope
+imgui.ini
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

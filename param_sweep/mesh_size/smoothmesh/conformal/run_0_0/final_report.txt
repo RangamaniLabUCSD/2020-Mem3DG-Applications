@@ -1,0 +1,49 @@
+Input Mesh: /home/cuzhu/2020-Mem3DG-Applications/param_sweep/input-file/slightlyOblate.ply
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     0
+Kse:    0
+Ksl:    0
+Kst:    1
+Ksg:    0.1
+Kv:     0.05
+gamma:  0
+Vt:     0.7
+kt:     0
+sigma:  0
+ptInd:  0
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    5e-08
+T:     5
+Frame: 50
+
+States: 
+
+Bending Energy:   0.00103225
+Surface Energy:   0.00826771
+Pressure Work:    0.00251344
+Kinetic Work:    0.00201343
+Chemical Energy:  0
+Total Energy:     0.0138268
+L2 error norm:    0.0504822
+Volume:           3.44357 = 0.830262 reduced volume
+Surface area:     11.047 = 0.884911 target surface area
+COM (x, y, z):		  0.000794005  -0.00216707 -0.000185654
+
+Errors: 
+
+Bending error:       0.0511042%
+Volume error:        18.6088%
+Surface area error:  11.5089%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    0
+Is considering protein: 0
+Is vertex shift: 0

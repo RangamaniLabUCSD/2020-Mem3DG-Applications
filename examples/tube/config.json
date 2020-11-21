@@ -7,20 +7,28 @@
 
         "dependencies":
         {
-            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release"
+            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
+            "viewer.py" : "../../visualization/viewer.py",
+            "plots.py" : "../../visualization/plots.py"
         },
 
         "geometry":
         {
             "generateGeometry": false,
             "R" : 1,
-            "nSub" : 10,
+
+            "verbosity": 1,
+            
+            "refMesh" : "../../mesh_generation/houdini/tube.ply",
+            "inputMesh" :  "../../mesh_generation/houdini/tube.ply",
+            "outputDir" : "../../results/patch_bud/r_p15_0pressure_conformal_no_masked",
+            
+            "nSub" : 0,
 
             "radiusOfIntegration" : 0.9,
             
-            "refMesh" : "input-file\\patch.ply",
-            "inputMesh" : "input-file\\patch.ply",
-            "outputDir" : "C:\\Users\\Kieran\\Dev\\2020-Mem3DG-Applications/results/tube/XXXXX"
+            "trajFile" : "../../results/patch_bud/r_p15_0pressure/traj.nc",
+            "startingFrame": 245
         },
 
         "options":
@@ -37,8 +45,8 @@
             "Bc" : 40,
 
             "H0*R" : 40,
-            "sharpness" : 100,
-            "r_H0" : 0.1,
+            "sharpness" : 50,
+            "r_H0" : 0.15,
 
             "Vt" : 1,
 
@@ -51,26 +59,26 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "Kv"  : [5e-2,5e-2],
+            "Kv"  : [0,0],
             "Ksg" : [0.1, 0.1],
 
             "Kse" : 0,     
-            "Ksl" : 0.05,
-            "Kst" : 0,			
+            "Ksl" : 0,
+            "Kst" : 10,			
 
             "kt" : 0,
-            "gamma" : 2
+            "gamma" : 6
         },
 
         "integration":
         {
-            "h" : 5e-5,
-            "T" : 100,
+            "h" : 2e-5,
+            "T" : 10,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
-            "increment" : 0.1,
+            "increment" : 0,
             "tSave" : 1e-1,
             "tMollify" : 100
         }
