@@ -23,6 +23,7 @@ surfenergy = ds.variables['surfenergy']
 pressenergy = ds.variables['pressenergy']
 kineenergy = ds.variables['kineenergy']
 chemenergy = ds.variables['chemenergy']
+lineenergy = ds.variables['lineenergy']
 totalenergy = ds.variables['totalenergy']
 
 time = ds.variables['time']
@@ -43,6 +44,7 @@ be = axs[1].plot(time, bendenergy, label='bending')
 se = axs[1].plot(time, surfenergy, label='surface')
 pse = axs[1].plot(time, pressenergy, label='pressure')
 ce = axs[1].plot(time, chemenergy, label='chemical')
+le = axs[1].plot(time, lineenergy, label='line')
 axs[1].legend()
 
 plt.show()
