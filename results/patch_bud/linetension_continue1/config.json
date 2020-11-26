@@ -21,7 +21,7 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../../results/patch_bud/linetension",
+            "outputDir" : "../../results/patch_bud/linetension_continue1",
             
             "nSub" : 1,
 
