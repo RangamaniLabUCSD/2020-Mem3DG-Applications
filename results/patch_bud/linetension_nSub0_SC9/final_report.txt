@@ -1,12 +1,12 @@
-Input Mesh: /home/cuzhu/2020-Mem3DG-Applications/examples/patch_bud/input-file/patch.ply
+Input Mesh: /home/cuzhu/2020-Mem3DG-Applications/results/patch_bud/linetension_nSub0/traj.nc
 Final parameter: 
 
 Kb:     8.22e-05
-H0:     9
+H0:     15
 Kse:    0
 Ksl:    0
 Kst:    0.1
-Ksg:    0.05
+Ksg:    0
 Kv:     0
 gamma:  3
 Vt:     1
@@ -19,26 +19,26 @@ conc:   25
 Integration: 
 
 dt:    1e-05
-T:     30
-Frame: 150
+T:     23.4922
+Frame: 117
 
 States: 
 
-Bending Energy:   0.000352184
-Surface Energy:   4.27442e-05
-Pressure Work:    -0
-Kinetic Work:    2.12547e-06
+Bending Energy:   0.000356201
+Surface Energy:   0
+Pressure Work:    0
+Kinetic Work:    7.44897e-06
 Chemical Energy:  0
-Line tension Energy:  0.210951
-Total Energy:     0.211348
-L2 error norm:    0.0736453
-Volume:           0.000793753 = inf reduced volume
-Surface area:     3.13911 = 1.00027 target surface area
-COM (x, y, z):		 -0.000293171  0.000185344 -0.000456281
+Line tension Energy:  0.0260521
+Total Energy:     0.0264158
+L2 error norm:    0.0656203
+Volume:           -0.174299 = -inf reduced volume
+Surface area:     3.29686 = 1.05054 target surface area
+COM (x, y, z):		 -0.00196856  0.00378127   0.0797899
 
 Errors: 
 
-Bending error:       0.013886%
+Bending error:       0.63371%
 Volume error:        0%
 Surface area error:  0%
 Face area error:     0%

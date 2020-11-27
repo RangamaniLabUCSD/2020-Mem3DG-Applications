@@ -27,8 +27,8 @@
 
             "radiusOfIntegration" : 100,
             
-            "trajFile" : "../../results/patch_bud/testing_newlinetension_continue/traj.nc",
-            "startingFrame": 100
+            "trajFile" : "../../results/patch_bud/linetension_nSub0/traj.nc",
+            "startingFrame": 217
         },
 
         "options":
@@ -44,7 +44,7 @@
             "epsilon" : 15e-5,
             "Bc" : 40,
 
-            "H0*R" : 9,
+            "H0*R" : 15,
             "sharpness" : 50,
             "r_H0" : 0.15,
 
@@ -59,9 +59,9 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "eta" : 0.1,
+            "eta" : 0.02,
             "Kv"  : [0,0],
-            "Ksg" : [0.05, 0.1],
+            "Ksg" : [0, 0],
 
             "Kse" : 0,     
             "Ksl" : 0,
