@@ -1,0 +1,50 @@
+Input Mesh: /home/cuzhu/2020-Mem3DG-Applications/results/patch_bud/linetension_nSub0_asymm/traj.nc
+Final parameter: 
+
+Kb:     8.22e-05
+H0:     40
+Kse:    0
+Ksl:    0
+Kst:    0.1
+Ksg:    0.05
+Kv:     0
+gamma:  3
+Vt:     1
+kt:     0
+sigma:  0
+ptInd:  672
+Kf:   0
+conc:   25
+
+Integration: 
+
+dt:    1e-05
+T:     41.5262
+Frame: 1384
+
+States: 
+
+Bending Energy:   0.165036
+Surface Energy:   2.27131
+Pressure Work:    0
+Kinetic Work:    1.39889
+Chemical Energy:  0
+Line tension Energy:  0.968007
+Total Energy:     4.80325
+L2 error norm:    3.68808
+Volume:           -0.312547 = -inf reduced volume
+Surface area:     48.6138 = 15.4907 target surface area
+COM (x, y, z):		 -0.314186   0.19005   0.30496
+
+Errors: 
+
+Bending error:       0.274098%
+Volume error:        0%
+Surface area error:  0%
+Face area error:     0%
+
+Options: 
+
+Is tufted laplacian:    0
+Is considering protein: 0
+Is vertex shift: 0
