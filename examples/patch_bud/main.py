@@ -100,7 +100,8 @@ if (options.ply != None):
                         increment=inte["increment"],
                         tSave=inte["tSave"],
                         tMollify=inte["tMollify"],
-                        errorJumpLim=inte["errorJumpLim"])
+                        errorJumpLim=inte["errorJumpLim"],
+                        integration = inte["method"])
 
 elif (options.nc != None):
     pymem3dg.driver_nc(verbosity=geo["verbosity"],
@@ -142,4 +143,5 @@ elif (options.nc != None):
                        increment=inte["increment"],
                        tSave=inte["tSave"],
                        tMollify=inte["tMollify"],
-                       errorJumpLim=inte["errorJumpLim"])
+                       errorJumpLim=inte["errorJumpLim"],
+                       integration = inte["method"])
