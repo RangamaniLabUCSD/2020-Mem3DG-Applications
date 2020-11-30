@@ -1,0 +1,90 @@
+{
+    "parameters":{
+        "comments":
+        {
+            "units": "micron, gram, second, nanonewton"
+        },
+
+        "dependencies":
+        {
+            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
+            "viewer.py" : "../../visualization/viewer.py",
+            "plots.py" : "../../visualization/plots.py"
+        },
+
+        "geometry":
+        {
+            "generateGeometry": false,
+            "R" : 1,
+
+            "verbosity": 2,
+            
+            "refMesh" : "./input-file/patch.ply",
+            "inputMesh" : "./input-file/patch.ply",
+            "outputDir" : "../../results/patch_bud/symmetric_H20_euler_continue3_H_16",
+            
+            "nSub" : 0,
+
+            "radiusOfIntegration" : 100,
+            
+            "trajFile" : "../../results/patch_bud/symmetric_H20_euler_continue3/traj.nc",
+            "startingFrame": 17
+        },
+
+        "options":
+        {
+            "isTuftedLaplacian" : false,
+            "mollifyFactor" : 1e-3,
+            "isVertexShift" : false,
+            "isProtein" : false
+        },
+
+        "variables":
+        {
+            "epsilon" : 15e-5,
+            "Bc" : 40,
+
+            "H0*R" : 16,
+            "sharpness" : 50,
+            "r_H0" : [0.15, 0.15],
+
+            "Vt" : 1,
+
+            "pt" : [0,0,0],
+            "Kf" : 0,
+            "conc" : 25,
+            "height" : 0
+        },
+
+        "properties":
+        {
+            "Kb" : 8.22e-5,
+            "eta" : 1,
+            "Kv"  : [0,0],
+            "Ksg" : [0.001, 0.001],
+
+            "Kse" : 0,     
+            "Ksl" : 0,
+            "Kst" : 1,			
+
+            "kt" : 0,
+            "gamma" : 3
+        },
+
+        "integration":
+        {
+            "method": "euler",
+            "h" : 1e-6,
+            "T" : 10,
+
+            "eps" : 0.002,
+            "closeZone" : 1000,
+
+            "increment" : 0,
+            "tSave" : 1e-2,
+            "tMollify" : 100,
+            "errorJumpLim" : 600000
+        }
+}
+    
+}
