@@ -28,7 +28,7 @@
             "radiusOfIntegration" : 100,
             
             "trajFile" : "../../results/patch_bud/symmetric_H20_euler_continue3/traj.nc",
-            "startingFrame": 30
+            "startingFrame": 17
         },
 
         "options":
