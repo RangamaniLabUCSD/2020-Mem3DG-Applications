@@ -8,8 +8,8 @@
         "dependencies":
         {
             "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
-            "viewer.py" : "../../visualization/viewer.py",
-            "plots.py" : "../../visualization/plots.py"
+            "viewer.py" : "../visualization/viewer.py",
+            "plots.py" : "../visualization/plots.py"
         },
 
         "geometry":
@@ -21,14 +21,14 @@
             
             "refMesh" : "./input-file/prolate.ply",
             "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../../results/vesicle/prolate_sc",
+            "outputDir" : "../results/vesicle/prolate_sc",
 
             "nSub" : 0,
 
             "radiusOfIntegration" : 100000,
 
-            "trajFile" : "../../results/vesicle/cup/traj.nc",
-            "startingFrame": 49 
+            "trajFile" : "../results/vesicle/prolate_sc/traj.nc",
+            "startingFrame": 63 
         },
 
         "options":

@@ -8,8 +8,8 @@
         "dependencies":
         {
             "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
-            "viewer.py" : "../../visualization/viewer.py",
-            "plots.py" : "../../visualization/plots.py"
+            "viewer.py" : "../visualization/viewer.py",
+            "plots.py" : "../visualization/plots.py"
         },
 
         "geometry":
@@ -21,13 +21,13 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../../results/patch_bud/testing_DPD",
+            "outputDir" : "../results/patch_bud/testing_DPD",
             
             "nSub" : 0,
 
             "radiusOfIntegration" : 100,
             
-            "trajFile" : "../../results/patch_bud/linetension_nSub0/traj.nc",
+            "trajFile" : "../results/patch_bud/linetension_nSub0/traj.nc",
             "startingFrame": 200
         },
 
