@@ -1,0 +1,90 @@
+{
+    "parameters":{
+        "comments":
+        {
+            "units": "micron, gram, second, nanonewton"
+        },
+
+        "dependencies":
+        {
+            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
+            "viewer.py" : "../visualization/viewer.py",
+            "plots.py" : "../visualization/plots.py"
+        },
+
+        "geometry":
+        {
+            "generateGeometry": false,
+            "R" : 1,
+
+            "verbosity": 2,
+            
+            "refMesh" : "./input-file/prolate.ply",
+            "inputMesh" : "./input-file/prolate.ply",
+            "outputDir" : "../results/vesicle/prolate_sc_continue1",
+
+            "nSub" : 0,
+
+            "radiusOfIntegration" : 100000,
+
+            "trajFile" : "../results/vesicle/prolate_sc/traj.nc",
+            "startingFrame": 63 
+        },
+
+        "options":
+        {
+            "isTuftedLaplacian" : false,
+            "mollifyFactor" : 1e-3,
+            "isVertexShift" : false,
+            "isProtein" : false
+        },
+
+        "variables":
+        {
+            "epsilon" : 15e-5,
+            "Bc" : 40,
+
+            "H0*R" : 1.2,
+            "sharpness" : 10,
+            "r_H0" : [10, 10],
+
+            "Vt" : 0.69,
+
+            "pt" : [0, 0, 0],
+            "Kf" : 0,
+            "conc" : 25,
+            "height" : 0
+        },
+
+        "properties":
+        {
+            "Kb" : 8.22e-5,
+            "eta": 0,
+            "Kv"  : [10e-2,5e-1],
+            "Ksg" : [0.1, 1],
+
+            "Kse" : 0,     
+            "Ksl" : 0,
+            "Kst" : 0.1,			
+
+            "kt" : 0,
+            "gamma" : 2
+        },
+
+        "integration":
+        {
+            "method" : "euler",
+            "h" : 1e-4,
+            "T" : 300,
+
+            "eps" : 0.002,
+            "closeZone" : 1000,
+
+            "increment" : 0.05,
+            "tSave" : 1,
+            "tMollify" : 100,
+            "errorJumpLim": 6
+        }
+}
+    
+}
