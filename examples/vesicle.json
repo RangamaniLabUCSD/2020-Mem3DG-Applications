@@ -19,16 +19,16 @@
 
             "verbosity": 2,
             
-            "refMesh" : "./input-file/patch.ply",
-            "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../../results/patch_bud/testing_euler",
-            
+            "refMesh" : "./input-file/prolate.ply",
+            "inputMesh" : "./input-file/prolate.ply",
+            "outputDir" : "../../results/vesicle/prolate_sc",
+
             "nSub" : 0,
 
-            "radiusOfIntegration" : 100,
-            
-            "trajFile" : "../../results/patch_bud/linetension_nSub0_asymm/traj.nc",
-            "startingFrame": 616
+            "radiusOfIntegration" : 100000,
+
+            "trajFile" : "../../results/vesicle/cup/traj.nc",
+            "startingFrame": 49 
         },
 
         "options":
@@ -44,13 +44,13 @@
             "epsilon" : 15e-5,
             "Bc" : 40,
 
-            "H0*R" : 10,
-            "sharpness" : 50,
-            "r_H0" : [0.15, 0.30],
+            "H0*R" : 1.2,
+            "sharpness" : 10,
+            "r_H0" : [10, 10],
 
-            "Vt" : 1,
+            "Vt" : 0.69,
 
-            "pt" : [0,0,0],
+            "pt" : [0, 0, 0],
             "Kf" : 0,
             "conc" : 25,
             "height" : 0
@@ -59,31 +59,31 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "eta" : 0.5,
-            "Kv"  : [0,0],
-            "Ksg" : [0.05, 0.1],
+            "eta": 0,
+            "Kv"  : [10e-2,5e-1],
+            "Ksg" : [0.1, 1],
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 1,			
+            "Kst" : 0.1,			
 
             "kt" : 0,
-            "gamma" : 3
+            "gamma" : 2
         },
 
         "integration":
         {
-            "method": "euler",
-            "h" : 1e-6,
-            "T" : 10,
+            "method" : "euler",
+            "h" : 5e-5,
+            "T" : 300,
 
             "eps" : 0.002,
             "closeZone" : 1000,
 
-            "increment" : 0,
-            "tSave" : 3e-1,
+            "increment" : 0.05,
+            "tSave" : 0.1,
             "tMollify" : 100,
-            "errorJumpLim" : 600000
+            "errorJumpLim": 6
         }
 }
     
