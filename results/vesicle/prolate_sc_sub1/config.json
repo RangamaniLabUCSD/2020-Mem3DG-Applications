@@ -19,8 +19,8 @@
 
             "verbosity": 2,
             
-            "refMesh" : "./input-file/prolate.ply",
-            "inputMesh" : "./input-file/prolate.ply",
+            "refMesh" : "./input-file/slightlyOblate.ply",
+            "inputMesh" : "./input-file/slightlyOblate.ply",
             "outputDir" : "../results/vesicle/prolate_sc_sub1",
 
             "nSub" : 0,
