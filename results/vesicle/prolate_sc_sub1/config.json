@@ -73,7 +73,7 @@
 
         "integration":
         {
-            "method" : "conjugate gradient",
+            "method" : "euler",
             "h" : 1e-4,
             "T" : 300,
 
