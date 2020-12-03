@@ -73,7 +73,7 @@
 
         "integration":
         {
-            "method" : "euler",
+            "method" : "velocity verlet",
             "h" : 1e-4,
             "T" : 300,
 
