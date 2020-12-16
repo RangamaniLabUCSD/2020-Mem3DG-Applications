@@ -12,23 +12,21 @@
             "plots.py" : "../visualization/plots.py"
         },
 
-        "geometry":
+        "I/O":
         {
             "generateGeometry": false,
             "R" : 1,
 
             "verbosity": 2,
             
-            "refMesh" : "./input-file/slightlyOblate.ply",
-            "inputMesh" : "./input-file/slightlyOblate.ply",
-            "outputDir" : "../results/vesicle/prolate_sc_sub1",
+            "refMesh" : "./input-file/prolate.ply",
+            "inputMesh" : "./input-file/prolate.ply",
+            "outputDir" : "../results/vesicle/testing_savedata",
 
             "nSub" : 0,
 
-            "radiusOfIntegration" : 100000,
-
-            "trajFile" : "../results/vesicle/prolate_sc_continue1/traj.nc",
-            "startingFrame": 38 
+            "trajFile" : "../results/vesicle/prolate_CG/traj.nc",
+            "startingFrame": 263
         },
 
         "options":
@@ -41,10 +39,7 @@
 
         "variables":
         {
-            "epsilon" : 15e-5,
-            "Bc" : 40,
-
-            "H0*R" : 1.2,
+            "H0*R" : 0,
             "sharpness" : 10,
             "r_H0" : [10, 10],
 
@@ -60,30 +55,35 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : [10e-2,5e-1],
-            "Ksg" : [0.1, 1],
+            "Kv"  : 2e-2,
+            "Ksg" : 0.02,
+
+            "epsilon" : 15e-5,
+            "Bc" : 40,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 0.1,			
+            "Kst" : 10,			
 
             "kt" : 0,
-            "gamma" : 2
+            "gamma" : 0
         },
 
         "integration":
         {
-            "method" : "velocity verlet",
-            "h" : 1e-4,
-            "T" : 300,
-
-            "eps" : 0.002,
-            "closeZone" : 1000,
-
-            "increment" : 0.05,
+            "radiusOfIntegration" : 100000,
+            "method" : "conjugate gradient",
+            "h" : 0.0002,
+            "T" : 30000,
+            "eps" : 0.01,
             "tSave" : 1,
-            "tMollify" : 100,
-            "errorJumpLim": 6
+
+            "options":
+            {
+                "isBacktrack" : true,
+                "rho" : 0.5,
+                "c1" : 1e-4
+            }
         }
 }
     

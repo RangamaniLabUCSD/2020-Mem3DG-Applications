@@ -12,7 +12,7 @@
             "plots.py" : "../visualization/plots.py"
         },
 
-        "geometry":
+        "I/O":
         {
             "generateGeometry": false,
             "R" : 1,
@@ -21,11 +21,9 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/patch_bud/symmetric_H20_CG_",
+            "outputDir" : "../results/patch_bud/patch_CG",
             
             "nSub" : 0,
-
-            "radiusOfIntegration" : 100,
             
             "trajFile" : "../results/patch_bud/symmetric_H20_euler/traj.nc",
             "startingFrame": 38
@@ -41,9 +39,6 @@
 
         "variables":
         {
-            "epsilon" : 15e-5,
-            "Bc" : 40,
-
             "H0*R" : 10,
             "sharpness" : 50,
             "r_H0" : [0.15, 0.15],
@@ -60,30 +55,35 @@
         {
             "Kb" : 8.22e-5,
             "eta" : 0.1,
-            "Kv"  : [0,0],
-            "Ksg" : [0.05, 0.1],
+            "Kv"  : 0,
+            "Ksg" : 0.05,
+
+            "epsilon" : 15e-5,
+            "Bc" : 40,
 
             "Kse" : 0,     
             "Ksl" : 0,
             "Kst" : 1,			
 
             "kt" : 0,
-            "gamma" : 3
+            "gamma" : 0
         },
 
         "integration":
         {
+            "radiusOfIntegration" : 100,
             "method": "conjugate gradient",
-            "h" : 1e-6,
+            "h" : 1e-8,
             "T" : 10,
-
             "eps" : 0.002,
-            "closeZone" : 1000,
+            "tSave" : 1e-5,
 
-            "increment" : 0,
-            "tSave" : 1e-3,
-            "tMollify" : 100,
-            "errorJumpLim" : 600000
+            "options":
+            {
+                "isBacktrack" : false,
+                "rho" : 0.5,
+                "c1" : 1e-4
+            }
         }
 }
     
