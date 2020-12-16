@@ -32,10 +32,10 @@ time = ds.variables['time']
 
 fig, axs = plt.subplots(3)
 fig.suptitle('Energy trajectory')
-axs[1].set_xlabel('time (s)')
+axs[2].set_xlabel('time (s)')
 axs[0].set_ylabel('energy (10^(-15) J)')
 axs[1].set_ylabel('energy (10^(-15) J)')
-axs[2].set_ylabel('L2 Error Norm (10^3 Pa)')
+axs[2].set_ylabel('L2 Error Norm (10^(-9) N)')
 
 te = axs[0].plot(time, totalenergy, label='total')
 ke = axs[0].plot(time, kineenergy, label='kinetic')

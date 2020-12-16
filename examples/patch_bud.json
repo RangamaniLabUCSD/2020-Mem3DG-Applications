@@ -21,12 +21,12 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/patch_bud/patch_CG",
+            "outputDir" : "../results/patch_bud/patch_CG_h5",
             
             "nSub" : 0,
             
-            "trajFile" : "../results/patch_bud/symmetric_H20_euler/traj.nc",
-            "startingFrame": 38
+            "trajFile" : "../results/patch_bud/patch_CG/traj.nc",
+            "startingFrame": 974
         },
 
         "options":
@@ -39,7 +39,7 @@
 
         "variables":
         {
-            "H0*R" : 10,
+            "H0*R" : 5,
             "sharpness" : 50,
             "r_H0" : [0.15, 0.15],
 
@@ -54,7 +54,7 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "eta" : 0.1,
+            "eta" : 0,
             "Kv"  : 0,
             "Ksg" : 0.05,
 
@@ -73,16 +73,16 @@
         {
             "radiusOfIntegration" : 100,
             "method": "conjugate gradient",
-            "h" : 1e-8,
+            "h" : 5e-6,
             "T" : 10,
             "eps" : 0.002,
-            "tSave" : 1e-5,
+            "tSave" : 1e-3,
 
             "options":
             {
-                "isBacktrack" : false,
+                "isBacktrack" : true,
                 "rho" : 0.5,
-                "c1" : 1e-4
+                "c1" : 0
             }
         }
 }

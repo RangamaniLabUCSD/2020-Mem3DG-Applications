@@ -21,12 +21,12 @@
             
             "refMesh" : "./input-file/prolate.ply",
             "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/testing_savedata",
+            "outputDir" : "../results/vesicle/prolateCG_c1_1e4_continue1_version2",
 
             "nSub" : 0,
 
-            "trajFile" : "../results/vesicle/prolate_CG/traj.nc",
-            "startingFrame": 263
+            "trajFile" : "../results/vesicle/prolateCG_c1_1e4/traj.nc",
+            "startingFrame": 259
         },
 
         "options":
@@ -43,7 +43,7 @@
             "sharpness" : 10,
             "r_H0" : [10, 10],
 
-            "Vt" : 0.69,
+            "Vt" : 0.75,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -55,8 +55,8 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : 2e-2,
-            "Ksg" : 0.02,
+            "Kv"  : 8e-2,
+            "Ksg" : 0.06,
 
             "epsilon" : 15e-5,
             "Bc" : 40,
@@ -76,13 +76,13 @@
             "h" : 0.0002,
             "T" : 30000,
             "eps" : 0.01,
-            "tSave" : 1,
+            "tSave" : 0.1,
 
             "options":
             {
                 "isBacktrack" : true,
                 "rho" : 0.5,
-                "c1" : 1e-4
+                "c1" : 0
             }
         }
 }
