@@ -26,13 +26,16 @@ chemenergy = ds.variables['chemenergy']
 lineenergy = ds.variables['lineenergy']
 totalenergy = ds.variables['totalenergy']
 
+l2errornorm = ds.variables['l2errornorm']
+
 time = ds.variables['time']
 
-fig, axs = plt.subplots(2)
+fig, axs = plt.subplots(3)
 fig.suptitle('Energy trajectory')
 axs[1].set_xlabel('time (s)')
 axs[0].set_ylabel('energy (10^(-15) J)')
 axs[1].set_ylabel('energy (10^(-15) J)')
+axs[2].set_ylabel('L2 Error Norm (10^3 Pa)')
 
 te = axs[0].plot(time, totalenergy, label='total')
 ke = axs[0].plot(time, kineenergy, label='kinetic')
@@ -46,6 +49,9 @@ pse = axs[1].plot(time, pressenergy, label='pressure')
 ce = axs[1].plot(time, chemenergy, label='chemical')
 le = axs[1].plot(time, lineenergy, label='line')
 axs[1].legend()
+
+l2 = axs[2].plot(time, l2errornorm, label = 'L2 error')
+axs[2].legend()
 
 plt.show()
 
