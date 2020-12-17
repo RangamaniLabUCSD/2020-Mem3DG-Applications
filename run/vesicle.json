@@ -21,12 +21,12 @@
             
             "refMesh" : "./input-file/prolate.ply",
             "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/prolateCG_c1_1e4_continue1_version2",
+            "outputDir" : "../results/vesicle/codeTesingContinuation",
 
             "nSub" : 0,
 
-            "trajFile" : "../results/vesicle/prolateCG_c1_1e4/traj.nc",
-            "startingFrame": 259
+            "trajFile" : "../results/vesicle/codeTesing/traj.nc",
+            "startingFrame": 8
         },
 
         "options":
@@ -73,7 +73,7 @@
         {
             "radiusOfIntegration" : 100000,
             "method" : "conjugate gradient",
-            "h" : 0.0002,
+            "h" : 0.0003,
             "T" : 30000,
             "eps" : 0.01,
             "tSave" : 0.1,
