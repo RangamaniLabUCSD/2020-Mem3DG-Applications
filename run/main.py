@@ -9,9 +9,11 @@ from pathlib import Path
 # parse the config file and options
 optparser = optparse.OptionParser()
 optparser.add_option('-p', '--ply', dest="ply", type="string",
-                     help="input mesh and remesh file in .ply format")
+                     help="input mesh and reference mesh files in .ply format")
 optparser.add_option('-n', '--nc', dest="nc", type="string",
                      help="input trajectory file in .nc format")
+optparser.add_option('-s', '--swp', dest="swp", type="string",
+                     help="feedforward sweep")
 (options, args) = optparser.parse_args()
 # argparser = argparse.ArgumentParser()
 # parser.add_argument("config", help = "configuration file (.json) used for the simulation", type = str)
@@ -20,6 +22,8 @@ if (options.ply != None):
     configFile = options.ply
 elif(options.nc != None):
     configFile = options.nc
+elif(options.swp != None):
+    configFile = options.swp
 
 # read the config file
 with open(configFile) as f:
@@ -140,6 +144,47 @@ elif (options.nc != None):
                         eps=inte["eps"],
                         tSave=inte["tSave"],
                         integration = inte["method"],
+                        isBacktrack = inte["options"]["isBacktrack"],
+                        rho = inte["options"]["rho"],
+                        c1 = inte["options"]["c1"])
+
+elif (options.swp != None):
+    pymem3dg.driver_sweep(inputMesh=io["inputMesh"],
+                        outputDir=io["outputDir"],
+                        refMesh=io["refMesh"],
+                        nSub=io["nSub"],
+
+                        isTuftedLaplacian=opt["isTuftedLaplacian"],
+                        mollifyFactor=opt["mollifyFactor"],
+                        isVertexShift=opt["isVertexShift"],
+                        isProtein=opt["isProtein"],
+
+                        H0=var["H0*R"],
+                        sharpness=var["sharpness"],
+                        r_H0=var["r_H0"],
+                        Vt=var["Vt"],
+                        pt=var["pt"],
+                        Kf=var["Kf"],
+                        conc=var["conc"],
+                        height=var["height"],
+
+                        Kb=prop["Kb"],
+                        eta = prop["eta"],
+                        Ksg=prop["Ksg"],
+                        Kv=prop["Kv"],
+                        epsilon=prop["epsilon"],
+                        Bc=prop["Bc"],
+                        Kse=prop["Kse"],
+                        Ksl=prop["Ksl"],
+                        Kst=prop["Kst"],
+                        kt=prop["kt"],
+                        gamma=prop["gamma"],
+
+                        radius=inte["radiusOfIntegration"],
+                        h=inte["h"],
+                        T=inte["T"],
+                        eps=inte["eps"],
+                        tSave=inte["tSave"],
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
                         c1 = inte["options"]["c1"])

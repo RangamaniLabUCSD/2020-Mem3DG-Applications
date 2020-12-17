@@ -1,0 +1,90 @@
+{
+    "parameters":{
+        "comments":
+        {
+            "units": "micron, gram, second, nanonewton"
+        },
+
+        "dependencies":
+        {
+            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
+            "viewer.py" : "../visualization/viewer.py",
+            "plots.py" : "../visualization/plots.py"
+        },
+
+        "I/O":
+        {
+            "generateGeometry": false,
+            "R" : 1,
+
+            "verbosity": 2,
+            
+            "refMesh" : "./input-file/patch.ply",
+            "inputMesh" : "./input-file/patch.ply",
+            "outputDir" : "../results/patch_bud/testing_sweep",
+            
+            "nSub" : 1,
+            
+            "trajFile" : "../results/patch_bud/patch_CG/traj.nc",
+            "startingFrame": 974
+        },
+
+        "options":
+        {
+            "isTuftedLaplacian" : false,
+            "mollifyFactor" : 1e-3,
+            "isVertexShift" : false,
+            "isProtein" : false
+        },
+
+        "variables":
+        {
+            "H0*R" : [10,15,20,25],
+            "sharpness" : 50,
+            "r_H0" : [0.15, 0.15],
+
+            "Vt" : 1,
+
+            "pt" : [0,0,0],
+            "Kf" : 0,
+            "conc" : 25,
+            "height" : 0
+        },
+
+        "properties":
+        {
+            "Kb" : 8.22e-5,
+            "eta" : 0,
+            "Kv"  : 0,
+            "Ksg" : 0.05,
+
+            "epsilon" : 15e-5,
+            "Bc" : 40,
+
+            "Kse" : 0,     
+            "Ksl" : 0,
+            "Kst" : 1,			
+
+            "kt" : 0,
+            "gamma" : 0
+        },
+
+        "integration":
+        {
+            "radiusOfIntegration" : 100,
+            "method": "conjugate gradient",
+            "h" : 1e-6,
+            "T" : 10,
+            "eps" : 0.02,
+            "tSave" : 1e-2,
+
+            "options":
+            {
+                "isBacktrack" : true,
+                "rho" : 0.5,
+                "c1" : 0
+            }
+        }
+}
+    
+}
