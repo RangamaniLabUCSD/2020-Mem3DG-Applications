@@ -17,16 +17,16 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 2,
+            "verbosity": 3,
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/patch_bud/testing_sweep",
+            "outputDir" : "../results/bud/testing_sweep2",
             
             "nSub" : 1,
             
-            "trajFile" : "../results/patch_bud/patch_CG/traj.nc",
-            "startingFrame": 974
+            "trajFile" : "../results/bud/testing_sweep/traj_H_10.nc",
+            "startingFrame": 0
         },
 
         "options":
@@ -43,7 +43,7 @@
             "sharpness" : 50,
             "r_H0" : [0.15, 0.15],
 
-            "Vt" : 1,
+            "Vt" : [1],
 
             "pt" : [0,0,0],
             "Kf" : 0,

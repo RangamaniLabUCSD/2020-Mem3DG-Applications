@@ -64,8 +64,7 @@ if io["generateGeometry"] == True:
 
 # run simulation
 if (options.ply != None):
-    pymem3dg.driver_ply(verbosity=io["verbosity"],
-                        inputMesh=io["inputMesh"],
+    pymem3dg.driver_ply_sweep(inputMesh=io["inputMesh"],
                         outputDir=io["outputDir"],
                         refMesh=io["refMesh"],
                         nSub=io["nSub"],
@@ -75,7 +74,7 @@ if (options.ply != None):
                         isVertexShift=opt["isVertexShift"],
                         isProtein=opt["isProtein"],
 
-                        H0=var["H0*R"] / io["R"],
+                        H0=var["H0*R"],
                         sharpness=var["sharpness"],
                         r_H0=var["r_H0"],
                         Vt=var["Vt"],
@@ -101,14 +100,12 @@ if (options.ply != None):
                         T=inte["T"],
                         eps=inte["eps"],
                         tSave=inte["tSave"],
-                        integration = inte["method"],
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
                         c1 = inte["options"]["c1"])
 
 elif (options.nc != None):
-    pymem3dg.driver_nc( verbosity=io["verbosity"],
-                        trajFile=io["trajFile"],
+    pymem3dg.driver_nc_sweep( trajFile=io["trajFile"],
                         startingFrame=io["startingFrame"],
                         outputDir=io["outputDir"],
 
@@ -117,7 +114,7 @@ elif (options.nc != None):
                         isVertexShift=opt["isVertexShift"],
                         isProtein=opt["isProtein"],
 
-                        H0=var["H0*R"] / io["R"],
+                        H0=var["H0*R"],
                         sharpness=var["sharpness"],
                         r_H0=var["r_H0"],
                         Vt=var["Vt"],
@@ -143,7 +140,6 @@ elif (options.nc != None):
                         T=inte["T"],
                         eps=inte["eps"],
                         tSave=inte["tSave"],
-                        integration = inte["method"],
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
                         c1 = inte["options"]["c1"])

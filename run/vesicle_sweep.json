@@ -17,13 +17,13 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 2,
+            "verbosity": 3,
             
             "refMesh" : "./input-file/prolate.ply",
             "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/codeTesingContinuation",
+            "outputDir" : "../results/vesicle/sweeping_nsub1_prolate",
 
-            "nSub" : 0,
+            "nSub" : 1,
 
             "trajFile" : "../results/vesicle/codeTesing/traj.nc",
             "startingFrame": 8
@@ -39,11 +39,11 @@
 
         "variables":
         {
-            "H0*R" : [0,1,2,3],
+            "H0*R" : [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0],
             "sharpness" : 10,
             "r_H0" : [10, 10],
 
-            "Vt" : 0.75,
+            "Vt" : [0.95, 0.90, 0.85, 0.8, 0.75, 0.7, 0.65],
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -55,15 +55,15 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : 8e-2,
-            "Ksg" : 0.06,
+            "Kv"  : 2e-2,
+            "Ksg" : 0.01,
 
             "epsilon" : 15e-5,
             "Bc" : 40,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 10,			
+            "Kst" : 7,			
 
             "kt" : 0,
             "gamma" : 0
@@ -73,10 +73,10 @@
         {
             "radiusOfIntegration" : 100000,
             "method" : "conjugate gradient",
-            "h" : 0.0003,
+            "h" : 0.00005,
             "T" : 30000,
             "eps" : 0.01,
-            "tSave" : 0.1,
+            "tSave" : 0.5,
 
             "options":
             {

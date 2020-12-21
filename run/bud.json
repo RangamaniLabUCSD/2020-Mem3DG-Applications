@@ -17,16 +17,16 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 2,
+            "verbosity": 3,
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/patch_bud/patch_CG_h5",
+            "outputDir" : "../results/bud/euler",
             
             "nSub" : 0,
             
-            "trajFile" : "../results/patch_bud/patch_CG/traj.nc",
-            "startingFrame": 974
+            "trajFile" : "../results/bud/testing_ply/traj.nc",
+            "startingFrame": 1
         },
 
         "options":
@@ -39,9 +39,9 @@
 
         "variables":
         {
-            "H0*R" : 5,
+            "H0*R" : 25,
             "sharpness" : 50,
-            "r_H0" : [0.15, 0.15],
+            "r_H0" : [0.3, 0.3],
 
             "Vt" : 1,
 
@@ -56,14 +56,14 @@
             "Kb" : 8.22e-5,
             "eta" : 0,
             "Kv"  : 0,
-            "Ksg" : 0.05,
+            "Ksg" : 0.01,
 
             "epsilon" : 15e-5,
-            "Bc" : 40,
+            "Bc" : 10,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 1,			
+            "Kst" : 2,			
 
             "kt" : 0,
             "gamma" : 0
@@ -72,15 +72,15 @@
         "integration":
         {
             "radiusOfIntegration" : 100,
-            "method": "conjugate gradient",
-            "h" : 5e-6,
-            "T" : 10,
+            "method": "euler",
+            "h" : 10e-6,
+            "T" : 1,
             "eps" : 0.002,
-            "tSave" : 1e-3,
+            "tSave" : 5e-3,
 
             "options":
             {
-                "isBacktrack" : true,
+                "isBacktrack" : false,
                 "rho" : 0.5,
                 "c1" : 0
             }

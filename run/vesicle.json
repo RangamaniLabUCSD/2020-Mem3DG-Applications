@@ -17,11 +17,11 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 2,
+            "verbosity": 3,
             
-            "refMesh" : "./input-file/prolate.ply",
-            "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/codeTesingContinuation",
+            "refMesh" : "./input-file/slightlyOblate.ply",
+            "inputMesh" : "./input-file/slightlyOblate.ply",
+            "outputDir" : "../results/vesicle/trajectory_sphere_protein",
 
             "nSub" : 0,
 
@@ -34,16 +34,16 @@
             "isTuftedLaplacian" : false,
             "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
-            "isProtein" : false
+            "isProtein" : true
         },
 
         "variables":
         {
-            "H0*R" : 0,
+            "H0*R" : 20,
             "sharpness" : 10,
             "r_H0" : [10, 10],
 
-            "Vt" : 0.75,
+            "Vt" : 0.60,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -55,28 +55,28 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : 8e-2,
-            "Ksg" : 0.06,
+            "Kv"  : 2e-2,
+            "Ksg" : 0.01,
 
             "epsilon" : 15e-5,
             "Bc" : 40,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 10,			
+            "Kst" : 6,			
 
             "kt" : 0,
-            "gamma" : 0
+            "gamma" : 3
         },
 
         "integration":
         {
             "radiusOfIntegration" : 100000,
-            "method" : "conjugate gradient",
+            "method" : "velocity verlet",
             "h" : 0.0003,
-            "T" : 30000,
-            "eps" : 0.01,
-            "tSave" : 0.1,
+            "T" : 100,
+            "eps" : 0,
+            "tSave" : 0.2,
 
             "options":
             {
