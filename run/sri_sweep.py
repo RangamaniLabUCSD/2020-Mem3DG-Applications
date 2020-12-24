@@ -103,6 +103,7 @@ if (options.ply != None):
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
                         c1 = inte["options"]["c1"],
+                        ctol = inte["options"]["ctol"],
                         isAugmentedLagrangian = inte["options"]["isAugmentedLagrangian"])
 
 elif (options.nc != None):
@@ -144,4 +145,5 @@ elif (options.nc != None):
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
                         c1 = inte["options"]["c1"],
+                        ctol = inte["options"]["ctol"],
                         isAugmentedLagrangian = inte["options"]["isAugmentedLagrangian"])
