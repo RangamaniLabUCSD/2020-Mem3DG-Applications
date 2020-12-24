@@ -82,7 +82,9 @@
             {
                 "isBacktrack" : true,
                 "rho" : 0.5,
-                "c1" : 0
+                "c1" : 0,
+
+                "isAugmentedLagrangian" : false
             }
         }
 }

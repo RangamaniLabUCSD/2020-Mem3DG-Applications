@@ -104,8 +104,8 @@ if (options.ply != None):
                         integration = inte["method"],
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
-                        c1 = inte["options"]["c1"])
-
+                        c1 = inte["options"]["c1"],
+                        isAugmentedLagrangian = inte["options"]["isAugmentedLagrangian"])
 elif (options.nc != None):
     pymem3dg.driver_nc( verbosity=io["verbosity"],
                         trajFile=io["trajFile"],
@@ -146,4 +146,5 @@ elif (options.nc != None):
                         integration = inte["method"],
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
-                        c1 = inte["options"]["c1"])
+                        c1 = inte["options"]["c1"],
+                        isAugmentedLagrangian = inte["options"]["isAugmentedLagrangian"])

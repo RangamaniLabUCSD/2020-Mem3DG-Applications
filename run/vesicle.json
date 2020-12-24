@@ -19,9 +19,9 @@
 
             "verbosity": 3,
             
-            "refMesh" : "./input-file/slightlyOblate.ply",
-            "inputMesh" : "./input-file/slightlyOblate.ply",
-            "outputDir" : "../results/vesicle/trajectory_sphere_protein",
+            "refMesh" : "./input-file/prolate.ply",
+            "inputMesh" : "./input-file/prolate.ply",
+            "outputDir" : "../results/vesicle/testing_totaltime",
 
             "nSub" : 0,
 
@@ -34,16 +34,16 @@
             "isTuftedLaplacian" : false,
             "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
-            "isProtein" : true
+            "isProtein" : false
         },
 
         "variables":
         {
-            "H0*R" : 20,
+            "H0*R" : 0,
             "sharpness" : 10,
             "r_H0" : [10, 10],
 
-            "Vt" : 0.60,
+            "Vt" : 0.95,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -63,26 +63,28 @@
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 6,			
+            "Kst" : 7,			
 
             "kt" : 0,
-            "gamma" : 3
+            "gamma" : 0
         },
 
         "integration":
         {
             "radiusOfIntegration" : 100000,
-            "method" : "velocity verlet",
-            "h" : 0.0003,
-            "T" : 100,
-            "eps" : 0,
-            "tSave" : 0.2,
+            "method" : "conjugate gradient",
+            "h" : 0.0002,
+            "T" : 30000,
+            "eps" : 0.01,
+            "tSave" : 0.5,
 
             "options":
             {
                 "isBacktrack" : true,
                 "rho" : 0.5,
-                "c1" : 0
+                "c1" : 0,
+
+                "isAugmentedLagrangian": false
             }
         }
 }

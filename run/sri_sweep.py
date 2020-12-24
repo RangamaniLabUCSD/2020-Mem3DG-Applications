@@ -102,7 +102,8 @@ if (options.ply != None):
                         tSave=inte["tSave"],
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
-                        c1 = inte["options"]["c1"])
+                        c1 = inte["options"]["c1"],
+                        isAugmentedLagrangian = inte["options"]["isAugmentedLagrangian"])
 
 elif (options.nc != None):
     pymem3dg.driver_nc_sweep( trajFile=io["trajFile"],
@@ -142,4 +143,5 @@ elif (options.nc != None):
                         tSave=inte["tSave"],
                         isBacktrack = inte["options"]["isBacktrack"],
                         rho = inte["options"]["rho"],
-                        c1 = inte["options"]["c1"])
+                        c1 = inte["options"]["c1"],
+                        isAugmentedLagrangian = inte["options"]["isAugmentedLagrangian"])
