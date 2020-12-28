@@ -17,7 +17,7 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 3,
+            "verbosity": 5,
             
             "refMesh" : "./input-file/slightlyOblate.ply",
             "inputMesh" : "./input-file/slightlyOblate.ply",
