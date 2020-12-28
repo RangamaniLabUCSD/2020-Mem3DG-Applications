@@ -13,6 +13,13 @@ optparser.add_option('-a', '--all', dest="all", type="string",
 # argparser = argparse.ArgumentParser()
 # parser.add_argument("config", help = "configuration file (.json) used for the simulation", type = str)
 # args = argparser.parse_args()
+
+# make video directory if not exist 
+cwd = os.getcwd()
+videoDir = os.path.join(cwd, './video')
+if not os.path.exists(videoDir):
+  os.mkdir(videoDir)
+
 if (options.shape != None):
   ext = os.path.splitext(options.shape)[1][1:]
   # run viewer 

@@ -17,11 +17,11 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 3,
+            "verbosity": 5,
             
             "refMesh" : "./input-file/prolate.ply",
             "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/testing_totaltime",
+            "outputDir" : "../results/vesicle/testing_filesystem",
 
             "nSub" : 0,
 
@@ -74,7 +74,7 @@
             "radiusOfIntegration" : 100000,
             "method" : "conjugate gradient",
             "h" : 0.0002,
-            "T" : 30000,
+            "T" : 1,
             "eps" : 0.01,
             "tSave" : 0.5,
 
