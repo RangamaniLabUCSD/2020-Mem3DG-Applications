@@ -21,12 +21,12 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/testing_sweep2",
+            "outputDir" : "../results/bud/sweep_fine_2",
             
             "nSub" : 1,
             
-            "trajFile" : "../results/bud/testing_sweep/traj_H_10.nc",
-            "startingFrame": 0
+            "trajFile" : "../results/bud/sweep_fine/traj_H_2400_V_100.nc",
+            "startingFrame": 7
         },
 
         "options":
@@ -39,7 +39,7 @@
 
         "variables":
         {
-            "H0*R" : [10,15,20,25],
+            "H0*R" : [22.5, 23, 23.5, 24],
             "sharpness" : 50,
             "r_H0" : [0.15, 0.15],
 
@@ -63,7 +63,7 @@
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 1,			
+            "Kst" : 2,			
 
             "kt" : 0,
             "gamma" : 0
@@ -73,9 +73,9 @@
         {
             "radiusOfIntegration" : 100,
             "method": "conjugate gradient",
-            "h" : 1e-6,
+            "h" : 2.5e-6,
             "T" : 10,
-            "eps" : 0.02,
+            "eps" : 0.014,
             "tSave" : 1e-2,
 
             "options":

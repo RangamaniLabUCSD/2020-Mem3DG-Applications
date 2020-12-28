@@ -17,11 +17,11 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 3,
+            "verbosity": 3, 
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/euler",
+            "outputDir" : "../results/bud/trajectory_H20_euler_largetension",
             
             "nSub" : 0,
             
@@ -39,9 +39,9 @@
 
         "variables":
         {
-            "H0*R" : 25,
+            "H0*R" : 20,
             "sharpness" : 50,
-            "r_H0" : [0.3, 0.3],
+            "r_H0" : [0.15, 0.15],
 
             "Vt" : 1,
 
@@ -56,7 +56,7 @@
             "Kb" : 8.22e-5,
             "eta" : 0,
             "Kv"  : 0,
-            "Ksg" : 0.01,
+            "Ksg" : 0.1,
 
             "epsilon" : 15e-5,
             "Bc" : 10,
@@ -74,8 +74,8 @@
             "radiusOfIntegration" : 100,
             "method": "euler",
             "h" : 10e-6,
-            "T" : 1,
-            "eps" : 0.002,
+            "T" : 3e-1,
+            "eps" : 0.01,
             "tSave" : 5e-3,
 
             "options":
