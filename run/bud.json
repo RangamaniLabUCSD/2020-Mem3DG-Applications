@@ -21,7 +21,7 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/trajectory_H20_euler_largetension",
+            "outputDir" : "../results/bud/testing_libraries",
             
             "nSub" : 0,
             
