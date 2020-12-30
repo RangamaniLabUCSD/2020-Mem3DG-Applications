@@ -2,7 +2,8 @@
     "parameters":{
         "comments":
         {
-            "units": "micron, gram, second, nanonewton"
+            "units": "micron, gram, second, nanonewton",
+            "gamma unit": "nanonewton * second / micron"
         },
 
         "dependencies":
@@ -17,13 +18,13 @@
             "generateGeometry": false,
             "R" : 1,
 
-            "verbosity": 5,
+            "verbosity": 3,
             
             "refMesh" : "./input-file/slightlyOblate.ply",
             "inputMesh" : "./input-file/slightlyOblate.ply",
-            "outputDir" : "../results/vesicle/trajectory_sphere",
+            "outputDir" : "../results/vesicle/trajectory_nsub1_sphere_DPD",
 
-            "nSub" : 0,
+            "nSub" : 1,
 
             "trajFile" : "../results/vesicle/codeTesing/traj.nc",
             "startingFrame": 8
@@ -65,7 +66,7 @@
             "Ksl" : 0,
             "Kst" : 6,			
 
-            "kt" : 0,
+            "temp" : 293,
             "gamma" : 3
         },
 
@@ -73,7 +74,7 @@
         {
             "radiusOfIntegration" : 100000,
             "method" : "velocity verlet",
-            "h" : 0.0003,
+            "h" : 0.000075,
             "T" : 100,
             "eps" : 0,
             "tSave" : 0.2,

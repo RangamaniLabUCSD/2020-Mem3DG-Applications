@@ -93,7 +93,7 @@ if (options.ply != None):
                         Kse=prop["Kse"],
                         Ksl=prop["Ksl"],
                         Kst=prop["Kst"],
-                        kt=prop["kt"],
+                        temp=prop["temp"],
                         gamma=prop["gamma"],
 
                         radius=inte["radiusOfIntegration"],
@@ -136,7 +136,7 @@ elif (options.nc != None):
                         Kse=prop["Kse"],
                         Ksl=prop["Ksl"],
                         Kst=prop["Kst"],
-                        kt=prop["kt"],
+                        temp=prop["temp"],
                         gamma=prop["gamma"],
 
                         radius=inte["radiusOfIntegration"],

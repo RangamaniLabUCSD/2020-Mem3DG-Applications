@@ -2,7 +2,8 @@
     "parameters":{
         "comments":
         {
-            "units": "micron, gram, second, nanonewton"
+            "units": "micron, gram, second, nanonewton, Kelvin",
+            "gamma unit": "nanonewton * second / micron"
         },
 
         "dependencies":
@@ -65,7 +66,7 @@
             "Ksl" : 0,
             "Kst" : 2,			
 
-            "kt" : 0,
+            "temp" : 0,
             "gamma" : 0
         },
 
