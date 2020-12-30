@@ -30,7 +30,10 @@ if (options.shape != None):
                         capillary_pressure = 0,
                         bending_pressure = 0, line_pressure = 0, mask = 0, H_H0 = 0)
   elif ext == "ply": 
-      pymem3dg.viewer(options.shape)
+      pymem3dg.viewer(options.shape, mean_curvature = 0, spon_curvature = 0,
+          ext_pressure = 0, physical_pressure = 0, capillary_pressure = 0,
+            bending_pressure = 0, line_pressure = 0)
+            
 elif(options.all != None):
   ext = os.path.splitext(options.all)[1][1:]
   # run viewer 
