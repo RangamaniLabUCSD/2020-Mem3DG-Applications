@@ -12,7 +12,7 @@ if __name__ == "__main__":
     for filename in glob.iglob(cwd_string + '/**/**.nc', recursive=True):
 
         ## extract the foldername and filename
-        directory, ncFile = os.path.split(filename)
+        directory, _ = os.path.split(filename)
         _, folderName = os.path.split(directory)
     
         # Run plot() with input of filename and output as foldername

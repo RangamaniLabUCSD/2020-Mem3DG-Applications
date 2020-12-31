@@ -64,7 +64,7 @@ if io["generateGeometry"] == True:
 
 # run simulation
 if (options.ply != None):
-    pymem3dg.driver_ply_sweep(inputMesh=io["inputMesh"],
+    pymem3dg.forwardsweep_ply(inputMesh=io["inputMesh"],
                         outputDir=io["outputDir"],
                         refMesh=io["refMesh"],
                         nSub=io["nSub"],
@@ -107,7 +107,7 @@ if (options.ply != None):
                         isAugmentedLagrangian = inte["options"]["isAugmentedLagrangian"])
 
 elif (options.nc != None):
-    pymem3dg.driver_nc_sweep( trajFile=io["trajFile"],
+    pymem3dg.forwardsweep_nc( trajFile=io["trajFile"],
                         startingFrame=io["startingFrame"],
                         outputDir=io["outputDir"],
 
