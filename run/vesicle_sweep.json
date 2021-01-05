@@ -22,29 +22,30 @@
             
             "refMesh" : "./input-file/prolate.ply",
             "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/sweeping_nsub1_prolate",
+            "outputDir" : "../results/vesicle/testingPressure",
 
-            "nSub" : 1,
+            "nSub" : 0,
 
-            "trajFile" : "../results/vesicle/codeTesing/traj.nc",
-            "startingFrame": 8
+            "trajFile" : "./input-file/",
+            "startingFrame": 1e100
         },
 
         "options":
         {
             "isTuftedLaplacian" : false,
-            "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
-            "isProtein" : false
+            "isProtein" : false,
+            "isReducedVolume" : false
         },
 
         "variables":
         {
-            "H0*R" : [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0],
+            "H0*R" : [0, 0.4, 0.8, 1.2, 1.6, 2.0],
             "sharpness" : 10,
             "r_H0" : [10, 10],
 
-            "Vt" : [0.95, 0.90, 0.85, 0.8, 0.75, 0.7, 0.65],
+            "Vt" : [0.95, 0.90, 0.85, 0.8, 0.75, 0.7, 0.67],
+            "Pam": [2e-3, 3e-3, 4e-3],
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -56,8 +57,9 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : 2e-2,
-            "Ksg" : 0.01,
+            "Kv"  : 5e-2,
+            "comments" : "Kv = 5e-2 for reduced volume, 1e-2 for pressure constraint",
+            "Ksg" : 0.02,
 
             "epsilon" : 15e-5,
             "Bc" : 40,
@@ -76,8 +78,8 @@
             "method" : "conjugate gradient",
             "h" : 0.00005,
             "T" : 30000,
-            "eps" : 0.01,
-            "tSave" : 0.5,
+            "eps" : 0.0015,
+            "tSave" : 0.1,
 
             "options":
             {

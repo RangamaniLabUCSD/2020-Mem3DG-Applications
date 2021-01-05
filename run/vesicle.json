@@ -20,11 +20,11 @@
 
             "verbosity": 3,
             
-            "refMesh" : "./input-file/slightlyOblate.ply",
-            "inputMesh" : "./input-file/slightlyOblate.ply",
-            "outputDir" : "../results/vesicle/trajectory_nsub1_sphere_DPD",
+            "refMesh" : "./input-file/oblate.ply",
+            "inputMesh" : "./input-file/oblate.ply",
+            "outputDir" : "../results/vesicle/testing",
 
-            "nSub" : 1,
+            "nSub" : 0,
 
             "trajFile" : "../results/vesicle/codeTesing/traj.nc",
             "startingFrame": 8
@@ -33,9 +33,9 @@
         "options":
         {
             "isTuftedLaplacian" : false,
-            "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
-            "isProtein" : false
+            "isProtein" : false,
+            "isReducedVolume" : false
         },
 
         "variables":
@@ -45,6 +45,7 @@
             "r_H0" : [10, 10],
 
             "Vt" : 0.60,
+            "Pam": 20e-3,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -56,8 +57,9 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : 2e-2,
-            "Ksg" : 0.01,
+            "Kv"  : 4e-2,
+            "comments" : "Kv = 5e-2 for reduced volume, 1e-2 for pressure constraint",
+            "Ksg" : 1,
 
             "epsilon" : 15e-5,
             "Bc" : 40,
@@ -66,18 +68,18 @@
             "Ksl" : 0,
             "Kst" : 6,			
 
-            "temp" : 293,
-            "gamma" : 3
+            "temp" : 0,
+            "gamma" : 0
         },
 
         "integration":
         {
             "radiusOfIntegration" : 100000,
-            "method" : "velocity verlet",
-            "h" : 0.000075,
-            "T" : 100,
-            "eps" : 0,
-            "tSave" : 0.2,
+            "method" : "conjugate gradient",
+            "h" : 0.0005,
+            "T" : 1000,
+            "eps" : 0.002,
+            "tSave" : 1,
 
             "options":
             {
