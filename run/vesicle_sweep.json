@@ -3,7 +3,8 @@
         "comments":
         {
             "units": "micron, gram, second, nanonewton, Kelvin",
-            "gamma unit": "nanonewton * second / micron"
+            "gamma unit": "nanonewton * second / micron",
+            "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 1e-2 for P"
         },
 
         "dependencies":
@@ -20,14 +21,14 @@
 
             "verbosity": 3,
             
-            "refMesh" : "./input-file/prolate.ply",
-            "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/testingPressure",
+            "refMesh" : "./input-file/oblate.ply",
+            "inputMesh" : "./input-file/oblate.ply",
+            "outputDir" : "../results/vesicle/test_newpressure",
 
             "nSub" : 0,
 
             "trajFile" : "./input-file/",
-            "startingFrame": 1e100
+            "startingFrame": 1e8
         },
 
         "options":
@@ -35,7 +36,7 @@
             "isTuftedLaplacian" : false,
             "isVertexShift" : false,
             "isProtein" : false,
-            "isReducedVolume" : false
+            "isReducedVolume" : true
         },
 
         "variables":
@@ -45,7 +46,7 @@
             "r_H0" : [10, 10],
 
             "Vt" : [0.95, 0.90, 0.85, 0.8, 0.75, 0.7, 0.67],
-            "Pam": [2e-3, 3e-3, 4e-3],
+            "cam": [20e-2],
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -58,7 +59,6 @@
             "Kb" : 8.22e-5,
             "eta": 0,
             "Kv"  : 5e-2,
-            "comments" : "Kv = 5e-2 for reduced volume, 1e-2 for pressure constraint",
             "Ksg" : 0.02,
 
             "epsilon" : 15e-5,
@@ -76,10 +76,10 @@
         {
             "radiusOfIntegration" : 100000,
             "method" : "conjugate gradient",
-            "h" : 0.00005,
+            "h" : 0.0002,
             "T" : 30000,
-            "eps" : 0.0015,
-            "tSave" : 0.1,
+            "eps" : 0.005,
+            "tSave" : 1,
 
             "options":
             {
