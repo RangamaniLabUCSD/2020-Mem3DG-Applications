@@ -7,17 +7,8 @@ import pymem3dg
 from pathlib import Path
 
 
-def run():
-    # parse the config file and options
-    optparser = optparse.OptionParser()
-    optparser.add_option('-p', '--ply', dest="ply", type="string",
-                         help="input mesh and reference mesh files in .ply format")
-    optparser.add_option('-n', '--nc', dest="nc", type="string",
-                         help="input trajectory file in .nc format")
-    (options, args) = optparser.parse_args()
-    # argparser = argparse.ArgumentParser()
-    # parser.add_argument("config", help = "configuration file (.json) used for the simulation", type = str)
-    # args = argparser.parse_args()
+def configParse(options, args):
+    '''function that parse the .json config file'''
     if (options.ply != None):
         configFile = options.ply
     elif(options.nc != None):
@@ -54,6 +45,11 @@ def run():
         io["outputDir"], "viewer.py"))
     shutil.copyfile(dep["plots.py"], os.path.join(io["outputDir"], "plots.py"))
 
+    return dep, io, opt, var, prop, inte
+
+
+def plyRun(dep, io, opt, var, prop, inte):
+    '''function run the driver function starting with .ply mesh'''
     # create starting mesh
     if io["generateGeometry"] == True:
         pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=io["R"])
@@ -62,104 +58,128 @@ def run():
     #                     , path = io["inputMesh"])
 
     # run simulation
-    if (options.ply != None):
-        pymem3dg.driver_ply(verbosity=io["verbosity"],
-                            inputMesh=io["inputMesh"],
-                            outputDir=io["outputDir"],
-                            refMesh=io["refMesh"],
-                            nSub=io["nSub"],
+    pymem3dg.driver_ply(verbosity=io["verbosity"],
+                        inputMesh=io["inputMesh"],
+                        outputDir=io["outputDir"],
+                        refMesh=io["refMesh"],
+                        nSub=io["nSub"],
 
-                            isTuftedLaplacian=opt["isTuftedLaplacian"],
-                            isVertexShift=opt["isVertexShift"],
-                            isProtein=opt["isProtein"],
-                            isReducedVolume=opt["isReducedVolume"],
+                        isVertexShift=opt["isVertexShift"],
+                        isProtein=opt["isProtein"],
+                        isLocalCurvature = opt["isLocalCurvature"],
+                        isReducedVolume=opt["isReducedVolume"],
 
-                            H0=var["H0*R"] / io["R"],
-                            sharpness=var["sharpness"],
-                            r_H0=var["r_H0"],
-                            Vt=var["Vt"],
-                            cam=var["cam"],
-                            pt=var["pt"],
-                            Kf=var["Kf"],
-                            conc=var["conc"],
-                            height=var["height"],
+                        H0=var["H0*R"] / io["R"],
+                        sharpness=var["sharpness"],
+                        r_H0=var["r_H0"],
+                        Vt=var["Vt"],
+                        cam=var["cam"],
+                        pt=var["pt"],
+                        Kf=var["Kf"],
+                        conc=var["conc"],
+                        height=var["height"],
 
-                            Kb=prop["Kb"],
-                            eta=prop["eta"],
-                            Ksg=prop["Ksg"],
-                            Kv=prop["Kv"],
-                            epsilon=prop["epsilon"],
-                            Bc=prop["Bc"],
-                            Kse=prop["Kse"],
-                            Ksl=prop["Ksl"],
-                            Kst=prop["Kst"],
-                            temp=prop["temp"],
-                            gamma=prop["gamma"],
+                        Kb=prop["Kb"],
+                        eta=prop["eta"],
+                        Ksg=prop["Ksg"],
+                        Kv=prop["Kv"],
+                        epsilon=prop["epsilon"],
+                        Bc=prop["Bc"],
+                        Kse=prop["Kse"],
+                        Ksl=prop["Ksl"],
+                        Kst=prop["Kst"],
+                        temp=prop["temp"],
+                        gamma=prop["gamma"],
 
-                            radius=inte["radiusOfIntegration"],
-                            h=inte["h"],
-                            T=inte["T"],
-                            eps=inte["eps"],
-                            tSave=inte["tSave"],
-                            integration=inte["method"],
-                            isBacktrack=inte["options"]["isBacktrack"],
-                            rho=inte["options"]["rho"],
-                            c1=inte["options"]["c1"],
-                            ctol=inte["options"]["ctol"],
-                            isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
-    elif (options.nc != None):
-        pymem3dg.driver_nc(verbosity=io["verbosity"],
-                           trajFile=io["trajFile"],
-                           startingFrame=io["startingFrame"],
-                           outputDir=io["outputDir"],
+                        radius=inte["radiusOfIntegration"],
+                        h=inte["h"],
+                        T=inte["T"],
+                        eps=inte["eps"],
+                        tSave=inte["tSave"],
+                        integration=inte["method"],
+                        isBacktrack=inte["options"]["isBacktrack"],
+                        rho=inte["options"]["rho"],
+                        c1=inte["options"]["c1"],
+                        ctol=inte["options"]["ctol"],
+                        isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
 
-                           isTuftedLaplacian=opt["isTuftedLaplacian"],
-                           isVertexShift=opt["isVertexShift"],
-                           isProtein=opt["isProtein"],
-                           isReducedVolume=opt["isReducedVolume"],
 
-                           H0=var["H0*R"] / io["R"],
-                           sharpness=var["sharpness"],
-                           r_H0=var["r_H0"],
-                           Vt=var["Vt"],
-                           cam=var["cam"],
-                           pt=var["pt"],
-                           Kf=var["Kf"],
-                           conc=var["conc"],
-                           height=var["height"],
+def ncRun(dep, io, opt, var, prop, inte):
+    '''function run the driver function starting with data stored in netcdf .nc file'''
+    pymem3dg.driver_nc(verbosity=io["verbosity"],
+                       trajFile=io["trajFile"],
+                       startingFrame=io["startingFrame"],
+                       outputDir=io["outputDir"],
 
-                           Kb=prop["Kb"],
-                           eta=prop["eta"],
-                           Ksg=prop["Ksg"],
-                           Kv=prop["Kv"],
-                           epsilon=prop["epsilon"],
-                           Bc=prop["Bc"],
-                           Kse=prop["Kse"],
-                           Ksl=prop["Ksl"],
-                           Kst=prop["Kst"],
-                           temp=prop["temp"],
-                           gamma=prop["gamma"],
+                       isVertexShift=opt["isVertexShift"],
+                       isProtein=opt["isProtein"],
+                       isLocalCurvature = opt["isLocalCurvature"],
+                       isReducedVolume=opt["isReducedVolume"],
 
-                           radius=inte["radiusOfIntegration"],
-                           h=inte["h"],
-                           T=inte["T"],
-                           eps=inte["eps"],
-                           tSave=inte["tSave"],
-                           integration=inte["method"],
-                           isBacktrack=inte["options"]["isBacktrack"],
-                           rho=inte["options"]["rho"],
-                           c1=inte["options"]["c1"],
-                           ctol=inte["options"]["ctol"],
-                           isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                       H0=var["H0*R"] / io["R"],
+                       sharpness=var["sharpness"],
+                       r_H0=var["r_H0"],
+                       Vt=var["Vt"],
+                       cam=var["cam"],
+                       pt=var["pt"],
+                       Kf=var["Kf"],
+                       conc=var["conc"],
+                       height=var["height"],
 
-    # run
+                       Kb=prop["Kb"],
+                       eta=prop["eta"],
+                       Ksg=prop["Ksg"],
+                       Kv=prop["Kv"],
+                       epsilon=prop["epsilon"],
+                       Bc=prop["Bc"],
+                       Kse=prop["Kse"],
+                       Ksl=prop["Ksl"],
+                       Kst=prop["Kst"],
+                       temp=prop["temp"],
+                       gamma=prop["gamma"],
+
+                       radius=inte["radiusOfIntegration"],
+                       h=inte["h"],
+                       T=inte["T"],
+                       eps=inte["eps"],
+                       tSave=inte["tSave"],
+                       integration=inte["method"],
+                       isBacktrack=inte["options"]["isBacktrack"],
+                       rho=inte["options"]["rho"],
+                       c1=inte["options"]["c1"],
+                       ctol=inte["options"]["ctol"],
+                       isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+
+def genPlots(io):
+    '''function that generate the .png plots for netcdf trajectory file'''
     sys.path.insert(1, io["outputDir"])
     from plots import plot
     plot(trajnc=os.fspath(os.path.abspath(Path(io['outputDir'] + "/traj.nc"))),
-         figureFile=os.fspath(os.path.abspath(
-             Path(io['outputDir'] + "/traj_plot.pdf"))),
-         show=False, save=True)
-
+        figureFile=os.fspath(os.path.abspath(
+            Path(io['outputDir'] + "/traj_plot.pdf"))),
+        show=False, save=True)
 
 if __name__ == "__main__":
-    run()
+
+    # parse the command line option
+    optparser = optparse.OptionParser()
+    optparser.add_option('-p', '--ply', dest="ply", type="string",
+                         help="input mesh and reference mesh files in .ply format")
+    optparser.add_option('-n', '--nc', dest="nc", type="string",
+                         help="input trajectory file in .nc format")
+    (options, args) = optparser.parse_args()
+    # argparser = argparse.ArgumentParser()
+    # parser.add_argument("config", help = "configuration file (.json) used for the simulation", type = str)
+    # args = argparser.parse_args()
+
+    # parse the config file
+    dep, io, opt, var, prop, inte = configParse(options, args)
+
+    # run simulation
+    if (options.ply != None):
+        plyRun(dep, io, opt, var, prop, inte)
+    elif(options.nc != None):
+        ncRun(dep, io, opt, var, prop, inte)
+
+    # generate plots based on netcdf trajectory
+    genPlots(io)

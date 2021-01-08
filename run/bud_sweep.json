@@ -32,10 +32,10 @@
 
         "options":
         {
-            "isTuftedLaplacian" : false,
             "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
-            "isProtein" : false
+            "isProtein" : false,
+            "isLocalCurvature": true
         },
 
         "variables":

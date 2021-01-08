@@ -33,9 +33,9 @@
 
         "options":
         {
-            "isTuftedLaplacian" : false,
             "isVertexShift" : false,
             "isProtein" : false,
+            "isLocalCurvature": false,
             "isReducedVolume" : true
         },
 
