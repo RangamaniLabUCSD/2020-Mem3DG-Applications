@@ -58,107 +58,162 @@ def plyRun(dep, io, opt, var, prop, inte):
     #                     , path = io["inputMesh"])
 
     # run simulation
-    pymem3dg.driver_ply(verbosity=io["verbosity"],
-                        inputMesh=io["inputMesh"],
-                        outputDir=io["outputDir"],
-                        refMesh=io["refMesh"],
-                        nSub=io["nSub"],
+    return pymem3dg.driver_ply(verbosity=io["verbosity"],
+                               inputMesh=io["inputMesh"],
+                               outputDir=io["outputDir"],
+                               refMesh=io["refMesh"],
+                               nSub=io["nSub"],
 
-                        isVertexShift=opt["isVertexShift"],
-                        isProtein=opt["isProtein"],
-                        isLocalCurvature = opt["isLocalCurvature"],
-                        isReducedVolume=opt["isReducedVolume"],
+                               isVertexShift=opt["isVertexShift"],
+                               isProtein=opt["isProtein"],
+                               isLocalCurvature=opt["isLocalCurvature"],
+                               isReducedVolume=opt["isReducedVolume"],
 
-                        H0=var["H0*R"] / io["R"],
-                        sharpness=var["sharpness"],
-                        r_H0=var["r_H0"],
-                        Vt=var["Vt"],
-                        cam=var["cam"],
-                        pt=var["pt"],
-                        Kf=var["Kf"],
-                        conc=var["conc"],
-                        height=var["height"],
+                               H0=var["H0*R"] / io["R"],
+                               sharpness=var["sharpness"],
+                               r_H0=var["r_H0"],
+                               Vt=var["Vt"],
+                               cam=var["cam"],
+                               pt=var["pt"],
+                               Kf=var["Kf"],
+                               conc=var["conc"],
+                               height=var["height"],
 
-                        Kb=prop["Kb"],
-                        eta=prop["eta"],
-                        Ksg=prop["Ksg"],
-                        Kv=prop["Kv"],
-                        epsilon=prop["epsilon"],
-                        Bc=prop["Bc"],
-                        Kse=prop["Kse"],
-                        Ksl=prop["Ksl"],
-                        Kst=prop["Kst"],
-                        temp=prop["temp"],
-                        gamma=prop["gamma"],
+                               Kb=prop["Kb"],
+                               eta=prop["eta"],
+                               Ksg=prop["Ksg"],
+                               Kv=prop["Kv"],
+                               epsilon=prop["epsilon"],
+                               Bc=prop["Bc"],
+                               Kse=prop["Kse"],
+                               Ksl=prop["Ksl"],
+                               Kst=prop["Kst"],
+                               temp=prop["temp"],
+                               gamma=prop["gamma"],
 
-                        radius=inte["radiusOfIntegration"],
-                        h=inte["h"],
-                        T=inte["T"],
-                        eps=inte["eps"],
-                        tSave=inte["tSave"],
-                        integration=inte["method"],
-                        isBacktrack=inte["options"]["isBacktrack"],
-                        rho=inte["options"]["rho"],
-                        c1=inte["options"]["c1"],
-                        ctol=inte["options"]["ctol"],
-                        isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                               radius=inte["radiusOfIntegration"],
+                               h=inte["h"],
+                               T=inte["T"],
+                               eps=inte["eps"],
+                               tSave=inte["tSave"],
+                               integration=inte["method"],
+                               isBacktrack=inte["options"]["isBacktrack"],
+                               rho=inte["options"]["rho"],
+                               c1=inte["options"]["c1"],
+                               ctol=inte["options"]["ctol"],
+                               isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
 
 
 def ncRun(dep, io, opt, var, prop, inte):
     '''function run the driver function starting with data stored in netcdf .nc file'''
-    pymem3dg.driver_nc(verbosity=io["verbosity"],
-                       trajFile=io["trajFile"],
-                       startingFrame=io["startingFrame"],
-                       outputDir=io["outputDir"],
+    return pymem3dg.driver_nc(verbosity=io["verbosity"],
+                              trajFile=io["trajFile"],
+                              startingFrame=io["startingFrame"],
+                              outputDir=io["outputDir"],
 
-                       isVertexShift=opt["isVertexShift"],
-                       isProtein=opt["isProtein"],
-                       isLocalCurvature = opt["isLocalCurvature"],
-                       isReducedVolume=opt["isReducedVolume"],
+                              isVertexShift=opt["isVertexShift"],
+                              isProtein=opt["isProtein"],
+                              isLocalCurvature=opt["isLocalCurvature"],
+                              isReducedVolume=opt["isReducedVolume"],
 
-                       H0=var["H0*R"] / io["R"],
-                       sharpness=var["sharpness"],
-                       r_H0=var["r_H0"],
-                       Vt=var["Vt"],
-                       cam=var["cam"],
-                       pt=var["pt"],
-                       Kf=var["Kf"],
-                       conc=var["conc"],
-                       height=var["height"],
+                              H0=var["H0*R"] / io["R"],
+                              sharpness=var["sharpness"],
+                              r_H0=var["r_H0"],
+                              Vt=var["Vt"],
+                              cam=var["cam"],
+                              pt=var["pt"],
+                              Kf=var["Kf"],
+                              conc=var["conc"],
+                              height=var["height"],
 
-                       Kb=prop["Kb"],
-                       eta=prop["eta"],
-                       Ksg=prop["Ksg"],
-                       Kv=prop["Kv"],
-                       epsilon=prop["epsilon"],
-                       Bc=prop["Bc"],
-                       Kse=prop["Kse"],
-                       Ksl=prop["Ksl"],
-                       Kst=prop["Kst"],
-                       temp=prop["temp"],
-                       gamma=prop["gamma"],
+                              Kb=prop["Kb"],
+                              eta=prop["eta"],
+                              Ksg=prop["Ksg"],
+                              Kv=prop["Kv"],
+                              epsilon=prop["epsilon"],
+                              Bc=prop["Bc"],
+                              Kse=prop["Kse"],
+                              Ksl=prop["Ksl"],
+                              Kst=prop["Kst"],
+                              temp=prop["temp"],
+                              gamma=prop["gamma"],
 
-                       radius=inte["radiusOfIntegration"],
-                       h=inte["h"],
-                       T=inte["T"],
-                       eps=inte["eps"],
-                       tSave=inte["tSave"],
-                       integration=inte["method"],
-                       isBacktrack=inte["options"]["isBacktrack"],
-                       rho=inte["options"]["rho"],
-                       c1=inte["options"]["c1"],
-                       ctol=inte["options"]["ctol"],
-                       isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                              radius=inte["radiusOfIntegration"],
+                              h=inte["h"],
+                              T=inte["T"],
+                              eps=inte["eps"],
+                              tSave=inte["tSave"],
+                              integration=inte["method"],
+                              isBacktrack=inte["options"]["isBacktrack"],
+                              rho=inte["options"]["rho"],
+                              c1=inte["options"]["c1"],
+                              ctol=inte["options"]["ctol"],
+                              isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
 
 def genPlots(io):
     '''function that generate the .png plots for netcdf trajectory file'''
     sys.path.insert(1, io["outputDir"])
     from plots import plot
     plot(trajnc=os.fspath(os.path.abspath(Path(io['outputDir'] + "/traj.nc"))),
-        figureFile=os.fspath(os.path.abspath(
-            Path(io['outputDir'] + "/traj_plot.pdf"))),
-        show=False, save=True)
+         figureFile=os.fspath(os.path.abspath(
+             Path(io['outputDir'] + "/traj_plot.pdf"))),
+         show=False, save=True)
 
+def plySystem(dep, io, opt, var, prop, inte):
+    '''function run the driver function starting with .ply mesh'''
+    # create starting mesh
+    if io["generateGeometry"] == True:
+        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=io["R"])
+    # elif io["inputMesh"] == "UVsphere.ply":
+    #     pymem3dg.genUVsphere( nSub = io["nSub"]
+    #                     , path = io["inputMesh"])
+
+    # run simulation
+    return pymem3dg.system_ply(verbosity=io["verbosity"],
+                               inputMesh=io["inputMesh"],
+                               outputDir=io["outputDir"],
+                               refMesh=io["refMesh"],
+                               nSub=io["nSub"],
+
+                               isVertexShift=opt["isVertexShift"],
+                               isProtein=opt["isProtein"],
+                               isLocalCurvature=opt["isLocalCurvature"],
+                               isReducedVolume=opt["isReducedVolume"],
+
+                               H0=var["H0*R"] / io["R"],
+                               sharpness=var["sharpness"],
+                               r_H0=var["r_H0"],
+                               Vt=var["Vt"],
+                               cam=var["cam"],
+                               pt=var["pt"],
+                               Kf=var["Kf"],
+                               conc=var["conc"],
+                               height=var["height"],
+
+                               Kb=prop["Kb"],
+                               eta=prop["eta"],
+                               Ksg=prop["Ksg"],
+                               Kv=prop["Kv"],
+                               epsilon=prop["epsilon"],
+                               Bc=prop["Bc"],
+                               Kse=prop["Kse"],
+                               Ksl=prop["Ksl"],
+                               Kst=prop["Kst"],
+                               temp=prop["temp"],
+                               gamma=prop["gamma"],
+
+                               radius=inte["radiusOfIntegration"],
+                               h=inte["h"],
+                               T=inte["T"],
+                               eps=inte["eps"],
+                               tSave=inte["tSave"],
+                               integration=inte["method"],
+                               isBacktrack=inte["options"]["isBacktrack"],
+                               rho=inte["options"]["rho"],
+                               c1=inte["options"]["c1"],
+                               ctol=inte["options"]["ctol"],
+                               isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                               
 if __name__ == "__main__":
 
     # parse the command line option
@@ -180,6 +235,14 @@ if __name__ == "__main__":
         plyRun(dep, io, opt, var, prop, inte)
     elif(options.nc != None):
         ncRun(dep, io, opt, var, prop, inte)
+
+    # testing python binding 
+    # f = plySystem(dep, io, opt, var, prop, inte)
+    # print(f)
+    # print(f.insidePressure)
+    # # import pdb
+    # # pdb.set_trace()
+    # f.getBindingForces()
 
     # generate plots based on netcdf trajectory
     genPlots(io)
