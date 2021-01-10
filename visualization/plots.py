@@ -10,15 +10,22 @@ import numpy as np
 def plot(trajnc, figureFile, show=False, save=False):
     # Read data from Trajectory file
     ds = nc.Dataset(trajnc)
-    bendenergy = ds.variables['bendenergy']
-    surfenergy = ds.variables['surfenergy']
-    pressenergy = ds.variables['pressenergy']
-    kineenergy = ds.variables['kineenergy']
-    chemenergy = ds.variables['chemenergy']
-    lineenergy = ds.variables['lineenergy']
-    totalenergy = ds.variables['totalenergy']
-    l2errornorm = ds.variables['l2errornorm']
-    time = ds.variables['time']
+    bendenergy = np.array(ds.variables['bendenergy'])
+    surfenergy = np.array(ds.variables['surfenergy'])
+    pressenergy = np.array(ds.variables['pressenergy'])
+    kineenergy = np.array(ds.variables['kineenergy'])
+    chemenergy = np.array(ds.variables['chemenergy'])
+    lineenergy = np.array(ds.variables['lineenergy'])
+    totalenergy = np.array(ds.variables['totalenergy'])
+    l2errornorm = np.array(ds.variables['l2errornorm'])
+    surfarea = np.array(ds.variables['surfacearea'])
+    volume = np.array(ds.variables['volume'])
+    time = np.array(ds.variables['time'])
+
+    # Processed data 
+    surfarea_ = surfarea / surfarea[0]
+    refVolume = (surfarea[0] / 4 / np.pi )**(1.5) * 4.0 / 3.0 * np.pi
+    volume_ = volume / refVolume
 
     # Visualization preference
     # Font:
@@ -38,8 +45,8 @@ def plot(trajnc, figureFile, show=False, save=False):
     plt.rc('pdf', fonttype=42)
 
     # Figure:
-    fig, axs = plt.subplots(3)
-    fig.set_size_inches(8, 10)
+    fig, axs = plt.subplots(4)
+    fig.set_size_inches(7, 10)
     plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
 
     # Plotting
@@ -51,23 +58,28 @@ def plot(trajnc, figureFile, show=False, save=False):
     axs[0].set_ylabel('Energy ($10^{-15} ~J$)')
     axs[1].set_ylabel('Energy ($10^{-15} ~J$)')
     axs[2].set_ylabel('$L_2$ Residual ($10^{-9} ~N$)')
+    axs[3].set_ylabel('Geometry')
 
     # line graph
-    te = axs[0].plot(time, totalenergy, label='Total')
-    ke = axs[0].plot(time, kineenergy, label='Kinetic')
-    pe = axs[0].plot(time, np.array(totalenergy) -
-                     np.array(kineenergy), label='Potential')
+    te = axs[0].plot(time, totalenergy, label='$E$')
+    ke = axs[0].plot(time, kineenergy, label='$E_{kinetic}$')
+    pe = axs[0].plot(time, totalenergy - kineenergy, label='$E_{potential}$')
     axs[0].legend()
 
-    be = axs[1].plot(time, bendenergy, label='Bending')
-    se = axs[1].plot(time, surfenergy, label='Surface')
-    pse = axs[1].plot(time, pressenergy, label='Pressure')
-    ce = axs[1].plot(time, chemenergy, label='Chemical')
-    le = axs[1].plot(time, lineenergy, label='Line')
+    be = axs[1].plot(time, bendenergy, label='$E_{b}$')
+    se = axs[1].plot(time, surfenergy, label='$E_{s}$')
+    pse = axs[1].plot(time, pressenergy, label='$E_{p}$')
+    ce = axs[1].plot(time, chemenergy, label='$E_{c}$')
+    le = axs[1].plot(time, lineenergy, label='$E_{l}$')
     axs[1].legend()
 
     l2 = axs[2].plot(time, l2errornorm)
     # axs[2].legend()
+
+    A = axs[3].plot(time, surfarea_, label='$A$')
+    V = axs[3].plot(time, volume_, label='$V$')
+    axs[3].legend()
+
     if save:
         plt.savefig(figureFile)
     if show:
