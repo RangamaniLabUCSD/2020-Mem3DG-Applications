@@ -20,12 +20,13 @@ def plot(trajnc, figureFile, show=False, save=False):
     l2errornorm = np.array(ds.variables['l2errornorm'])
     surfarea = np.array(ds.variables['surfacearea'])
     volume = np.array(ds.variables['volume'])
+    refsurfarea = np.array(ds.variables['refsurfarea'])
+    refvolume = np.array(ds.variables['refvolume'])
     time = np.array(ds.variables['time'])
 
-    # Processed data 
-    surfarea_ = surfarea / surfarea[0]
-    refVolume = (surfarea[0] / 4 / np.pi )**(1.5) * 4.0 / 3.0 * np.pi
-    volume_ = volume / refVolume
+    # Processed data
+    surfarea_ = surfarea / refsurfarea
+    volume_ = volume / refvolume
 
     # Visualization preference
     # Font:

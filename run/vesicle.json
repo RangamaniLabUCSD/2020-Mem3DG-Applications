@@ -4,7 +4,8 @@
         {
             "units": "micron, gram, second, nanonewton",
             "gamma unit": "nanonewton * second / micron",
-            "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 1e-2 for P"
+            "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 6e-2 for P",
+            "reduced volume and cam equivalence" : "Vt = 3/4/3.14/cam"
         },
 
         "dependencies":
@@ -21,8 +22,8 @@
 
             "verbosity": 3,
             
-            "refMesh" : "./input-file/oblate.ply",
-            "inputMesh" : "./input-file/oblate.ply",
+            "refMesh" : "./input-file/prolate.ply",
+            "inputMesh" : "./input-file/prolate.ply",
             "outputDir" : "../results/vesicle/test_newpressure",
 
             "nSub" : 0,
@@ -35,7 +36,7 @@
         {
             "isVertexShift" : false,
             "isProtein" : false,
-            "isLocalCurvature": true,
+            "isLocalCurvature": false,
             "isReducedVolume" : false
         },
 
@@ -46,7 +47,7 @@
             "r_H0" : [-1, -1],
 
             "Vt" : -1,
-            "cam": 40e-2,
+            "cam": 0.25,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -58,8 +59,8 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : 5e-2,
-            "Ksg" : 0.05,
+            "Kv"  : 0.1,
+            "Ksg" : 1,
 
             "epsilon" : -1,
             "Bc" : -1,
@@ -69,16 +70,16 @@
             "Kst" : 7,			
 
             "temp" : 0,
-            "gamma" : 3
+            "gamma" : 0
         },
 
         "integration":
         {
             "radiusOfIntegration" : 100000,
-            "method" : "velocity verlet",
-            "h" : 0.0005,
-            "T" : 10,
-            "eps" : 0.0005,
+            "method" : "conjugate gradient",
+            "h" : 0.0002,
+            "T" : 2000,
+            "eps" : 0.0002,
             "tSave" : 1,
 
             "options":

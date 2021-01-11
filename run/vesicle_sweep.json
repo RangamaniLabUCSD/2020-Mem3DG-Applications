@@ -4,7 +4,8 @@
         {
             "units": "micron, gram, second, nanonewton, Kelvin",
             "gamma unit": "nanonewton * second / micron",
-            "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 1e-2 for P"
+            "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 6e-2 for P",
+            "reduced volume and cam equivalence" : "Vt = 3/4/3.14/cam"
         },
 
         "dependencies":
