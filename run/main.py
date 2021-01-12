@@ -7,13 +7,8 @@ import pymem3dg
 from pathlib import Path
 
 
-def configParse(options, args):
+def configParse(configFile):
     '''function that parse the .json config file'''
-    if (options.ply != None):
-        configFile = options.ply
-    elif(options.nc != None):
-        configFile = options.nc
-
     # read the config file
     with open(configFile) as f:
         data = json.load(f)
@@ -223,12 +218,13 @@ if __name__ == "__main__":
     optparser.add_option('-n', '--nc', dest="nc", type="string",
                          help="input trajectory file in .nc format")
     (options, args) = optparser.parse_args()
-    # argparser = argparse.ArgumentParser()
-    # parser.add_argument("config", help = "configuration file (.json) used for the simulation", type = str)
-    # args = argparser.parse_args()
+    if (options.ply != None):
+        configFile = options.ply
+    elif(options.nc != None):
+        configFile = options.nc
 
     # parse the config file
-    dep, io, opt, var, prop, inte = configParse(options, args)
+    dep, io, opt, var, prop, inte = configParse(configFile)
 
     # run simulation
     if (options.ply != None):

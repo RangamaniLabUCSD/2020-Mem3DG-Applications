@@ -112,12 +112,13 @@ if __name__ == "__main__":
     optparser.add_option('-n', '--nc', dest="nc", type="string",
                          help="input trajectory file in .nc format")
     (options, args) = optparser.parse_args()
-    # argparser = argparse.ArgumentParser()
-    # parser.add_argument("config", help = "configuration file (.json) used for the simulation", type = str)
-    # args = argparser.parse_args()
+    if (options.ply != None):
+          configFile = options.ply
+    elif(options.nc != None):
+        configFile = options.nc
 
     # parse the config file
-    dep, io, opt, var, prop, inte = configParse(options, args)
+    dep, io, opt, var, prop, inte = configParse(configFile)
 
     # run simulation
     if (options.ply != None):
