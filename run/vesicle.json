@@ -24,12 +24,12 @@
             
             "refMesh" : "./input-file/prolate.ply",
             "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/test_newpressure",
+            "outputDir" : "../results/vesicle/getVP40",
 
             "nSub" : 0,
 
-            "trajFile" : "./input-file/",
-            "startingFrame": 1e8
+            "trajFile" : "../results/vesicle/prolate_sweep_coarse/traj_H_0_VP_35.nc",
+            "startingFrame": -1
         },
 
         "options":
@@ -47,7 +47,7 @@
             "r_H0" : [-1, -1],
 
             "Vt" : -1,
-            "cam": 0.25,
+            "cam": 0.40,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -77,20 +77,21 @@
         {
             "radiusOfIntegration" : 100000,
             "method" : "conjugate gradient",
-            "h" : 0.0002,
+            "h" : 0.0001,
             "T" : 2000,
-            "eps" : 0.0002,
-            "tSave" : 1,
+            "eps" : 0.0004,
+            "tSave" : 2,
 
             "options":
             {
-                "isBacktrack" : true,
+                "isBacktrack" : false,
                 "rho" : 0.5,
                 "c1" : 0,
 
                 "ctol" : 0.005,
 
-                "isAugmentedLagrangian": false
+                "isAugmentedLagrangian": false,
+                "isAdaptiveStep": true
             }
         }
 }
