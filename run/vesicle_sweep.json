@@ -22,9 +22,9 @@
 
             "verbosity": 3,
             
-            "refMesh" : "./input-file/oblate.ply",
-            "inputMesh" : "./input-file/oblate.ply",
-            "outputDir" : "../results/vesicle/test_newpressure",
+            "refMesh" : "./input-file/prolate.ply",
+            "inputMesh" : "./input-file/prolate.ply",
+            "outputDir" : "../results/vesicle/prolate_sweep_coarse",
 
             "nSub" : 0,
 
@@ -37,17 +37,17 @@
             "isVertexShift" : false,
             "isProtein" : false,
             "isLocalCurvature": false,
-            "isReducedVolume" : true
+            "isReducedVolume" : false
         },
 
         "variables":
         {
             "H0*R" : [0, 0.4, 0.8, 1.2, 1.6, 2.0],
-            "sharpness" : 10,
-            "r_H0" : [10, 10],
+            "sharpness" : 0,
+            "r_H0" : [-1, -1],
 
-            "Vt" : [0.95, 0.90, 0.85, 0.8, 0.75, 0.7, 0.67],
-            "cam": [20e-2],
+            "Vt" : [-1],
+            "cam": [0.25, 0.30, 0.35, 0.37],
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -59,11 +59,11 @@
         {
             "Kb" : 8.22e-5,
             "eta": 0,
-            "Kv"  : 5e-2,
-            "Ksg" : 0.02,
+            "Kv"  : 0.1,
+            "Ksg" : 1,
 
-            "epsilon" : 15e-5,
-            "Bc" : 40,
+            "epsilon" : -1,
+            "Bc" : -1,
 
             "Kse" : 0,     
             "Ksl" : 0,
@@ -79,8 +79,8 @@
             "method" : "conjugate gradient",
             "h" : 0.0002,
             "T" : 30000,
-            "eps" : 0.005,
-            "tSave" : 1,
+            "eps" : 0.0005,
+            "tSave" : 2,
 
             "options":
             {
@@ -88,9 +88,10 @@
                 "rho" : 0.5,
                 "c1" : 0,
 
-                "ctol" : 0.005,
+                "ctol" : 0.001,
 
-                "isAugmentedLagrangian" : false
+                "isAugmentedLagrangian" : false,
+                "isAdaptiveStep" : true
             }
         }
 }

@@ -101,7 +101,8 @@ def plyRun(dep, io, opt, var, prop, inte):
                                rho=inte["options"]["rho"],
                                c1=inte["options"]["c1"],
                                ctol=inte["options"]["ctol"],
-                               isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                               isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"],
+                               isAdaptiveStep=inte["options"]["isAdaptiveStep"])
 
 
 def ncRun(dep, io, opt, var, prop, inte):
@@ -148,7 +149,8 @@ def ncRun(dep, io, opt, var, prop, inte):
                               rho=inte["options"]["rho"],
                               c1=inte["options"]["c1"],
                               ctol=inte["options"]["ctol"],
-                              isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                              isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"],
+                              isAdaptiveStep=inte["options"]["isAdaptiveStep"])
 
 def genPlots(io):
     '''function that generate the .png plots for netcdf trajectory file'''

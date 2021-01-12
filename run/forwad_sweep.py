@@ -8,6 +8,7 @@ import numpy as np
 from pathlib import Path
 from main import configParse, genPlots
 
+
 def plySweep(dep, io, opt, var, prop, inte):
     '''function run the forward sweep function starting with .ply mesh'''
     # create starting mesh
@@ -57,7 +58,8 @@ def plySweep(dep, io, opt, var, prop, inte):
                                      rho=inte["options"]["rho"],
                                      c1=inte["options"]["c1"],
                                      ctol=inte["options"]["ctol"],
-                                     isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                                     isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"],
+                                     isAdaptiveStep=inte["options"]["isAdaptiveStep"])
 
 
 def ncSweep(dep, io, opt, var, prop, inte):
@@ -102,7 +104,9 @@ def ncSweep(dep, io, opt, var, prop, inte):
                                     rho=inte["options"]["rho"],
                                     c1=inte["options"]["c1"],
                                     ctol=inte["options"]["ctol"],
-                                    isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
+                                    isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"],
+                                    isAdaptiveStep=inte["options"]["isAdaptiveStep"])
+
 
 if __name__ == "__main__":
     # parse the command line option
