@@ -12,9 +12,10 @@ if __name__ == "__main__":
     for filename in glob.iglob(cwd_string + '/**/**.nc', recursive=True):
 
         # extract the foldername and filename
-        directory, _ = os.path.split(filename)
+        directory, ncFile = os.path.split(filename)
         _, folderName = os.path.split(directory)
+        ncFileName = folderName + "_" + os.path.splitext(ncFile)[0]
 
         # Run plot() with input of filename and output as foldername
-        plot(trajnc=filename, figureFile=folderName +
-             ".pdf", show=False, save=True)
+        plot(trajnc=filename, figureFile=ncFileName +
+             ".png", show=False, save=True)
