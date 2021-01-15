@@ -77,9 +77,9 @@
         {
             "radiusOfIntegration" : 100000,
             "method" : "conjugate gradient",
-            "h" : 0.0002,
+            "h" : 0.0001,
             "T" : 30000,
-            "eps" : 0.0005,
+            "eps" : 0.0001,
             "tSave" : 2,
 
             "options":
