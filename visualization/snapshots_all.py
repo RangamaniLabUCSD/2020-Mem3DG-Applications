@@ -19,9 +19,9 @@ if __name__ == "__main__":
         _, folderName = os.path.split(directory)
         ncFileName = folderName + "_" + os.path.splitext(ncFile)[0]
 
-        pymem3dg.snapshot_nc(fileName=filename, frame=lastFrameIndex, angle=60, isShow=False, isSave=True,
+        pymem3dg.snapshot_nc(fileName=filename, frame=lastFrameIndex, transparency=0.3, angle=0, fov=70, edgeWidth=2, isShow=False, isSave=True,
                              screenshotName=ncFileName + ".png", ref_coord=False, velocity=False,
                              mean_curvature=True,  spon_curvature=False,
                              ext_pressure=False, physical_pressure=False,
-                             capillary_pressure=False,
+                             capillary_pressure=False, inside_pressure=False,
                              bending_pressure=False, line_pressure=False, mask=False, H_H0=False)
