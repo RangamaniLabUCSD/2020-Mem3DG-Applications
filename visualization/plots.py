@@ -58,7 +58,7 @@ def plot(trajnc, figureFile, show=False, save=False):
     axs[2].set_xlabel('Time ($s$)')
     axs[0].set_ylabel('Energy ($10^{-15} ~J$)')
     axs[1].set_ylabel('Energy ($10^{-15} ~J$)')
-    axs[2].set_ylabel('$L_2$ Residual ($10^{-9} ~N$)')
+    axs[2].set_ylabel('$L_2$ Residual ($10^{-9} ~N~ \mu m^{-2}$)')
     axs[3].set_ylabel('Geometry')
 
     # line graph

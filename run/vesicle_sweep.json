@@ -18,7 +18,6 @@
         "I/O":
         {
             "generateGeometry": false,
-            "R" : 1,
 
             "verbosity": 3,
             
@@ -27,6 +26,7 @@
             "outputDir" : "../results/vesicle/prolate_sweep_coarse",
 
             "nSub" : 0,
+            "scale" : "TODO",
 
             "trajFile" : "./input-file/",
             "startingFrame": 1e8

@@ -16,7 +16,6 @@
         "I/O":
         {
             "generateGeometry": false,
-            "R" : 1,
 
             "verbosity": 3, 
             
@@ -25,6 +24,7 @@
             "outputDir" : "../results/bud/testing_libraries",
             
             "nSub" : 0,
+            "scale" : "TODO",
             
             "trajFile" : "../results/bud/testing_ply/traj.nc",
             "startingFrame": 1

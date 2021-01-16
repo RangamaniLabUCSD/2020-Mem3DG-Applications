@@ -64,7 +64,7 @@ def plyRun(dep, io, opt, var, prop, inte):
                                isLocalCurvature=opt["isLocalCurvature"],
                                isReducedVolume=opt["isReducedVolume"],
 
-                               H0=var["H0*R"] / io["R"],
+                               H0=var["H0"],
                                sharpness=var["sharpness"],
                                r_H0=var["r_H0"],
                                Vt=var["Vt"],
@@ -112,7 +112,7 @@ def ncRun(dep, io, opt, var, prop, inte):
                               isLocalCurvature=opt["isLocalCurvature"],
                               isReducedVolume=opt["isReducedVolume"],
 
-                              H0=var["H0*R"] / io["R"],
+                              H0=var["H0"],
                               sharpness=var["sharpness"],
                               r_H0=var["r_H0"],
                               Vt=var["Vt"],
@@ -177,7 +177,7 @@ def plySystem(dep, io, opt, var, prop, inte):
                                isLocalCurvature=opt["isLocalCurvature"],
                                isReducedVolume=opt["isReducedVolume"],
 
-                               H0=var["H0*R"] / io["R"],
+                               H0=var["H0"],
                                sharpness=var["sharpness"],
                                r_H0=var["r_H0"],
                                Vt=var["Vt"],
