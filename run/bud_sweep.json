@@ -16,7 +16,6 @@
         "I/O":
         {
             "generateGeometry": false,
-            "R" : 1,
 
             "verbosity": 3,
             
@@ -25,6 +24,7 @@
             "outputDir" : "../results/bud/sweep_fine_2",
             
             "nSub" : 1,
+            "scale" : "TODO",
             
             "trajFile" : "../results/bud/sweep_fine/traj_H_2400_V_100.nc",
             "startingFrame": 7

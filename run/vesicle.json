@@ -18,40 +18,40 @@
         "I/O":
         {
             "generateGeometry": false,
-            "R" : 1,
 
             "verbosity": 3,
             
-            "refMesh" : "./input-file/prolate.ply",
-            "inputMesh" : "./input-file/prolate.ply",
-            "outputDir" : "../results/vesicle/getVP40",
+            "refMesh" : "./input-file/slightlyOblate.ply",
+            "inputMesh" : "./input-file/slightlyOblate.ply",
+            "outputDir" : "../results/vesicle/sphere_vv_DPD_protein_coarse",
 
             "nSub" : 0,
+            "scale" : "TODO",
 
-            "trajFile" : "../results/vesicle/prolate_sweep_coarse/traj_H_0_VP_35.nc",
+            "trajFile" : "",
             "startingFrame": -1
         },
 
         "options":
         {
             "isVertexShift" : false,
-            "isProtein" : false,
+            "isProtein" : true,
             "isLocalCurvature": false,
             "isReducedVolume" : false
         },
 
         "variables":
         {
-            "H0*R" : 0,
+            "H0" : 10,
             "sharpness" : 0,
             "r_H0" : [-1, -1],
 
             "Vt" : -1,
-            "cam": 0.40,
+            "cam": 0.45,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
-            "conc" : 25,
+            "conc" : -1,
             "height" : 0
         },
 
@@ -62,25 +62,25 @@
             "Kv"  : 0.1,
             "Ksg" : 1,
 
-            "epsilon" : -1,
-            "Bc" : -1,
+            "epsilon" : 1.5e-4,
+            "Bc" : 40,
 
             "Kse" : 0,     
             "Ksl" : 0,
             "Kst" : 7,			
 
-            "temp" : 0,
-            "gamma" : 0
+            "temp" : 310,
+            "gamma" : 3
         },
 
         "integration":
         {
             "radiusOfIntegration" : 100000,
-            "method" : "conjugate gradient",
+            "method" : "velocity verlet",
             "h" : 0.0001,
-            "T" : 2000,
+            "T" : 150,
             "eps" : 0.0004,
-            "tSave" : 2,
+            "tSave" : 1,
 
             "options":
             {
