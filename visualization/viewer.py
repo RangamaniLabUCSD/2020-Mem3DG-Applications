@@ -24,7 +24,8 @@ if (options.shape != None):
     ext = os.path.splitext(options.shape)[1][1:]
     # run viewer
     if ext == "nc":
-        pymem3dg.animation_nc(fileName=options.shape, ref_coord=False, velocity=False,
+        pymem3dg.animation_nc(fileName=options.shape, transparency = 0.5, angle = 0,
+                              fov = 50, edgeWidth = 2, ref_coord=False, velocity=False,
                               mean_curvature=False,  spon_curvature=False,
                               ext_pressure=False, physical_pressure=False,
                               capillary_pressure=False, inside_pressure=False,
@@ -38,7 +39,8 @@ elif(options.all != None):
     ext = os.path.splitext(options.all)[1][1:]
     # run viewer
     if ext == "nc":
-        pymem3dg.animation_nc(fileName=options.all, ref_coord=True, velocity=True,
+        pymem3dg.animation_nc(fileName=options.all, transparency = 0.5, angle = 0,
+                              fov = 50, edgeWidth = 2, ref_coord=True, velocity=True,
                               mean_curvature=True,  spon_curvature=True,
                               ext_pressure=True, physical_pressure=True,
                               capillary_pressure=True, inside_pressure=True,
