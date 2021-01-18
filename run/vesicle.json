@@ -2,7 +2,7 @@
     "parameters":{
         "comments":
         {
-            "units": "micron, gram, second, nanonewton",
+            "units": "micron, gram, second, nanonewton, Kelvin",
             "gamma unit": "nanonewton * second / micron",
             "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 6e-2 for P",
             "reduced volume and cam equivalence" : "Vt = 3/4/3.14/cam"
@@ -10,7 +10,6 @@
 
         "dependencies":
         {
-            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
             "viewer.py" : "../visualization/viewer.py",
             "plots.py" : "../visualization/plots.py"
         },

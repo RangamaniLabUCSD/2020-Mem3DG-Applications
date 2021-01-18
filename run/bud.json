@@ -3,12 +3,13 @@
         "comments":
         {
             "units": "micron, gram, second, nanonewton, Kelvin",
-            "gamma unit": "nanonewton * second / micron"
+            "gamma unit": "nanonewton * second / micron",
+            "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 6e-2 for P",
+            "reduced volume and cam equivalence" : "Vt = 3/4/3.14/cam"
         },
 
         "dependencies":
         {
-            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
             "viewer.py" : "../visualization/viewer.py",
             "plots.py" : "../visualization/plots.py"
         },
@@ -21,34 +22,35 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/testing_libraries",
+            "outputDir" : "../results/bud/testing_bud",
             
             "nSub" : 0,
             "scale" : "TODO",
             
-            "trajFile" : "../results/bud/testing_ply/traj.nc",
-            "startingFrame": 1
+            "trajFile" : "",
+            "startingFrame": -1
         },
 
         "options":
         {
-            "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
             "isProtein" : false,
-            "isLocalCurvature": true
+            "isLocalCurvature": true,
+            "isReducedVolume" : false
         },
 
         "variables":
         {
-            "H0*R" : 20,
+            "H0" : 0.5,
             "sharpness" : 50,
             "r_H0" : [0.15, 0.15],
 
-            "Vt" : 1,
+            "Vt" : -1,
+            "cam": 0,
 
             "pt" : [0,0,0],
             "Kf" : 0,
-            "conc" : 25,
+            "conc" : -1,
             "height" : 0
         },
 
@@ -57,14 +59,14 @@
             "Kb" : 8.22e-5,
             "eta" : 0,
             "Kv"  : 0,
-            "Ksg" : 0.1,
+            "Ksg" : 0.01,
 
-            "epsilon" : 15e-5,
-            "Bc" : 10,
+            "epsilon" : -1,
+            "Bc" : -1,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 2,			
+            "Kst" : 7,			
 
             "temp" : 0,
             "gamma" : 0
@@ -73,21 +75,21 @@
         "integration":
         {
             "radiusOfIntegration" : 100,
-            "method": "euler",
-            "h" : 10e-6,
-            "T" : 3e-1,
-            "eps" : 0.01,
-            "tSave" : 5e-3,
+            "method": "velocity verlet",
+            "h" : 5e-6,
+            "T" : 1,
+            "eps" : 0.0001,
+            "tSave" : 1e-2,
 
             "options":
             {
-                "isBacktrack" : false,
+                "isBacktrack" : true,
                 "rho" : 0.5,
                 "c1" : 0,
 
                 "ctol" : 0.005,
                 
-                "isAugmentedLagrangian" : false,
+                "isAugmentedLagrangian": false,
                 "isAdaptiveStep": true
             }
         }

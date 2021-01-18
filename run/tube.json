@@ -7,7 +7,6 @@
 
         "dependencies":
         {
-            "pyddg" : "C:\\Users\\Kieran\\Desktop\\DDG_membrane\\build\\lib\\Release",
             "viewer.py" : "../../visualization/viewer.py",
             "plots.py" : "../../visualization/plots.py"
         },

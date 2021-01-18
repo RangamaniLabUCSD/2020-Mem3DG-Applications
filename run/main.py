@@ -243,4 +243,4 @@ if __name__ == "__main__":
     # f.getBindingForces()
 
     # generate plots based on netcdf trajectory
-    genPlots(io)
+    # genPlots(io)
