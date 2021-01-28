@@ -105,6 +105,8 @@ def ncRun(dep, io, opt, var, prop, inte):
     return pymem3dg.driver_nc(verbosity=io["verbosity"],
                               trajFile=io["trajFile"],
                               startingFrame=io["startingFrame"],
+                              nSub = io["nSub"],
+                              isContinue = io["isContinue"],
                               outputDir=io["outputDir"],
 
                               isVertexShift=opt["isVertexShift"],
@@ -160,7 +162,7 @@ def plySystem(dep, io, opt, var, prop, inte):
     '''function run the driver function starting with .ply mesh'''
     # create starting mesh
     if io["generateGeometry"] == True:
-        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=io["R"])
+        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=1)
     # elif io["inputMesh"] == "UVsphere.ply":
     #     pymem3dg.genUVsphere( nSub = io["nSub"]
     #                     , path = io["inputMesh"])

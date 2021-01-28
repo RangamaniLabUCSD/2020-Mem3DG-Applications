@@ -8,25 +8,38 @@ import numpy as np
 
 
 def plot(trajnc, figureFile, show=False, save=False):
+    # Set unit of data
+    kBT = 1.38e-23 * 310 * 1e15  # 1e-15 J
+    Pa = 1e-3  # kPa
+
     # Read data from Trajectory file
     ds = nc.Dataset(trajnc)
-    bendenergy = np.array(ds.variables['bendenergy'])
-    surfenergy = np.array(ds.variables['surfenergy'])
-    pressenergy = np.array(ds.variables['pressenergy'])
-    kineenergy = np.array(ds.variables['kineenergy'])
-    chemenergy = np.array(ds.variables['chemenergy'])
-    lineenergy = np.array(ds.variables['lineenergy'])
-    totalenergy = np.array(ds.variables['totalenergy'])
-    l2errornorm = np.array(ds.variables['l2errornorm'])
+    bendenergy = np.array(ds.variables['bendenergy'])/kBT
+    surfenergy = np.array(ds.variables['surfenergy'])/kBT
+    pressenergy = np.array(ds.variables['pressenergy'])/kBT
+    kineenergy = np.array(ds.variables['kineenergy'])/kBT
+    chemenergy = np.array(ds.variables['chemenergy'])/kBT
+    lineenergy = np.array(ds.variables['lineenergy'])/kBT
+    totalenergy = np.array(ds.variables['totalenergy'])/kBT
+
+    # norm data
+    l2errornorm = np.array(ds.variables['l2errornorm'])/Pa
+    l2bendnorm = np.array(ds.variables['l2bendnorm'])/Pa
+    l2surfnorm = np.array(ds.variables['l2surfnorm'])/Pa
+    l2pressnorm = np.array(ds.variables['l2pressnorm'])/Pa
+
+    # geometric data
     surfarea = np.array(ds.variables['surfacearea'])
     volume = np.array(ds.variables['volume'])
     refsurfarea = np.array(ds.variables['refsurfarea'])
     refvolume = np.array(ds.variables['refvolume'])
+
+    # time
     time = np.array(ds.variables['time'])
 
     # Processed data
-    surfarea_ = surfarea / refsurfarea
-    volume_ = volume / refvolume
+    dsurfarea = surfarea / refsurfarea - 1
+    dvolume = volume / refvolume - 1
 
     # Visualization preference
     # Font:
@@ -55,10 +68,10 @@ def plot(trajnc, figureFile, show=False, save=False):
     # fig.suptitle('Energy trajectory')
 
     # Axes label:
-    axs[2].set_xlabel('Time ($s$)')
-    axs[0].set_ylabel('Energy ($10^{-15} ~J$)')
-    axs[1].set_ylabel('Energy ($10^{-15} ~J$)')
-    axs[2].set_ylabel('$L_2$ Residual ($10^{-9} ~N~ \mu m^{-2}$)')
+    axs[3].set_xlabel('Time')
+    axs[0].set_ylabel('Energy ($k_B T$)')
+    axs[1].set_ylabel('Energy ($k_B T$)')
+    axs[2].set_ylabel('$L_2$ Norm ($Pa$)')
     axs[3].set_ylabel('Geometry')
 
     # line graph
@@ -66,6 +79,7 @@ def plot(trajnc, figureFile, show=False, save=False):
     ke = axs[0].plot(time, kineenergy, label='$E_{kinetic}$')
     pe = axs[0].plot(time, totalenergy - kineenergy, label='$E_{potential}$')
     axs[0].legend()
+    axs[0].set_xticklabels([])
 
     be = axs[1].plot(time, bendenergy, label='$E_{b}$')
     se = axs[1].plot(time, surfenergy, label='$E_{s}$')
@@ -73,14 +87,22 @@ def plot(trajnc, figureFile, show=False, save=False):
     ce = axs[1].plot(time, chemenergy, label='$E_{c}$')
     le = axs[1].plot(time, lineenergy, label='$E_{l}$')
     axs[1].legend()
+    axs[1].set_xticklabels([])
 
-    l2 = axs[2].plot(time, l2errornorm)
-    # axs[2].legend()
+    l2 = axs[2].plot(time, l2errornorm, label="$e$")
+    l2_bend = axs[2].plot(time, l2bendnorm, label="$e_{b}$")
+    l2_surf = axs[2].plot(time, l2surfnorm, label="$e_{s}$")
+    l2_press = axs[2].plot(time, l2pressnorm, label="$e_{p}$")
+    axs[2].legend()
+    axs[2].set_xticklabels([])
 
-    A = axs[3].plot(time, surfarea_, label='$A$')
-    V = axs[3].plot(time, volume_, label='$V$')
+    A = axs[3].plot(time, dsurfarea, label='$A$')
+    V = axs[3].plot(time, dvolume, label='$V$')
     axs[3].legend()
+    axs[3].ticklabel_format(axis='y', style='sci', scilimits=[-3,-3], useMathText=True)
 
+    # plt.tight_layout()
+    
     if save:
         plt.savefig(figureFile)
     if show:

@@ -20,33 +20,34 @@
 
             "verbosity": 3,
             
-            "refMesh" : "./input-file/slightlyOblate.ply",
-            "inputMesh" : "./input-file/slightlyOblate.ply",
-            "outputDir" : "../results/vesicle/sphere_vv_DPD_protein_coarse",
+            "refMesh" : " ",
+            "inputMesh" : " ",
+            "outputDir" : "../results/vesicle/test_convergence_n1",
 
-            "nSub" : 0,
+            "nSub" : 1,
             "scale" : "TODO",
 
-            "trajFile" : "",
-            "startingFrame": -1
+            "trajFile" : "../results/vesicle/test_convergence_relaxedtension/traj_start.nc",
+            "startingFrame": -1,
+            "isContinue": false
         },
 
         "options":
         {
             "isVertexShift" : false,
-            "isProtein" : true,
+            "isProtein" : false,
             "isLocalCurvature": false,
             "isReducedVolume" : false
         },
 
         "variables":
         {
-            "H0" : 10,
+            "H0" : 0.4,
             "sharpness" : 0,
             "r_H0" : [-1, -1],
 
             "Vt" : -1,
-            "cam": 0.45,
+            "cam": 0.30,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -61,24 +62,24 @@
             "Kv"  : 0.1,
             "Ksg" : 1,
 
-            "epsilon" : 1.5e-4,
-            "Bc" : 40,
+            "epsilon" : -1,
+            "Bc" : -1,
 
             "Kse" : 0,     
             "Ksl" : 0,
             "Kst" : 7,			
 
-            "temp" : 310,
-            "gamma" : 3
+            "temp" : 0,
+            "gamma" : 0
         },
 
         "integration":
         {
             "radiusOfIntegration" : 100000,
-            "method" : "velocity verlet",
+            "method" : "conjugate gradient",
             "h" : 0.0001,
-            "T" : 150,
-            "eps" : 0.0004,
+            "T" : 0.0001,
+            "eps" : 0.0001,
             "tSave" : 1,
 
             "options":
@@ -87,7 +88,7 @@
                 "rho" : 0.5,
                 "c1" : 0,
 
-                "ctol" : 0.005,
+                "ctol" : 0.001,
 
                 "isAugmentedLagrangian": false,
                 "isAdaptiveStep": true

@@ -3,7 +3,9 @@
         "comments":
         {
             "units": "micron, gram, second, nanonewton, Kelvin",
-            "gamma unit": "nanonewton * second / micron"
+            "gamma unit": "nanonewton * second / micron",
+            "Kv for pressure or reduced volume" : "Kv = 5e-2 for RV, 6e-2 for P",
+            "reduced volume and cam equivalence" : "Vt = 3/4/3.14/cam"
         },
 
         "dependencies":
@@ -16,38 +18,40 @@
         {
             "generateGeometry": false,
 
-            "verbosity": 3,
+            "verbosity": 3, 
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/sweep_fine_2",
+            "outputDir" : "../results/bud/testing_bud_notension_continue2",
             
-            "nSub" : 1,
+            "nSub" : 0,
             "scale" : "TODO",
             
-            "trajFile" : "../results/bud/sweep_fine/traj_H_2400_V_100.nc",
-            "startingFrame": 7
+            "trajFile" : "../results/bud/testing_bud_notension/traj_failed_continue1.nc",
+            "startingFrame": -1, 
+            "isContinue": false
         },
 
         "options":
         {
-            "mollifyFactor" : 1e-3,
             "isVertexShift" : false,
             "isProtein" : false,
-            "isLocalCurvature": true
+            "isLocalCurvature": true,
+            "isReducedVolume" : false
         },
 
         "variables":
         {
-            "H0*R" : [22.5, 23, 23.5, 24],
+            "H0" : 10,
             "sharpness" : 50,
             "r_H0" : [0.15, 0.15],
 
-            "Vt" : [1],
+            "Vt" : -1,
+            "cam": 0,
 
             "pt" : [0,0,0],
             "Kf" : 0,
-            "conc" : 25,
+            "conc" : -1,
             "height" : 0
         },
 
@@ -56,14 +60,14 @@
             "Kb" : 8.22e-5,
             "eta" : 0,
             "Kv"  : 0,
-            "Ksg" : 0.05,
+            "Ksg" : 0,
 
-            "epsilon" : 15e-5,
-            "Bc" : 40,
+            "epsilon" : -1,
+            "Bc" : -1,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 2,			
+            "Kst" : 7,			
 
             "temp" : 0,
             "gamma" : 0
@@ -73,20 +77,20 @@
         {
             "radiusOfIntegration" : 100,
             "method": "conjugate gradient",
-            "h" : 2.5e-6,
-            "T" : 10,
-            "eps" : 0.014,
-            "tSave" : 1e-2,
+            "h" : 1e-6,
+            "T" : 2000,
+            "eps" : 0.0002,
+            "tSave" : 0.1,
 
             "options":
             {
-                "isBacktrack" : true,
+                "isBacktrack" : false,
                 "rho" : 0.5,
                 "c1" : 0,
 
                 "ctol" : 0.005,
                 
-                "isAugmentedLagrangian" : false,
+                "isAugmentedLagrangian": false,
                 "isAdaptiveStep": true
             }
         }

@@ -3,9 +3,10 @@ import json
 import os
 import optparse
 import shutil
-import pymem3dg
 import numpy as np
 from pathlib import Path
+
+import pymem3dg
 from main import configParse, genPlots, plyRun, ncRun
 
 import multiprocessing
@@ -13,8 +14,6 @@ import subprocess
 from tqdm.contrib.concurrent import process_map
 
 import concurrent.futures
-
-
 def worker(args):
   # read all simulation parameters
     (dep, io, opt, var, prop, inte) = args[0]
@@ -23,7 +22,7 @@ def worker(args):
     H0 = args[1]
     cam = args[2]
     Vt = args[3]
-    var["H0*R"] = H0
+    var["H0"] = H0
     var["cam"] = cam
     var["Vt"] = Vt
 
@@ -69,7 +68,7 @@ if __name__ == "__main__":
 
     # parallel run the axis of cam for each H0[i]
     jobs = []
-    for H0 in np.array(var["H0*R"]):
+    for H0 in np.array(var["H0"]):
         for cam in np.array(var["cam"]):
             for Vt in np.array(var["Vt"]):
                 subFolder = f'H_{H0*100}_c_{cam*100}_V_{Vt*100}/'

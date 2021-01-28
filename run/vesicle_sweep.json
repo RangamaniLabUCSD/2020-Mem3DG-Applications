@@ -28,7 +28,8 @@
             "scale" : "TODO",
 
             "trajFile" : "./input-file/",
-            "startingFrame": 1e8
+            "startingFrame": 1e8,
+            "isContinue": false
         },
 
         "options":
@@ -41,7 +42,7 @@
 
         "variables":
         {
-            "H0*R" : [0, 0.4, 0.8, 1.2, 1.6, 2.0],
+            "H0" : [0, 0.4, 0.8, 1.2, 1.6, 2.0],
             "sharpness" : 0,
             "r_H0" : [-1, -1],
 
@@ -50,7 +51,7 @@
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
-            "conc" : 25,
+            "conc" : -1,
             "height" : 0
         },
 

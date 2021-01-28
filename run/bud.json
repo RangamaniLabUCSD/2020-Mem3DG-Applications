@@ -22,13 +22,14 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/testing_bud",
+            "outputDir" : "../results/bud/tension0p05_euler",
             
             "nSub" : 0,
             "scale" : "TODO",
             
             "trajFile" : "",
-            "startingFrame": -1
+            "startingFrame": -1,
+            "isContinue": false
         },
 
         "options":
@@ -41,7 +42,7 @@
 
         "variables":
         {
-            "H0" : 0.5,
+            "H0" : 10,
             "sharpness" : 50,
             "r_H0" : [0.15, 0.15],
 
@@ -59,7 +60,7 @@
             "Kb" : 8.22e-5,
             "eta" : 0,
             "Kv"  : 0,
-            "Ksg" : 0.01,
+            "Ksg" : 0.05,
 
             "epsilon" : -1,
             "Bc" : -1,
@@ -75,15 +76,15 @@
         "integration":
         {
             "radiusOfIntegration" : 100,
-            "method": "velocity verlet",
+            "method": "euler",
             "h" : 5e-6,
-            "T" : 1,
-            "eps" : 0.0001,
-            "tSave" : 1e-2,
+            "T" : 2000,
+            "eps" : 0.0002,
+            "tSave" : 0.01,
 
             "options":
             {
-                "isBacktrack" : true,
+                "isBacktrack" : false,
                 "rho" : 0.5,
                 "c1" : 0,
 

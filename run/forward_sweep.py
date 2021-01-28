@@ -13,7 +13,7 @@ def plySweep(dep, io, opt, var, prop, inte):
     '''function run the forward sweep function starting with .ply mesh'''
     # create starting mesh
     if io["generateGeometry"] == True:
-        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=io["R"])
+        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=1)
     # elif io["inputMesh"] == "UVsphere.ply":
     #     pymem3dg.genUVsphere( nSub = io["nSub"]
     #                     , path = io["inputMesh"])
@@ -66,6 +66,8 @@ def ncSweep(dep, io, opt, var, prop, inte):
     '''function that runs the forward sweep function starting with data stored in netcdf file'''
     return pymem3dg.forwardsweep_nc(trajFile=io["trajFile"],
                                     startingFrame=io["startingFrame"],
+                                    nSub=io["nSub"],
+                                    isContinue=io["isContinue"],
                                     outputDir=io["outputDir"],
 
                                     isVertexShift=opt["isVertexShift"],
@@ -73,7 +75,7 @@ def ncSweep(dep, io, opt, var, prop, inte):
                                     isLocalCurvature=opt["isLocalCurvature"],
                                     isReducedVolume=opt["isReducedVolume"],
 
-                                    H0=np.array(var["H0*R"]) / io["R"],
+                                    H0=var["H0"],
                                     sharpness=var["sharpness"],
                                     r_H0=var["r_H0"],
                                     Vt=var["Vt"],
@@ -117,7 +119,7 @@ if __name__ == "__main__":
                          help="input trajectory file in .nc format")
     (options, args) = optparser.parse_args()
     if (options.ply != None):
-          configFile = options.ply
+        configFile = options.ply
     elif(options.nc != None):
         configFile = options.nc
 
