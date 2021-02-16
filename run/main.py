@@ -47,11 +47,11 @@ def plyRun(dep, io, opt, var, prop, inte):
     '''function run the driver function starting with .ply mesh'''
     # create starting mesh
     if io["generateGeometry"] == True:
-        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=io["R"])
+        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=1)
+        io["nSub"] = 0
     # elif io["inputMesh"] == "UVsphere.ply":
     #     pymem3dg.genUVsphere( nSub = io["nSub"]
     #                     , path = io["inputMesh"])
-
     # run simulation
     return pymem3dg.driver_ply(verbosity=io["verbosity"],
                                inputMesh=io["inputMesh"],
@@ -160,14 +160,6 @@ def genPlots(io):
 
 def plySystem(dep, io, opt, var, prop, inte):
     '''function run the driver function starting with .ply mesh'''
-    # create starting mesh
-    if io["generateGeometry"] == True:
-        pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=1)
-    # elif io["inputMesh"] == "UVsphere.ply":
-    #     pymem3dg.genUVsphere( nSub = io["nSub"]
-    #                     , path = io["inputMesh"])
-
-    # run simulation
     return pymem3dg.system_ply(verbosity=io["verbosity"],
                                inputMesh=io["inputMesh"],
                                outputDir=io["outputDir"],
@@ -238,10 +230,10 @@ if __name__ == "__main__":
 
     # testing python binding 
     # f = plySystem(dep, io, opt, var, prop, inte)
-    # print(f)
+    # f.getInsidePressure()
     # print(f.insidePressure)
-    # # import pdb
-    # # pdb.set_trace()
+    # import pdb
+    # pdb.set_trace()
     # f.getBindingForces()
 
     # generate plots based on netcdf trajectory

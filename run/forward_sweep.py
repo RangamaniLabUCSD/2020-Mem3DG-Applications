@@ -14,6 +14,7 @@ def plySweep(dep, io, opt, var, prop, inte):
     # create starting mesh
     if io["generateGeometry"] == True:
         pymem3dg.genIcosphere(nSub=io["nSub"], path=io["refMesh"], R=1)
+        io["nSub"] = 0
     # elif io["inputMesh"] == "UVsphere.ply":
     #     pymem3dg.genUVsphere( nSub = io["nSub"]
     #                     , path = io["inputMesh"])

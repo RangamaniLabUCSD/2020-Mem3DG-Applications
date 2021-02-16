@@ -24,29 +24,29 @@ if (options.shape != None):
     ext = os.path.splitext(options.shape)[1][1:]
     # run viewer
     if ext == "nc":
-        pymem3dg.animation_nc(fileName=options.shape, transparency = 0.5, angle = 0,
-                              fov = 50, edgeWidth = 2, ref_coord=False, velocity=False,
-                              mean_curvature=False,  spon_curvature=False,
+        pymem3dg.animation_nc(fileName=options.shape, transparency=0.5, angle=0,
+                              fov=50, edgeWidth=2, ref_coord=False, velocity=False,
+                              mean_curvature=False,  gauss_curvature=False, spon_curvature=False,
                               ext_pressure=False, physical_pressure=False,
                               capillary_pressure=False, inside_pressure=False,
                               bending_pressure=False, line_pressure=False, mask=False, H_H0=False)
     elif ext == "ply":
-        pymem3dg.viewer_ply(fileName=options.shape, mean_curvature=False, spon_curvature=False,
-                            ext_pressure=False, physical_pressure=False, capillary_pressure=False, 
-                            bending_pressure=False, line_pressure=False)
+        pymem3dg.viewer_ply(fileName=options.shape, mean_curvature=False, gauss_curvature=False,
+                            spon_curvature=False, ext_pressure=False, physical_pressure=False,
+                            capillary_pressure=False, bending_pressure=False, line_pressure=False)
 
 elif(options.all != None):
     ext = os.path.splitext(options.all)[1][1:]
     # run viewer
     if ext == "nc":
-        pymem3dg.animation_nc(fileName=options.all, transparency = 0.5, angle = 0,
-                              fov = 50, edgeWidth = 2, ref_coord=True, velocity=True,
-                              mean_curvature=True,  spon_curvature=True,
+        pymem3dg.animation_nc(fileName=options.all, transparency=0.5, angle=0,
+                              fov=50, edgeWidth=2, ref_coord=True, velocity=True,
+                              mean_curvature=True, gauss_curvature=True, spon_curvature=True,
                               ext_pressure=True, physical_pressure=True,
                               capillary_pressure=True, inside_pressure=True,
                               bending_pressure=True, line_pressure=True, mask=True, H_H0=True)
 
     elif ext == "ply":
-        pymem3dg.viewer_ply(fileName=options.all, mean_curvature=True, spon_curvature=True,
+        pymem3dg.viewer_ply(fileName=options.all, mean_curvature=True, gauss_curvature=True, spon_curvature=True,
                             ext_pressure=True, physical_pressure=True, capillary_pressure=True,
                             bending_pressure=True, line_pressure=True)

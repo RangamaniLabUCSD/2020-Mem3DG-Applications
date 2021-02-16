@@ -22,12 +22,14 @@ def worker(args):
     H0 = args[1]
     cam = args[2]
     Vt = args[3]
+    Ksg = args[4]
     var["H0"] = H0
     var["cam"] = cam
     var["Vt"] = Vt
+    prop["Ksg"] = Ksg
 
     # construct the subfolder for each run
-    subFolder = args[4]
+    subFolder = args[5]
     subFolderPath = os.path.join(io["outputDir"], subFolder)
     io["outputDir"] = subFolderPath
     if not os.path.exists(subFolderPath):
@@ -71,9 +73,10 @@ if __name__ == "__main__":
     for H0 in np.array(var["H0"]):
         for cam in np.array(var["cam"]):
             for Vt in np.array(var["Vt"]):
-                subFolder = f'H_{H0*100}_c_{cam*100}_V_{Vt*100}/'
-                jobs.append(((dep, io, opt, var, prop, inte),
-                             H0, cam, Vt, subFolder))
+                for Ksg in np.array(prop["Ksg"]):
+                    subFolder = f'H_{H0}_c_{cam}_V_{Vt}_Ksg_{Ksg}/'
+                    jobs.append(((dep, io, opt, var, prop, inte),
+                                H0, cam, Vt, Ksg, subFolder))
 
     with concurrent.futures.ProcessPoolExecutor() as executor:
         results = executor.map(worker, jobs)
