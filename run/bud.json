@@ -22,14 +22,14 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/tension0p05_euler",
+            "outputDir" : "../results/bud/tension0_Patch0p4_continue_fine_sharpness100",
             
             "nSub" : 0,
             "scale" : "TODO",
             
-            "trajFile" : "",
+            "trajFile" : "../results/bud/tension0_Patch0p4_continue_fine/traj.nc",
             "startingFrame": -1,
-            "isContinue": false
+            "isContinue": true
         },
 
         "options":
@@ -43,8 +43,8 @@
         "variables":
         {
             "H0" : 10,
-            "sharpness" : 50,
-            "r_H0" : [0.15, 0.15],
+            "sharpness" : 10,
+            "r_H0" : [0.4, 0.4],
 
             "Vt" : -1,
             "cam": 0,
@@ -60,14 +60,14 @@
             "Kb" : 8.22e-5,
             "eta" : 0,
             "Kv"  : 0,
-            "Ksg" : 0.05,
+            "Ksg" : 0.0005,
 
             "epsilon" : -1,
             "Bc" : -1,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 7,			
+            "Kst" : 0.1,			
 
             "temp" : 0,
             "gamma" : 0
@@ -77,14 +77,14 @@
         {
             "radiusOfIntegration" : 100,
             "method": "euler",
-            "h" : 5e-6,
-            "T" : 2000,
-            "eps" : 0.0002,
-            "tSave" : 0.01,
+            "h" : 0.25e-3,
+            "T" : 200000,
+            "eps" : 1e-6,
+            "tSave" : 1,
 
             "options":
             {
-                "isBacktrack" : false,
+                "isBacktrack" : true,
                 "rho" : 0.5,
                 "c1" : 0,
 

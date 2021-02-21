@@ -11,6 +11,7 @@ def plot(trajnc, figureFile, show=False, save=False):
     # Set unit of data
     kBT = 1.38e-23 * 310 * 1e15  # 1e-15 J
     Pa = 1e-3  # kPa
+    pN = 1e-3  # nN
 
     # Read data from Trajectory file
     ds = nc.Dataset(trajnc)
@@ -23,16 +24,17 @@ def plot(trajnc, figureFile, show=False, save=False):
     totalenergy = np.array(ds.variables['totalenergy'])/kBT
 
     # norm data
-    l2errornorm = np.array(ds.variables['l2errornorm'])/Pa
-    l2bendnorm = np.array(ds.variables['l2bendnorm'])/Pa
-    l2surfnorm = np.array(ds.variables['l2surfnorm'])/Pa
-    l2pressnorm = np.array(ds.variables['l2pressnorm'])/Pa
+    l2errornorm = np.array(ds.variables['l2errornorm'])/pN
+    l2bendnorm = np.array(ds.variables['l2bendnorm'])/pN
+    l2surfnorm = np.array(ds.variables['l2surfnorm'])/pN
+    l2pressnorm = np.array(ds.variables['l2pressnorm'])/pN
 
     # geometric data
     surfarea = np.array(ds.variables['surfacearea'])
     volume = np.array(ds.variables['volume'])
     refsurfarea = np.array(ds.variables['refsurfarea'])
     refvolume = np.array(ds.variables['refvolume'])
+    height = np.array(ds.variables['height'])
 
     # time
     time = np.array(ds.variables['time'])
@@ -71,7 +73,7 @@ def plot(trajnc, figureFile, show=False, save=False):
     axs[3].set_xlabel('Time')
     axs[0].set_ylabel('Energy ($k_B T$)')
     axs[1].set_ylabel('Energy ($k_B T$)')
-    axs[2].set_ylabel('$L_2$ Norm ($Pa$)')
+    axs[2].set_ylabel('$L_2$ Norm ($pN$)')
     axs[3].set_ylabel('Geometry')
 
     # line graph
