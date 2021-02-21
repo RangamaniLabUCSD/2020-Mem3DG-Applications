@@ -20,34 +20,34 @@
 
             "verbosity": 3,
             
-            "refMesh" : " ",
-            "inputMesh" : " ",
-            "outputDir" : "../results/vesicle/test_convergence_n1",
+            "refMesh" : "./input-file/slightlyOblate.ply",
+            "inputMesh" : "./input-file/slightlyOblate.ply",
+            "outputDir" : "../results/vesicle/testAPI",
 
-            "nSub" : 1,
+            "nSub" : 0,
             "scale" : "TODO",
 
-            "trajFile" : "../results/vesicle/test_convergence_relaxedtension/traj_start.nc",
+            "trajFile" : "../results/vesicle/testAPI/traj.nc",
             "startingFrame": -1,
-            "isContinue": false
+            "isContinue": true
         },
 
         "options":
         {
             "isVertexShift" : false,
             "isProtein" : false,
-            "isLocalCurvature": false,
+            "isLocalCurvature": true,
             "isReducedVolume" : false
         },
 
         "variables":
         {
-            "H0" : 0.4,
+            "H0" : 2,
             "sharpness" : 0,
-            "r_H0" : [-1, -1],
+            "r_H0" : [0.1, 0.1],
 
             "Vt" : -1,
-            "cam": 0.30,
+            "cam": 0.3,
 
             "pt" : [0, 0, 0],
             "Kf" : 0,
@@ -76,15 +76,15 @@
         "integration":
         {
             "radiusOfIntegration" : 100000,
-            "method" : "conjugate gradient",
+            "method" : "euler",
             "h" : 0.0001,
-            "T" : 0.0001,
-            "eps" : 0.0001,
+            "T" : 30000,
+            "eps" : 1e-6,
             "tSave" : 1,
 
             "options":
             {
-                "isBacktrack" : false,
+                "isBacktrack" : true,
                 "rho" : 0.5,
                 "c1" : 0,
 

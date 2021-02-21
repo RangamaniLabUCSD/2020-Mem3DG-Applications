@@ -1,18 +1,18 @@
 import pymem3dg
 
-# inputMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/slightlyOblate.ply"
-# refMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/slightlyOblate.ply"
-# outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/vesicle/testAPI"
-inputMesh = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//slightlyOblate.ply"
-refMesh =  "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//slightlyOblate.ply"
-outputDir = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//results//vesicle//testAPI"
+inputMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/slightlyOblate.ply"
+refMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/slightlyOblate.ply"
+outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/vesicle/testAPI"
+# inputMesh = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//slightlyOblate.ply"
+# refMesh =  "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//slightlyOblate.ply"
+# outputDir = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//results//vesicle//testAPI"
 
 isProtein = False
 isVertexShift = False
 isReducedVolume = False
 isLocalCurvature = True
 
-nSub = 1
+nSub = 0
 
 p = pymem3dg.Parameters()
 p.Kb = 8.22e-5
