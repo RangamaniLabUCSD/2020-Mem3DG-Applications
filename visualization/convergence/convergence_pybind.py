@@ -66,11 +66,12 @@ pJ = 1e3  # fJ = 1e-15 J
 Pa = 1e-3  # kPa
 
 nSubSize = 6
+minSub = 2
 nvertices = np.zeros(nSubSize)
-l2bendnorm = np.zeros(nSubSize)
-l2surfnorm = np.zeros(nSubSize)
-l2pressnorm = np.zeros(nSubSize)
-l2linenorm = np.zeros(nSubSize)
+l1bendnorm = np.zeros(nSubSize)
+l1surfnorm = np.zeros(nSubSize)
+l1pressnorm = np.zeros(nSubSize)
+l1linenorm = np.zeros(nSubSize)
 
 bendenergy = np.zeros(nSubSize)
 surfenergy = np.zeros(nSubSize)
@@ -78,7 +79,7 @@ pressenergy = np.zeros(nSubSize)
 lineenergy = np.zeros(nSubSize)
 
 for i in range(nSubSize):
-    n = i+2
+    n = minSub + i
     faceMatrix, vertexMatrix = pymem3dg.getIcosphere(n, 1.3)
     faceMatrix, refVertexMatrix = pymem3dg.getIcosphere(n, 1)
     g = pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, isReducedVolume,
@@ -86,11 +87,11 @@ for i in range(nSubSize):
     g.computeFreeEnergy()
     g.computeAllForces()
     nvertices[i] = len(np.array(g.getVertexPositionMatrix()))
-    l2bendnorm[i] = g.computeL2Norm(
+    l1bendnorm[i] = g.computeL1Norm(
         g.getLumpedMassMatrix() * g.getBendingPressure())
-    l2surfnorm[i] = g.computeL2Norm(
+    l1surfnorm[i] = g.computeL1Norm(
         g.getLumpedMassMatrix() * g.getCapillaryPressure())
-    l2pressnorm[i] = g.computeL2Norm(
+    l1pressnorm[i] = g.computeL1Norm(
         g.getLumpedMassMatrix() * g.getInsidePressure())
 
     bendenergy[i] = g.E.BE
@@ -103,32 +104,28 @@ p.sharpness = 10000000
 p.r_H0 = [1, 1]
 p.eta = 0.0005
 for i in range(nSubSize):
-    n = i+1
+    n = minSub + i
     faceMatrix, vertexMatrix = pymem3dg.getIcosphere(n, 1.3)
     faceMatrix, refVertexMatrix = pymem3dg.getIcosphere(n, 1)
     g = pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, isReducedVolume,
                         isProtein, isLocalCurvature, isVertexShift)
     g.computeFreeEnergy()
     g.computeLineTensionPressure()
-    l2linenorm[i] = g.computeL2Norm(
+    l1linenorm[i] = g.computeL1Norm(
         g.getLumpedMassMatrix() * g.getLineTensionPressure())
     lineenergy[i] = g.E.lE
 
-
-print(g.getLineTension())
-print(l2bendnorm)
-print(l2linenorm)
-print(l2pressnorm)
-print(l2surfnorm)
-print(bendenergy)
-print(surfenergy)
-print(pressenergy)
-print(lineenergy)
-print(abs(l2bendnorm - l2bendnorm[nSubSize - 1])
-      [:nSubSize - 1])
-# l2bendnorm = l2bendnorm / Pa
-# l2surfnorm = l2surfnorm / Pa
-# l2pressnorm = l2pressnorm / Pa
+print("Bending Norm: ", l1bendnorm)
+print("Line tension Norm: ", l1linenorm)
+print("Pressure Norm: ", l1pressnorm)
+print("Surface Norm: ", l1surfnorm)
+print("Bending Energy: ", bendenergy)
+print("Surface Energy: ", surfenergy)
+print("Pressure Energy: ", pressenergy)
+print("Line Tension Energy: ", lineenergy)
+# l1bendnorm = l1bendnorm / Pa
+# l1surfnorm = l1surfnorm / Pa
+# l1pressnorm = l1pressnorm / Pa
 
 # Visualization preference
 # Font:
@@ -150,71 +147,61 @@ plt.rc('pdf', fonttype=42)
 
 
 ax = plt.subplot(1, 1, 1)
-# ax.plot(1/nvertices[:nSubSize-1], abs(l2bendnorm - l2bendnorm[nSubSize-1])[:nSubSize-1], label="bending")
-# ax.plot(1/nvertices[:nSubSize-1], abs(l2surfnorm - l2surfnorm[nSubSize-1])[:nSubSize-1], label="capillary")
-# ax.plot(1/nvertices[:nSubSize-1], abs(l2pressnorm - l2pressnorm[nSubSize-1])[:nSubSize-1], label="pressure")
-newX = np.logspace(-1.6, -1.1, base=10)
 
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(l2bendnorm - l2bendnorm[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(l2bendnorm - l2bendnorm[nSubSize-1])[:nSubSize-1],
+lengthScale = np.power(nvertices, -0.5)[:nSubSize-1]
+
+error = abs(l1bendnorm - l1bendnorm[nSubSize-1])[:nSubSize-1] / abs(l1bendnorm[nSubSize-1])
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
           '-o',  label="$f_b, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(l2surfnorm - l2surfnorm[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(l2surfnorm - l2surfnorm[nSubSize-1])[:nSubSize-1],
-          '-o', label="$f_s, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
+error = abs(l1surfnorm - l1surfnorm[nSubSize-1])[:nSubSize-1] / abs(l1surfnorm[nSubSize-1])
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
+          '-o', label="$f_s, {0:.1f}L^{{{1:.1f}}}$".format(*popt)) 
 
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(l2pressnorm - l2pressnorm[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(l2pressnorm - l2pressnorm[nSubSize-1])[:nSubSize-1],
+error = abs(l1pressnorm - l1pressnorm[nSubSize-1])[:nSubSize-1] / abs(l1pressnorm[nSubSize-1])
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
           '-o', label="$f_p, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(l2linenorm - l2linenorm[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(l2linenorm - l2linenorm[nSubSize-1])[:nSubSize-1],
+error = abs(l1linenorm - l1linenorm[nSubSize-1])[:nSubSize-1] / abs(l1linenorm[nSubSize-1])
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
           '-o', label="$f_l, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
 ax.legend()
-ax.set_ylabel("$e_f$(kPa)")
-ax.set_xlabel("$L$ (# Vertices$^{-1/2}$)")
+ax.set_ylabel("$e_f / f$")
+ax.set_xlabel("$L$")
 plt.tight_layout()
 plt.savefig("pressure_conv.png")
 ax.clear()
 
-newX = np.logspace(-2.5, -1.3, base=10)
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(bendenergy - bendenergy[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(bendenergy - bendenergy[nSubSize-1])[:nSubSize-1],
+error = abs(bendenergy - bendenergy[nSubSize-1])[:nSubSize-1] / abs(bendenergy[nSubSize-1])
+print(error)
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
           '-o', label="$E_b, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(surfenergy - surfenergy[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(surfenergy - surfenergy[nSubSize-1])[:nSubSize-1],
-          '-o', label="$E_s, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
+error = abs(surfenergy - surfenergy[nSubSize-1])[:nSubSize-1] / abs(surfenergy[nSubSize-1])
+print(error)
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
+          '--', label="$E_s, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(pressenergy - pressenergy[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(pressenergy - pressenergy[nSubSize-1])[:nSubSize-1],
+error = abs(pressenergy - pressenergy[nSubSize-1])[:nSubSize-1] / abs(pressenergy[nSubSize-1])
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
           '-o', label="$E_p, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-popt, pcov = curve_fit(myExpFunc, np.power(
-    nvertices, -0.5), abs(lineenergy - lineenergy[nSubSize-1]))
-ax.loglog(np.power(nvertices, -0.5)[:nSubSize-1],
-          abs(lineenergy - lineenergy[nSubSize-1])[:nSubSize-1],
+error = abs(lineenergy - lineenergy[nSubSize-1])[:nSubSize-1] / abs(lineenergy[nSubSize-1])
+popt, pcov = curve_fit(myExpFunc, lengthScale, error)
+ax.loglog(lengthScale, error,
           '-o', label="$E_l, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-
 ax.legend()
-ax.set_ylabel("$e_E(k_BT)$")
-ax.set_xlabel("$L$ (# Vertices$^{-1/2}$)")
+ax.set_ylabel("$e_E / E$")
+ax.set_xlabel("$L$")
 plt.tight_layout()
 plt.savefig("energy_conv.png")
 
