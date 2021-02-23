@@ -13,16 +13,16 @@ outputDir = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//results//vesicle/
 isProtein = False
 isVertexShift = False
 isReducedVolume = False
-isLocalCurvature = True
+isLocalCurvature = False
 
 nSub = 0
 
 p = pymem3dg.Parameters()
 p.Kb = 8.22e-5
 p.H0 = 3
-p.sharpness = 10000000
-p.r_H0 = [1, 1]
-p.eta = 0.0005
+p.sharpness = 0
+p.r_H0 = [-1, -1]
+p.eta = 0
 p.Ksg = 0.05
 p.Kst = 0.1
 p.Ksl = 0
@@ -65,7 +65,7 @@ kBT = 1.38e-23 * 310 * 1e15  # 1e-15 J
 pJ = 1e3  # fJ = 1e-15 J
 Pa = 1e-3  # kPa
 
-nSubSize = 5
+nSubSize = 6
 nvertices = np.zeros(nSubSize)
 l2bendnorm = np.zeros(nSubSize)
 l2surfnorm = np.zeros(nSubSize)
@@ -78,7 +78,7 @@ pressenergy = np.zeros(nSubSize)
 lineenergy = np.zeros(nSubSize)
 
 for i in range(nSubSize):
-    n = i+1
+    n = i+2
     faceMatrix, vertexMatrix = pymem3dg.getIcosphere(n, 1.3)
     faceMatrix, refVertexMatrix = pymem3dg.getIcosphere(n, 1)
     g = pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, isReducedVolume,
@@ -92,16 +92,34 @@ for i in range(nSubSize):
         g.getLumpedMassMatrix() * g.getCapillaryPressure())
     l2pressnorm[i] = g.computeL2Norm(
         g.getLumpedMassMatrix() * g.getInsidePressure())
-    l2linenorm[i] = g.computeL2Norm(
-        g.getLumpedMassMatrix() * g.getLineTensionPressure())
 
     bendenergy[i] = g.E.BE
     surfenergy[i] = g.E.sE
     pressenergy[i] = g.E.pE
+
+# activate line tension
+isLocalCurvature = True
+p.sharpness = 10000000
+p.r_H0 = [1, 1]
+p.eta = 0.0005
+for i in range(nSubSize):
+    n = i+1
+    faceMatrix, vertexMatrix = pymem3dg.getIcosphere(n, 1.3)
+    faceMatrix, refVertexMatrix = pymem3dg.getIcosphere(n, 1)
+    g = pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, isReducedVolume,
+                        isProtein, isLocalCurvature, isVertexShift)
+    g.computeFreeEnergy()
+    g.computeLineTensionPressure()
+    l2linenorm[i] = g.computeL2Norm(
+        g.getLumpedMassMatrix() * g.getLineTensionPressure())
     lineenergy[i] = g.E.lE
 
 
 print(g.getLineTension())
+print(l2bendnorm)
+print(l2linenorm)
+print(l2pressnorm)
+print(l2surfnorm)
 print(bendenergy)
 print(surfenergy)
 print(pressenergy)
@@ -199,7 +217,6 @@ ax.set_ylabel("$e_E(k_BT)$")
 ax.set_xlabel("$L$ (# Vertices$^{-1/2}$)")
 plt.tight_layout()
 plt.savefig("energy_conv.png")
-
 
 
 # plt.show()
