@@ -15,19 +15,21 @@ def plot(trajnc, figureFile, show=False, save=False):
 
     # Read data from Trajectory file
     ds = nc.Dataset(trajnc)
+    totalenergy = np.array(ds.variables['totalenergy'])/kBT
     bendenergy = np.array(ds.variables['bendenergy'])/kBT
     surfenergy = np.array(ds.variables['surfenergy'])/kBT
     pressenergy = np.array(ds.variables['pressenergy'])/kBT
+    lineenergy = np.array(ds.variables['lineenergy'])/kBT
     kineenergy = np.array(ds.variables['kineenergy'])/kBT
     chemenergy = np.array(ds.variables['chemenergy'])/kBT
-    lineenergy = np.array(ds.variables['lineenergy'])/kBT
-    totalenergy = np.array(ds.variables['totalenergy'])/kBT
+
 
     # norm data
-    l2errornorm = np.array(ds.variables['l2errornorm'])/pN
-    l2bendnorm = np.array(ds.variables['l2bendnorm'])/pN
-    l2surfnorm = np.array(ds.variables['l2surfnorm'])/pN
-    l2pressnorm = np.array(ds.variables['l2pressnorm'])/pN
+    l1errornorm = np.array(ds.variables['l1errornorm'])/Pa
+    l1bendnorm = np.array(ds.variables['l1bendnorm'])/Pa
+    l1surfnorm = np.array(ds.variables['l1surfnorm'])/Pa
+    l1pressnorm = np.array(ds.variables['l1pressnorm'])/Pa
+    l1linenorm = np.array(ds.variables['l1linenorm'])/Pa
 
     # geometric data
     surfarea = np.array(ds.variables['surfacearea'])
@@ -73,7 +75,7 @@ def plot(trajnc, figureFile, show=False, save=False):
     axs[3].set_xlabel('Time')
     axs[0].set_ylabel('Energy ($k_B T$)')
     axs[1].set_ylabel('Energy ($k_B T$)')
-    axs[2].set_ylabel('$L_2$ Norm ($pN$)')
+    axs[2].set_ylabel('$L_1$ Norm ($Pa$)')
     axs[3].set_ylabel('Geometry')
 
     # line graph
@@ -91,17 +93,20 @@ def plot(trajnc, figureFile, show=False, save=False):
     axs[1].legend()
     axs[1].set_xticklabels([])
 
-    l2 = axs[2].plot(time, l2errornorm, label="$e$")
-    l2_bend = axs[2].plot(time, l2bendnorm, label="$e_{b}$")
-    l2_surf = axs[2].plot(time, l2surfnorm, label="$e_{s}$")
-    l2_press = axs[2].plot(time, l2pressnorm, label="$e_{p}$")
+    l1 = axs[2].plot(time, l1errornorm, label="$e$")
+    l1_bend = axs[2].plot(time, l1bendnorm, label="$e_{b}$")
+    l1_surf = axs[2].plot(time, l1surfnorm, label="$e_{s}$")
+    l1_press = axs[2].plot(time, l1pressnorm, label="$e_{p}$")
+    l1_line = axs[2].plot(time, l1linenorm, label="$e_{l}$")
     axs[2].legend()
     axs[2].set_xticklabels([])
 
     A = axs[3].plot(time, dsurfarea, label='$A$')
     V = axs[3].plot(time, dvolume, label='$V$')
+    h = axs[3].plot(time, height, label='$h$')
     axs[3].legend()
-    axs[3].ticklabel_format(axis='y', style='sci', scilimits=[-3,-3], useMathText=True)
+    axs[3].ticklabel_format(axis='y', style='sci',
+                            scilimits=[-3, -3], useMathText=True)
 
     # plt.tight_layout()
     

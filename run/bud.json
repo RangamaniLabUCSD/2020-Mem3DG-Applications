@@ -21,15 +21,15 @@
             "verbosity": 3, 
             
             "refMesh" : "./input-file/patch.ply",
-            "inputMesh" : "./input-file/patch.ply",
-            "outputDir" : "../results/bud/tension0_Patch0p4_continue_fine_sharpness100",
+            "inputMesh" : "./input-file/bud.ply",
+            "outputDir" : "../results/bud/r0p5",
             
-            "nSub" : 0,
+            "nSub" : 1,
             "scale" : "TODO",
             
-            "trajFile" : "../results/bud/tension0_Patch0p4_continue_fine/traj.nc",
+            "trajFile" : "",
             "startingFrame": -1,
-            "isContinue": true
+            "isContinue": false
         },
 
         "options":
@@ -43,8 +43,7 @@
         "variables":
         {
             "H0" : 10,
-            "sharpness" : 10,
-            "r_H0" : [0.4, 0.4],
+            "r_H0" : [0.5, 0.5],
 
             "Vt" : -1,
             "cam": 0,
@@ -58,16 +57,16 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "eta" : 0,
+            "eta" : 1e-5,
             "Kv"  : 0,
-            "Ksg" : 0.0005,
+            "Ksg" : 0.005,
 
             "epsilon" : -1,
             "Bc" : -1,
 
             "Kse" : 0,     
             "Ksl" : 0,
-            "Kst" : 0.1,			
+            "Kst" : 0,			
 
             "temp" : 0,
             "gamma" : 0
@@ -76,17 +75,17 @@
         "integration":
         {
             "radiusOfIntegration" : 100,
-            "method": "euler",
-            "h" : 0.25e-3,
+            "method": "conjugate gradient",
+            "h" : 1e-1,
             "T" : 200000,
-            "eps" : 1e-6,
-            "tSave" : 1,
+            "eps" : 0.001,
+            "tSave" : 0.5,
 
             "options":
             {
                 "isBacktrack" : true,
-                "rho" : 0.5,
-                "c1" : 0,
+                "rho" : 0.99,
+                "c1" : 0.0001,
 
                 "ctol" : 0.005,
                 

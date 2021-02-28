@@ -29,7 +29,6 @@ def plySweep(dep, io, opt, var, prop, inte):
                                      isReducedVolume=opt["isReducedVolume"],
 
                                      H0=var["H0"],
-                                     sharpness=var["sharpness"],
                                      r_H0=var["r_H0"],
                                      Vt=var["Vt"],
                                      cam=var["cam"],
@@ -77,7 +76,6 @@ def ncSweep(dep, io, opt, var, prop, inte):
                                     isReducedVolume=opt["isReducedVolume"],
 
                                     H0=var["H0"],
-                                    sharpness=var["sharpness"],
                                     r_H0=var["r_H0"],
                                     Vt=var["Vt"],
                                     cam=var["cam"],

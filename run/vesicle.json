@@ -43,7 +43,6 @@
         "variables":
         {
             "H0" : 2,
-            "sharpness" : 0,
             "r_H0" : [0.1, 0.1],
 
             "Vt" : -1,
