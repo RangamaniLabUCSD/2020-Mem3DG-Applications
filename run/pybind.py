@@ -1,13 +1,13 @@
 import pymem3dg
 
-inputMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/oblate.ply"
-refMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/oblate.ply"
-outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/bud/testrefactor4"
-# inputMesh = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//slightlyOblate.ply"
-# refMesh =  "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//slightlyOblate.ply"
-# outputDir = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//results//vesicle//testAPI"
+# inputMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/oblate.ply"
+# refMesh = "/home/cuzhu/2020-Mem3DG-Applications/run/input-file/oblate.ply"
+# outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/bud/testrefactor4"
+inputMesh = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//bud.ply"
+refMesh =  "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//patch.ply"
+outputDir = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//results//vesicle//testAPI"
 
-trajFile = "/home/cuzhu/2020-Mem3DG-Applications/results/bud/testrefactor3/traj.nc"
+# trajFile = "/home/cuzhu/2020-Mem3DG-Applications/results/bud/testrefactor3/traj.nc"
 
 isProtein = False
 isVertexShift = False
@@ -22,7 +22,7 @@ p.H0 = 0
 p.r_H0 = [-1, -1]
 p.eta = 0
 p.Ksg = 1
-p.Kst = 1e-8 #2e-6    
+p.Kst = 1e-8  
 p.Ksl = 0
 p.Kse = 0
 p.epsilon = -1
@@ -55,7 +55,7 @@ p.sigma = (2 * p.gamma * 1.380649e-8 * p.temp / h)**0.5
 
 
 isLocalCurvature=True
-p.r_H0=[1, 1]
+p.r_H0=[0.4, 0.4]
 p.eta=0.0005
 p.H0 = 3
 g = pymem3dg.System(inputMesh, refMesh, nSub, p, isReducedVolume,
@@ -64,7 +64,7 @@ g = pymem3dg.System(inputMesh, refMesh, nSub, p, isReducedVolume,
 #                     isReducedVolume, isProtein, isLocalCurvature, isVertexShift)
 
 # g.computeFreeEnergy()
-# g.computeAllForces()
+# g.computePhysicalForces()
 # g.visualize()
 # fb = f.getBendingPressure()
 # totalEnergy = f.E.totalE
@@ -82,9 +82,9 @@ g = pymem3dg.System(inputMesh, refMesh, nSub, p, isReducedVolume,
 #                     tSave, eps, outputDir, "/traj3.nc", verbosity, isBacktrack, rho, c1)
 # fe.integrate()
 
-bf = pymem3dg.ConjugateGradient(g, h, isAdaptiveStep, T,
-                    tSave, eps, outputDir, "/traj.nc", verbosity, isBacktrack, rho, c1, 0.01, isAugmentedLagrangian)
-bf.integrate()
+# bf = pymem3dg.ConjugateGradient(g, h, isAdaptiveStep, T,
+#                     tSave, eps, outputDir, "/traj.nc", verbosity, isBacktrack, rho, c1, 0.01, isAugmentedLagrangian)
+# bf.integrate()
 
 # cg.step(1000)
 # cg.status()
