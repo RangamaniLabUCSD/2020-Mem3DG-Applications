@@ -14,7 +14,7 @@ outputDir = (
 icoFace, icoVertex = dg.getIcosphere(3, 1)
 icoFace, icoRefVertex = dg.getIcosphere(3, 1)
 
-trajFile = "/home/cuzhu/2020-Mem3DG-Applications/results/bud/testrefactor3/traj.nc"
+# trajFile = "/home/cuzhu/2020-Mem3DG-Applications/results/bud/testrefactor3/traj.nc"
 
 o = dg.Options()
 o.isProtein = False
