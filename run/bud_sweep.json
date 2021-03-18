@@ -37,7 +37,12 @@
             "isVertexShift" : false,
             "isProtein" : false,
             "isLocalCurvature": true,
-            "isReducedVolume" : false
+            "isReducedVolume" : false,
+            "isEdgeFlip" : false,
+            "isGrowMesh" : false, 
+            "isRefMesh" : true,
+            "isFloatVertex" : true,
+            "isLaplacianMeanCurvature" : false
         },
 
         "variables":

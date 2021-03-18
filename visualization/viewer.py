@@ -3,50 +3,107 @@ import json
 import os
 import optparse
 import pymem3dg
+from pathlib import Path
+
 # parse the config file and options
 optparser = optparse.OptionParser()
-optparser.add_option('-s', '--shape', dest="shape", type="string",
-                     help="visualization file in .nc/.ply format")
-optparser.add_option('-a', '--all', dest="all", type="string",
-                     help="visualization file in .nc/.ply format")
+optparser.add_option(
+    "-a",
+    "--animate",
+    dest="animate",
+    type="string",
+    help="visualize animation of trajectory file",
+)
+optparser.add_option(
+    "-s",
+    "--snapshot",
+    dest="snapshot",
+    type="string",
+    help="visualize snapshot geometric file",
+)
 (options, args) = optparser.parse_args()
-# argparser = argparse.ArgumentParser()
-# parser.add_argument("config", help = "configuration file (.json) used for the simulation", type = str)
-# args = argparser.parse_args()
 
 # make video directory if not exist
 cwd = os.getcwd()
-videoDir = os.path.join(cwd, './video')
+videoDir = os.path.join(cwd, "./video")
 if not os.path.exists(videoDir):
     os.mkdir(videoDir)
 
-if (options.shape != None):
-    ext = os.path.splitext(options.shape)[1][1:]
+####################################################
+# initialize option for visualization, CHANGE HERE #
+####################################################
+# Quantities data needed for visualization 
+Q = pymem3dg.Quantities()
+Q.ref_coord = True
+Q.velocity = True
+Q.mean_curvature = True
+Q.gauss_curvature = True
+Q.spon_curvature = True
+Q.ext_pressure = True
+Q.physical_pressure = True
+Q.capillary_pressure = True
+Q.inside_pressure = True
+Q.bending_pressure = True
+Q.mask = True
+Q.H_H0 = True
+
+# GUI & misc: optional arguments for viewers 
+transparency = 1
+angle = 0
+fov = 50
+edgeWidth = 1
+isShow = True
+isSave = False
+screenshotName = "screenshot.png"
+
+######################################################
+# run viewer based on option arguments and extension #
+######################################################
+if options.snapshot != None:
+    options.snapshot = os.fspath(os.path.abspath(Path(options.snapshot)))
+    ext = os.path.splitext(options.snapshot)[1][1:]
     # run viewer
     if ext == "nc":
-        pymem3dg.animation_nc(fileName=options.shape, transparency=0.5, angle=0,
-                              fov=50, edgeWidth=2, ref_coord=False, velocity=False,
-                              mean_curvature=False,  gauss_curvature=False, spon_curvature=False,
-                              ext_pressure=False, physical_pressure=False,
-                              capillary_pressure=False, inside_pressure=False,
-                              bending_pressure=False, line_pressure=False, mask=False, H_H0=False)
-    elif ext == "ply":
-        pymem3dg.viewer_ply(fileName=options.shape, mean_curvature=False, gauss_curvature=False,
-                            spon_curvature=False, ext_pressure=False, physical_pressure=False,
-                            capillary_pressure=False, bending_pressure=False, line_pressure=False)
+        pymem3dg.snapshot_nc(
+            fileName=options.snapshot,
+            options=Q,
+            frame=options[0],
+            transparency=transparency,
+            angle=angle,
+            fov=fov,
+            edgeWidth=edgeWidth,
+            isShow=isShow,
+            isSave=isSave,
+            screenshotName=screenshotName,
+        )
 
-elif(options.all != None):
-    ext = os.path.splitext(options.all)[1][1:]
+    elif ext == "ply":
+        pymem3dg.snapshot_ply(
+            fileName=options.snapshot,
+            options=Q,
+            transparency=transparency,
+            fov=fov,
+            edgeWidth=edgeWidth,
+        )
+
+elif options.animate != None:
+    options.animate = os.fspath(os.path.abspath(Path(options.animate)))
+    ext = os.path.splitext(options.animate)[1][1:]
     # run viewer
     if ext == "nc":
-        pymem3dg.animation_nc(fileName=options.all, transparency=0.5, angle=0,
-                              fov=50, edgeWidth=2, ref_coord=True, velocity=True,
-                              mean_curvature=True, gauss_curvature=True, spon_curvature=True,
-                              ext_pressure=True, physical_pressure=True,
-                              capillary_pressure=True, inside_pressure=True,
-                              bending_pressure=True, line_pressure=True, mask=True, H_H0=True)
-
-    elif ext == "ply":
-        pymem3dg.viewer_ply(fileName=options.all, mean_curvature=True, gauss_curvature=True, spon_curvature=True,
-                            ext_pressure=True, physical_pressure=True, capillary_pressure=True,
-                            bending_pressure=True, line_pressure=True)
+        pymem3dg.animate_nc(
+            fileName=options.animate,
+            options=Q,
+            transparency=transparency,
+            fov=fov,
+            edgeWidth=edgeWidth,
+        )
+    else:
+        pymem3dg.animate_ply(
+            framesDir=options.animate,
+            options=Q,
+            frameNum=[int(args[0]), int(args[1])],
+            transparency=transparency,
+            fov=fov,
+            edgeWidth=edgeWidth,
+        )

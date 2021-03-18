@@ -63,6 +63,8 @@ def plyRun(dep, io, opt, var, prop, inte):
                                isProtein=opt["isProtein"],
                                isLocalCurvature=opt["isLocalCurvature"],
                                isReducedVolume=opt["isReducedVolume"],
+                               isEdgeFlip=opt["isEdgeFlip"],
+                               isGrowMesh=opt["isGrowMesh"],
 
                                H0=var["H0"],
                                r_H0=var["r_H0"],
@@ -104,14 +106,16 @@ def ncRun(dep, io, opt, var, prop, inte):
     return pymem3dg.driver_nc(verbosity=io["verbosity"],
                               trajFile=io["trajFile"],
                               startingFrame=io["startingFrame"],
-                              nSub = io["nSub"],
-                              isContinue = io["isContinue"],
+                              nSub=io["nSub"],
+                              isContinue=io["isContinue"],
                               outputDir=io["outputDir"],
 
                               isVertexShift=opt["isVertexShift"],
                               isProtein=opt["isProtein"],
                               isLocalCurvature=opt["isLocalCurvature"],
                               isReducedVolume=opt["isReducedVolume"],
+                              isEdgeFlip=opt["isEdgeFlip"],
+                              isGrowMesh=opt["isGrowMesh"],
 
                               H0=var["H0"],
                               r_H0=var["r_H0"],
@@ -147,6 +151,7 @@ def ncRun(dep, io, opt, var, prop, inte):
                               isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"],
                               isAdaptiveStep=inte["options"]["isAdaptiveStep"])
 
+
 def genPlots(io):
     '''function that generate the .png plots for netcdf trajectory file'''
     sys.path.insert(1, io["outputDir"])
@@ -155,6 +160,7 @@ def genPlots(io):
          figureFile=os.fspath(os.path.abspath(
              Path(io['outputDir'] + "/traj_plot.pdf"))),
          show=False, save=True)
+
 
 def plySystem(dep, io, opt, var, prop, inte):
     '''function run the driver function starting with .ply mesh'''
@@ -201,7 +207,8 @@ def plySystem(dep, io, opt, var, prop, inte):
                                c1=inte["options"]["c1"],
                                ctol=inte["options"]["ctol"],
                                isAugmentedLagrangian=inte["options"]["isAugmentedLagrangian"])
-                               
+
+
 if __name__ == "__main__":
 
     # parse the command line option
@@ -225,7 +232,7 @@ if __name__ == "__main__":
     elif(options.nc != None):
         ncRun(dep, io, opt, var, prop, inte)
 
-    # testing python binding 
+    # testing python binding
     # f = plySystem(dep, io, opt, var, prop, inte)
     # f.getInsidePressure()
     # print(f.insidePressure)

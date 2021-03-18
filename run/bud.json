@@ -22,9 +22,9 @@
             
             "refMesh" : "./input-file/patch.ply",
             "inputMesh" : "./input-file/bud.ply",
-            "outputDir" : "../results/bud/r0p5",
+            "outputDir" : "../results/bud/coarse/Ksg5e-4_H5",
             
-            "nSub" : 1,
+            "nSub" : 0,
             "scale" : "TODO",
             
             "trajFile" : "",
@@ -37,18 +37,23 @@
             "isVertexShift" : false,
             "isProtein" : false,
             "isLocalCurvature": true,
-            "isReducedVolume" : false
+            "isReducedVolume" : false,
+            "isEdgeFlip" : true,
+            "isGrowMesh" : false,
+            "isRefMesh" : true,
+            "isFloatVertex" : true,
+            "isLaplacianMeanCurvature" : false
         },
 
         "variables":
         {
-            "H0" : 10,
-            "r_H0" : [0.5, 0.5],
+            "H0" : 6,
+            "r_H0" : [0.4, 0.4],
 
             "Vt" : -1,
             "cam": 0,
 
-            "pt" : [0,0,0],
+            "pt" : [0,0,1],
             "Kf" : 0,
             "conc" : -1,
             "height" : 0
@@ -57,15 +62,15 @@
         "properties":
         {
             "Kb" : 8.22e-5,
-            "eta" : 1e-5,
+            "eta" : 0,
             "Kv"  : 0,
-            "Ksg" : 0.005,
+            "Ksg" : 1e-5,
 
             "epsilon" : -1,
             "Bc" : -1,
 
-            "Kse" : 0,     
-            "Ksl" : 0,
+            "Kse" : 2e-5,     
+            "Ksl" : 2e-5,
             "Kst" : 0,			
 
             "temp" : 0,
@@ -76,18 +81,18 @@
         {
             "radiusOfIntegration" : 100,
             "method": "conjugate gradient",
-            "h" : 1e-1,
-            "T" : 200000,
-            "eps" : 0.001,
-            "tSave" : 0.5,
+            "h" : 0.1,
+            "T" : 1500,
+            "eps" : 0,
+            "tSave" : 10,
 
             "options":
             {
-                "isBacktrack" : true,
+                "isBacktrack" : false,
                 "rho" : 0.99,
-                "c1" : 0.0001,
+                "c1" : 0.000001,
 
-                "ctol" : 0.005,
+                "ctol" : 0.001,
                 
                 "isAugmentedLagrangian": false,
                 "isAdaptiveStep": true

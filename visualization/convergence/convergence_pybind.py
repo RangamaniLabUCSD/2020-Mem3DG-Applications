@@ -10,15 +10,22 @@ inputMesh = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//
 refMesh = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//run//input-file//slightlyOblate.ply"
 outputDir = "C://Users//Kieran//Dev//2020-Mem3DG-Applications//results//vesicle//testConvergence"
 
-isProtein = False
-isVertexShift = False
-isReducedVolume = False
-isLocalCurvature = False
+o = pymem3dg.Options()
+o.isProtein = False
+o.isVertexShift = False
+o.isReducedVolume = False
+o.isLocalCurvature = False
+o.isEdgeFlip = False
+o.isGrowMesh = False
+o.isRefMesh = True
+o.isFloatVertex = True
+o.isLaplacianMeanCurvature = True
 
 nSub = 0
 
 p = pymem3dg.Parameters()
 p.Kb = 8.22e-5
+p.Kbc = -1
 p.H0 = 3
 p.r_H0 = [-1, -1]
 p.eta = 0
@@ -81,8 +88,7 @@ for i in range(nSubSize):
     n = minSub + i
     faceMatrix, vertexMatrix = pymem3dg.getIcosphere(n, 1.3)
     faceMatrix, refVertexMatrix = pymem3dg.getIcosphere(n, 1)
-    g = pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, isReducedVolume,
-                        isProtein, isLocalCurvature, isVertexShift)
+    g = pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, o)
     g.computeFreeEnergy()
     g.computePhysicalForces()
     nvertices[i] = len(np.array(g.getVertexPositionMatrix()))
@@ -96,28 +102,28 @@ for i in range(nSubSize):
     pressenergy[i]=g.E.pE
 
 # activate line tension
-isLocalCurvature=True
-p.r_H0=[1, 1]
-p.eta=0.0005
-for i in range(nSubSize):
-    n=minSub + i
-    faceMatrix, vertexMatrix=pymem3dg.getIcosphere(n, 1.3)
-    faceMatrix, refVertexMatrix=pymem3dg.getIcosphere(n, 1)
-    g=pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, isReducedVolume,
-                        isProtein, isLocalCurvature, isVertexShift)
-    g.computeFreeEnergy()
-    g.computeLineCapillaryForce()
-    l1linenorm[i]= np.sum(abs(g.getLineCapillaryForce())) / g.surfaceArea
-    lineenergy[i]=g.E.lE
+# o.isLocalCurvature=True
+# p.r_H0=[1, 1]
+# p.eta=0.0005
+# for i in range(nSubSize):
+#     n=minSub + i
+#     faceMatrix, vertexMatrix=pymem3dg.getIcosphere(n, 1.3)
+#     faceMatrix, refVertexMatrix=pymem3dg.getIcosphere(n, 1)
+#     g=pymem3dg.System(faceMatrix, vertexMatrix, refVertexMatrix, nSub, p, o)
+#     g.computeFreeEnergy()
+#     g.computeLineCapillaryForce()
+#     # pymem3dg.visualize(g)
+#     l1linenorm[i]= np.sum(abs(g.getLineCapillaryForce())) / g.surfaceArea
+#     lineenergy[i]=g.E.lE
 
 print("Bending Norm: ", l1bendnorm)
-print("Line tension Norm: ", l1linenorm)
+# print("Line tension Norm: ", l1linenorm)
 print("Pressure Norm: ", l1pressnorm)
 print("Surface Norm: ", l1surfnorm)
 print("Bending Energy: ", bendenergy)
 print("Surface Energy: ", surfenergy)
 print("Pressure Energy: ", pressenergy)
-print("Line Tension Energy: ", lineenergy)
+# print("Line Tension Energy: ", lineenergy)
 
 # Visualization preference
 # Font:
@@ -160,11 +166,11 @@ popt, pcov=curve_fit(myExpFunc, lengthScale, error)
 ax.loglog(lengthScale, error,
           '-o', label="$f_p, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-error=abs(l1linenorm - l1linenorm[nSubSize-1]
-          )[:nSubSize-1] / abs(l1linenorm[nSubSize-1])
-popt, pcov=curve_fit(myExpFunc, lengthScale, error)
-ax.loglog(lengthScale, error,
-          '-o', label="$f_l, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
+# error=abs(l1linenorm - l1linenorm[nSubSize-1]
+#           )[:nSubSize-1] / abs(l1linenorm[nSubSize-1])
+# popt, pcov=curve_fit(myExpFunc, lengthScale, error)
+# ax.loglog(lengthScale, error,
+#           '-o', label="$f_l, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
 ax.legend()
 ax.set_ylabel("$e_f / f$")
@@ -193,11 +199,11 @@ popt, pcov=curve_fit(myExpFunc, lengthScale, error)
 ax.loglog(lengthScale, error,
           '-o', label="$E_p, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
-error=abs(lineenergy - lineenergy[nSubSize-1]
-          )[:nSubSize-1] / abs(lineenergy[nSubSize-1])
-popt, pcov=curve_fit(myExpFunc, lengthScale, error)
-ax.loglog(lengthScale, error,
-          '-o', label="$E_l, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
+# error=abs(lineenergy - lineenergy[nSubSize-1]
+#           )[:nSubSize-1] / abs(lineenergy[nSubSize-1])
+# popt, pcov=curve_fit(myExpFunc, lengthScale, error)
+# ax.loglog(lengthScale, error,
+#           '-o', label="$E_l, {0:.1f}L^{{{1:.1f}}}$".format(*popt))
 
 ax.legend()
 ax.set_ylabel("$e_E / E$")

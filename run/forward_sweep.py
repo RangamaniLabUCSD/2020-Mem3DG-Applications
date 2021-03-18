@@ -27,6 +27,8 @@ def plySweep(dep, io, opt, var, prop, inte):
                                      isProtein=opt["isProtein"],
                                      isLocalCurvature=opt["isLocalCurvature"],
                                      isReducedVolume=opt["isReducedVolume"],
+                                     isEdgeFlip=opt["isEdgeFlip"],
+                                     isGrowMesh=opt["isGrowMesh"],
 
                                      H0=var["H0"],
                                      r_H0=var["r_H0"],
@@ -74,6 +76,8 @@ def ncSweep(dep, io, opt, var, prop, inte):
                                     isProtein=opt["isProtein"],
                                     isLocalCurvature=opt["isLocalCurvature"],
                                     isReducedVolume=opt["isReducedVolume"],
+                                    isEdgeFlip=opt["isEdgeFlip"],
+                                    isGrowMesh=opt["isGrowMesh"],
 
                                     H0=var["H0"],
                                     r_H0=var["r_H0"],
