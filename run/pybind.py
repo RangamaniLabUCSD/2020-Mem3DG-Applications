@@ -44,29 +44,37 @@ o.isFloatVertex = True
 o.isLaplacianMeanCurvature = False
 
 nSub = 0
-
 p = dg.Parameters()
-p.Kb = 8.22e-5
-p.Kbc = 8.22e-4  # 8.22e-4 DEFINITION OF LARGE AND SMALL VALUE
-p.H0 = 6
+### general ###
+p.pt = [0, 0]
 p.r_H0 = [0.5, 0.5]
-p.eta = 0
-p.Ksg = 1e-2  # 1e-2 DEFINITION OF LARGE AND SMALL VALUE
-p.Kst = 0  # 2e-6
-p.Ksl = 1e-7
-p.Kse = 1e-7
-p.epsilon = -1
-p.Bc = -1
+### bending ###
+p.Kb = 8.22e-5
+p.Kbc = 3 * 8.22e-5  # 8.22e-4 DEFINITION OF LARGE AND SMALL VALUE
+p.H0 = 6
+### surface tension ###
+p.Ksg = 1e-3  # 1e-2 DEFINITION OF LARGE AND SMALL VALUE
+### osmotic force ###
 p.Kv = 0
 p.Vt = -1
 p.cam = 0
+### regularization ###
+p.Kst = 0  # 2e-6
+p.Ksl = 1e-7
+p.Kse = 1e-7
+### protein binding ###
+p.epsilon = -1
+p.Bc = -1
+### line tension ###
+p.eta = 0
+### DPD ###
+p.gamma = 0
+p.temp = 0
+### Rarely used ###
 p.Kf = 0
 p.conc = -1
 p.height = 0
 p.radius = 100000
-p.gamma = 0
-p.temp = 0
-p.pt = [0, 0]
 p.lambdaSG = 0
 p.lambdaV = 0
 
@@ -82,16 +90,18 @@ g = dg.System(inputMesh, inputMesh, nSub, p, o)
 ####################################################
 #          Time integration / Optimization         #
 ####################################################
+### options ###
+isBacktrack = False
+isAdaptiveStep = False
+isAugmentedLagrangian = False
+### parameters ###
 h = 0.1
-T = 5000
+T = 10000
 eps = 0
 tSave = 10
-isBacktrack = True
 rho = 0.99
 c1 = 0.0001
-isAdaptiveStep = True
-verbosity = 3
-isAugmentedLagrangian = False
+verbosity = 5
 restartNum = 3
 
 # h = 0.001
@@ -162,7 +172,7 @@ fe.integrate()
 ####################################################
 # initialize option for visualization, CHANGE HERE #
 ####################################################
-# Quantities data needed for visualization
+### Quantities data needed for visualization ###
 Q = dg.Quantities()
 Q.ref_coord = True
 Q.velocity = True
