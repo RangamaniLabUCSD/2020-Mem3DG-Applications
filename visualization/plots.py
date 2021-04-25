@@ -15,35 +15,38 @@ def plot(trajnc, figureFile, show=False, save=False):
 
     # Read data from Trajectory file
     ds = nc.Dataset(trajnc)
-    totalenergy = np.array(ds.variables['totalenergy'])/kBT
-    bendenergy = np.array(ds.variables['bendenergy'])/kBT
-    surfenergy = np.array(ds.variables['surfenergy'])/kBT
-    pressenergy = np.array(ds.variables['pressenergy'])/kBT
-    lineenergy = np.array(ds.variables['lineenergy'])/kBT
-    kineenergy = np.array(ds.variables['kineenergy'])/kBT
-    chemenergy = np.array(ds.variables['chemenergy'])/kBT
-
+    issmoothmask = np.array(ds.variables['issmooth'])
+    issmoothmask = [i for i, x in enumerate(issmoothmask) if not x]
+    # issmoothmask = []
+    totalenergy = np.delete(
+        np.array(ds.variables['totalenergy'])/kBT, issmoothmask)
+    bendenergy =  np.delete(np.array(ds.variables['bendenergy'])/kBT, issmoothmask)
+    surfenergy =  np.delete(np.array(ds.variables['surfenergy'])/kBT, issmoothmask)
+    pressenergy =  np.delete(np.array(ds.variables['pressenergy'])/kBT, issmoothmask)
+    lineenergy =  np.delete(np.array(ds.variables['lineenergy'])/kBT, issmoothmask)
+    kineenergy =  np.delete(np.array(ds.variables['kineenergy'])/kBT, issmoothmask)
+    chemenergy =  np.delete(np.array(ds.variables['chemenergy'])/kBT, issmoothmask)
 
     # norm data
-    l1errornorm = np.array(ds.variables['l1errornorm'])/Pa
-    l1bendnorm = np.array(ds.variables['l1bendnorm'])/Pa
-    l1surfnorm = np.array(ds.variables['l1surfnorm'])/Pa
-    l1pressnorm = np.array(ds.variables['l1pressnorm'])/Pa
-    l1linenorm = np.array(ds.variables['l1linenorm'])/Pa
+    l1errornorm =  np.delete(np.array(ds.variables['l1errornorm'])/Pa, issmoothmask)
+    l1bendnorm =  np.delete(np.array(ds.variables['l1bendnorm'])/Pa, issmoothmask)
+    l1surfnorm =  np.delete(np.array(ds.variables['l1surfnorm'])/Pa, issmoothmask)
+    l1pressnorm =  np.delete(np.array(ds.variables['l1pressnorm'])/Pa, issmoothmask)
+    l1linenorm =  np.delete(np.array(ds.variables['l1linenorm'])/Pa, issmoothmask)
 
     # geometric data
-    surfarea = np.array(ds.variables['surfacearea'])
-    volume = np.array(ds.variables['volume'])
-    refsurfarea = np.array(ds.variables['refsurfarea'])
-    refvolume = np.array(ds.variables['refvolume'])
-    height = np.array(ds.variables['height'])
+    # surfarea =  np.delete(np.array(ds.variables['surfacearea']), issmoothmask)
+    # volume =  np.delete(np.array(ds.variables['volume']), issmoothmask)
+    # refsurfarea =  np.delete(np.array(ds.variables['refsurfarea']), issmoothmask)
+    # refvolume =  np.delete(np.array(ds.variables['refvolume']), issmoothmask)
+    height =  np.delete(np.array(ds.variables['height']), issmoothmask)
 
     # time
-    time = np.array(ds.variables['time'])
+    time =  np.delete(np.array(ds.variables['time']), issmoothmask)
 
     # Processed data
-    dsurfarea = surfarea / refsurfarea - 1
-    dvolume = volume / refvolume - 1
+    # dsurfarea = surfarea / refsurfarea - 1
+    # dvolume = volume / refvolume - 1
 
     # Visualization preference
     # Font:
@@ -101,17 +104,17 @@ def plot(trajnc, figureFile, show=False, save=False):
     axs[2].legend()
     axs[2].set_xticklabels([])
 
-    A = axs[3].plot(time, dsurfarea, label='$A$')
-    V = axs[3].plot(time, dvolume, label='$V$')
+    # A = axs[3].plot(time, dsurfarea, label='$A$')
+    # V = axs[3].plot(time, dvolume, label='$V$')
     h = axs[3].plot(time, height, label='$h$')
     axs[3].legend()
-    axs[3].ticklabel_format(axis='y', style='sci',
-                            scilimits=[-3, -3], useMathText=True)
+    # axs[3].ticklabel_format(axis='y', style='sci',
+    #                         scilimits=[-3, -3], useMathText=True)
 
     # plt.tight_layout()
-    
+
     if save:
-        plt.savefig(figureFile)
+        plt.savefig(figureFile, transparent=True)
     if show:
         plt.show()
 

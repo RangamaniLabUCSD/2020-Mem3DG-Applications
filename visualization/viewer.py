@@ -32,22 +32,23 @@ if not os.path.exists(videoDir):
 ####################################################
 # initialize option for visualization, CHANGE HERE #
 ####################################################
-# Quantities data needed for visualization 
+# Quantities data needed for visualization
 Q = pymem3dg.Quantities()
 Q.ref_coord = True
 Q.velocity = True
 Q.mean_curvature = True
 Q.gauss_curvature = True
 Q.spon_curvature = True
-Q.ext_pressure = True
-Q.physical_pressure = True
-Q.capillary_pressure = True
-Q.inside_pressure = True
-Q.bending_pressure = True
+Q.ext_force = True
+Q.physical_force = True
+Q.capillary_force = True
+Q.osmotic_force = True
+Q.bending_force = True
 Q.mask = True
 Q.H_H0 = True
+Q.the_point = True
 
-# GUI & misc: optional arguments for viewers 
+# GUI & misc: optional arguments for viewers
 transparency = 1
 angle = 0
 fov = 50
