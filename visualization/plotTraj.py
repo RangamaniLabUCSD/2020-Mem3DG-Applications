@@ -16,8 +16,8 @@ def plot(trajnc, figureFile, show=False, save=False):
     # Read data from Trajectory file
     ds = nc.Dataset(trajnc)
     issmoothmask = np.array(ds.variables['issmooth'])
-    issmoothmask = [i for i, x in enumerate(issmoothmask) if not x]
-    # issmoothmask = []
+    # issmoothmask = [i for i, x in enumerate(issmoothmask) if not x]
+    issmoothmask = []
     totalenergy = np.delete(
         np.array(ds.variables['totalenergy'])/kBT, issmoothmask)
     bendenergy =  np.delete(np.array(ds.variables['bendenergy'])/kBT, issmoothmask)
@@ -25,14 +25,14 @@ def plot(trajnc, figureFile, show=False, save=False):
     pressenergy =  np.delete(np.array(ds.variables['pressenergy'])/kBT, issmoothmask)
     lineenergy =  np.delete(np.array(ds.variables['lineenergy'])/kBT, issmoothmask)
     kineenergy =  np.delete(np.array(ds.variables['kineenergy'])/kBT, issmoothmask)
-    chemenergy =  np.delete(np.array(ds.variables['chemenergy'])/kBT, issmoothmask)
+    adspenergy =  np.delete(np.array(ds.variables['adspenergy'])/kBT, issmoothmask)
 
     # norm data
-    l1errornorm =  np.delete(np.array(ds.variables['l1errornorm'])/Pa, issmoothmask)
-    l1bendnorm =  np.delete(np.array(ds.variables['l1bendnorm'])/Pa, issmoothmask)
-    l1surfnorm =  np.delete(np.array(ds.variables['l1surfnorm'])/Pa, issmoothmask)
-    l1pressnorm =  np.delete(np.array(ds.variables['l1pressnorm'])/Pa, issmoothmask)
-    l1linenorm =  np.delete(np.array(ds.variables['l1linenorm'])/Pa, issmoothmask)
+    errornorm =  np.delete(np.array(ds.variables['errornorm'])/Pa, issmoothmask)
+    bendnorm =  np.delete(np.array(ds.variables['bendnorm'])/Pa, issmoothmask)
+    surfnorm =  np.delete(np.array(ds.variables['surfnorm'])/Pa, issmoothmask)
+    pressnorm =  np.delete(np.array(ds.variables['pressnorm'])/Pa, issmoothmask)
+    linenorm =  np.delete(np.array(ds.variables['linenorm'])/Pa, issmoothmask)
 
     # geometric data
     # surfarea =  np.delete(np.array(ds.variables['surfacearea']), issmoothmask)
@@ -91,16 +91,16 @@ def plot(trajnc, figureFile, show=False, save=False):
     be = axs[1].plot(time, bendenergy, label='$E_{b}$')
     se = axs[1].plot(time, surfenergy, label='$E_{s}$')
     pse = axs[1].plot(time, pressenergy, label='$E_{p}$')
-    ce = axs[1].plot(time, chemenergy, label='$E_{c}$')
+    ce = axs[1].plot(time, adspenergy, label='$E_{c}$')
     le = axs[1].plot(time, lineenergy, label='$E_{l}$')
     axs[1].legend()
     axs[1].set_xticklabels([])
 
-    l1 = axs[2].plot(time, l1errornorm, label="$e$")
-    l1_bend = axs[2].plot(time, l1bendnorm, label="$e_{b}$")
-    l1_surf = axs[2].plot(time, l1surfnorm, label="$e_{s}$")
-    l1_press = axs[2].plot(time, l1pressnorm, label="$e_{p}$")
-    l1_line = axs[2].plot(time, l1linenorm, label="$e_{l}$")
+    er = axs[2].plot(time, errornorm, label="$e$")
+    er_bend = axs[2].plot(time, bendnorm, label="$e_{b}$")
+    er_surf = axs[2].plot(time, surfnorm, label="$e_{s}$")
+    er_press = axs[2].plot(time, pressnorm, label="$e_{p}$")
+    er_line = axs[2].plot(time, linenorm, label="$e_{l}$")
     axs[2].legend()
     axs[2].set_xticklabels([])
 

@@ -44,9 +44,15 @@ Q.physical_force = True
 Q.capillary_force = True
 Q.osmotic_force = True
 Q.bending_force = True
-Q.mask = True
+Q.line_force = True
+Q.mask = False
 Q.H_H0 = True
-Q.the_point = True
+Q.the_point = False
+Q.smoothing_mask = False
+Q.chemical_potential = True
+Q.bending_potential = True
+Q.diffusion_potential = True
+Q.adsorption_potential = True
 
 # GUI & misc: optional arguments for viewers
 transparency = 1
