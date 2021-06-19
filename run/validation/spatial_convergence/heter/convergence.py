@@ -196,8 +196,8 @@ plt.rc('pdf', fonttype=42)
 # plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
 
 
-fig, axs = plt.subplots(1, 2)
-fig.set_size_inches(6, 4)
+fig, axs = plt.subplots(1, 3)
+fig.set_size_inches(7, 4)
 
 # x = np.power(nvertices, -0.5)[:nSubSize-1]
 # x = 1 / 2 ** np.array(range(nSubSize-1))
@@ -292,16 +292,16 @@ axs[1].set_xticks([1, 10])
 # ax.set_ylabel("$e_E / E$")
 # ax.set_xlabel("$L$")
 plt.tight_layout()
-plt.savefig("heter.pdf")
+plt.savefig("heter.pdf", transparent=True)
 
 plt.show()
 
 
-outputMesh = "nSub2.ply"
+# outputMesh = "nSub2.ply"
 
-ps.init()
-face, vertex = dg.readMesh(outputMesh)
-mesh = ps.register_surface_mesh("frame0", vertex, face)
-mesh.add_scalar_quantity("spon_curvature", dg.readData(
-    outputMesh, 'vertex', 'spon_curvature'), enabled=True)
-ps.show()
+# ps.init()
+# face, vertex = dg.readMesh(outputMesh)
+# mesh = ps.register_surface_mesh("frame0", vertex, face)
+# mesh.add_scalar_quantity("spon_curvature", dg.readData(
+#     outputMesh, 'vertex', 'spon_curvature'), enabled=True)
+# ps.show()

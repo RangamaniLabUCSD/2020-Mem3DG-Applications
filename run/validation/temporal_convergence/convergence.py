@@ -196,8 +196,8 @@ plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
 plt.rc('pdf', fonttype=42)
 # plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
 
-fig, axs = plt.subplots(1, 2)
-fig.set_size_inches(6, 4)
+fig, axs = plt.subplots(1, 3)
+fig.set_size_inches(7, 4)
 
 popt, pcov = curve_fit(myExpFunc, H, diffBendingForce)
 axs[0].loglog(H, diffBendingForce,
@@ -236,6 +236,6 @@ axs[0].loglog(H, diffAdsorptionPotential,
 
 axs[0].legend()
 plt.tight_layout()
-plt.savefig("gradient.pdf")
+plt.savefig("gradient.pdf", transparent=True)
 
 plt.show()
