@@ -13,83 +13,25 @@ faceMatrix, vertexMatrix = dg.getIcosphere(1, 3)
 ####################################################
 #        System: Options and Parameters            #
 ####################################################
-o = dg.Options()
-o.isReducedVolume = False
-o.isConstantOsmoticPressure = True
-o.isConstantSurfaceTension = True
-o.isProteinVariation = True
-o.isShapeVariation = True
-o.isFloatVertex = True
-o.shapeBoundaryCondition = "none"
-o.proteinBoundaryCondition = "none"
-
-o.isEdgeFlip = False
-o.isSplitEdge = False
-o.isCollapseEdge = False
-o.isVertexShift = False
-
 p = dg.Parameters()
-### general ###
-p.pt = [0, 0, 1]
-p.protein0 = [1, 1, 0.3, 0.2]
-p.sharpness = 2
-### bending ###
-p.Kb = 8.22e-5
-p.Kbc = 0
-p.H0c = 100
-### surface tension ###
-p.Ksg = 1e-1
-p.A_res = 0
-p.epsilon = -1e-1
-### osmotic force ###
-p.Kv = 1e-1
-p.V_res = 0
-p.Vt = -1
-p.cam = -1
-### protein binding ###
-p.Bc = 1
-### line tension ###
-p.eta = 0.1
-
-# ####################################################
-# #        System: Options and Parameters            #
-# ####################################################
-# o = dg.Options()
-# o.isReducedVolume = False
-# o.isConstantOsmoticPressure = True
-# o.isConstantSurfaceTension = True
-# o.isProteinVariation = True
-# o.isShapeVariation = True
-# o.isFloatVertex = True
-# o.shapeBoundaryCondition = "none"
-# o.proteinBoundaryCondition = "none"
-
-# o.isEdgeFlip = False
-# o.isSplitEdge = False
-# o.isCollapseEdge = False
-# o.isVertexShift = False
-
-# p = dg.Parameters()
-# ### general ###
-# p.pt = [0, 0, 1]
-# p.protein0 = [1, 1, 0.3, 0.1]
-# ### bending ###
-# p.Kb = 8.22e-5
-# p.Kbc = 0  # 8.22e-4 #DEFINITION OF LARGE AND SMALL VALUE
-# p.H0c = 10
-# ### surface tension ###
-# p.Ksg = 1e-3
-# p.A_res = 0
-# p.epsilon = -1e-3
-# ### osmotic force ###
-# p.Kv = 1e-3
-# p.V_res = 0
-# p.Vt = -1
-# p.cam = -1
-# ### protein binding ###
-# p.Bc = 1
-# ### line tension ###
-# p.eta = 0.01
+p.point.isFloatVertex = True
+p.point.pt = [0, 0, 1]
+p.boundary.shapeBoundaryCondition = "none"
+p.boundary.proteinBoundaryCondition = "none"
+p.variation.isProteinVariation = True
+p.variation.isShapeVariation = True
+p.proteinDistribution.protein0 = [1, 1, 0.3, 0.2]
+p.proteinDistribution.sharpness = 2
+p.bending.Kb = 8.22e-5
+p.bending.Kbc = 0
+p.bending.H0c = 1
+p.tension.isConstantSurfaceTension = True
+p.tension.Ksg = 1e-1
+p.adsorption.epsilon = -1e-1
+p.osmotic.isConstantOsmoticPressure = True
+p.osmotic.Kv = 1e-1
+p.proteinMobility = 1
+p.dirichlet.eta = 0.1
 
 
 nSubSize = 8
@@ -109,74 +51,74 @@ for i in range(nSubSize):
     h = maxh / (2**i)
     H[i] = h
 
-    g = dg.System(faceMatrix, vertexMatrix, p, o)
+    g = dg.System(faceMatrix, vertexMatrix, p)
     g.computeFreeEnergy()
     g.computePhysicalForces()
-    p.protein0 = g.getProteinDensity()
-    # print("new pos: ", np.linalg.norm(h * g.F.getBendingForce() +
+    p.proteinDistribution.protein0 = g.getProteinDensity()
+    # print("new pos: ", np.linalg.norm(h * g.forces.getBendingForce() +
     #                  g.getVertexPositionMatrix()))
 
-    gNew = dg.System(faceMatrix, h * g.F.getBendingForce() +
-                     vertexMatrix, p, o)
+    gNew = dg.System(faceMatrix, h * g.forces.getBendingForce() +
+                     vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.BE - gNew.E.BE
-    expected = h * np.linalg.norm(g.F.getBendingForce())**2
+    dEnergy = g.energy.BE - gNew.energy.BE
+    expected = h * np.linalg.norm(g.forces.getBendingForce())**2
     diffBendingForce[i] = abs(dEnergy - expected)
     print("h is", h, " and dBE: ", dEnergy, " and expected: ", expected)
 
-    gNew = dg.System(faceMatrix, h * g.F.getCapillaryForce() +
-                     vertexMatrix, p, o)
+    gNew = dg.System(faceMatrix, h * g.forces.getCapillaryForce() +
+                     vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.sE - gNew.E.sE
-    expected = h * np.linalg.norm(g.F.getCapillaryForce())**2
+    dEnergy = g.energy.sE - gNew.energy.sE
+    expected = h * np.linalg.norm(g.forces.getCapillaryForce())**2
     diffCapillaryForce[i] = abs(dEnergy - expected)
     print("h is", h, " and dsE: ", dEnergy, " and expected: ", expected)
 
-    gNew = dg.System(faceMatrix, h * g.F.getOsmoticForce() +
-                     vertexMatrix, p, o)
+    gNew = dg.System(faceMatrix, h * g.forces.getOsmoticForce() +
+                     vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.pE - gNew.E.pE
-    expected = h * np.linalg.norm(g.F.getOsmoticForce())**2
+    dEnergy = g.energy.pE - gNew.energy.pE
+    expected = h * np.linalg.norm(g.forces.getOsmoticForce())**2
     diffOsmoticForce[i] = abs(dEnergy - expected)
     print("h is", h, " and dpE: ", dEnergy, " and expected: ", expected)
 
-    gNew = dg.System(faceMatrix, h * g.F.getAdsorptionForce() +
-                     vertexMatrix, p, o)
+    gNew = dg.System(faceMatrix, h * g.forces.getAdsorptionForce() +
+                     vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.aE - gNew.E.aE
-    expected = h * np.linalg.norm(g.F.getAdsorptionForce())**2
+    dEnergy = g.energy.aE - gNew.energy.aE
+    expected = h * np.linalg.norm(g.forces.getAdsorptionForce())**2
     diffAdsorptionForce[i] = abs(dEnergy - expected)
     print("h is", h, " and daE: ", dEnergy, " and expected: ", expected)
 
-    gNew = dg.System(faceMatrix, h * g.F.getLineCapillaryForce() +
-                     vertexMatrix, p, o)
+    gNew = dg.System(faceMatrix, h * g.forces.getLineCapillaryForce() +
+                     vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.dE - gNew.E.dE
-    expected = h * np.linalg.norm(g.F.getLineCapillaryForce())**2
+    dEnergy = g.energy.dE - gNew.energy.dE
+    expected = h * np.linalg.norm(g.forces.getLineCapillaryForce())**2
     diffLineCapillaryForce[i] = abs(dEnergy - expected)
     print("h is", h, " and ddE: ", dEnergy, " and expected: ", expected)
 
-    p.protein0 = g.getProteinDensity() + h * g.F.getDiffusionPotential()
-    gNew = dg.System(faceMatrix, vertexMatrix, p, o)
+    p.proteinDistribution.protein0 = g.getProteinDensity() + h * g.forces.getDiffusionPotential()
+    gNew = dg.System(faceMatrix, vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.dE - gNew.E.dE
-    expected = h * np.linalg.norm(g.F.getDiffusionPotential())**2
+    dEnergy = g.energy.dE - gNew.energy.dE
+    expected = h * np.linalg.norm(g.forces.getDiffusionPotential())**2
     diffDiffusionPotential[i] = abs(dEnergy - expected)
     print("h is", h, " and ddE: ", dEnergy, " and expected: ", expected)
 
-    p.protein0 = g.getProteinDensity() + h * g.F.getBendingPotential()
-    gNew = dg.System(faceMatrix, vertexMatrix, p, o)
+    p.proteinDistribution.protein0 = g.getProteinDensity() + h * g.forces.getBendingPotential()
+    gNew = dg.System(faceMatrix, vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.BE - gNew.E.BE
-    expected = h * np.linalg.norm(g.F.getBendingPotential())**2
+    dEnergy = g.energy.BE - gNew.energy.BE
+    expected = h * np.linalg.norm(g.forces.getBendingPotential())**2
     diffBendingPotential[i] = abs(dEnergy - expected)
     print("h is", h, " and dBE: ", dEnergy, " and expected: ", expected)
 
-    p.protein0 = g.getProteinDensity() + h * g.F.getAdsorptionPotential()
-    gNew = dg.System(faceMatrix, vertexMatrix, p, o)
+    p.proteinDistribution.protein0 = g.getProteinDensity() + h * g.forces.getAdsorptionPotential()
+    gNew = dg.System(faceMatrix, vertexMatrix, p)
     gNew.computeFreeEnergy()
-    dEnergy = g.E.aE - gNew.E.aE
-    expected = h * np.linalg.norm(g.F.getAdsorptionPotential())**2
+    dEnergy = g.energy.aE - gNew.energy.aE
+    expected = h * np.linalg.norm(g.forces.getAdsorptionPotential())**2
     diffAdsorptionPotential[i] = abs(dEnergy - expected)
     print("h is", h, " and daE: ", dEnergy, " and expected: ", expected)
 

@@ -6,82 +6,25 @@ import polyscope as ps
 ####################################################
 #        System: Options and Parameters            #
 ####################################################
-o = dg.Options()
-o.isReducedVolume = False
-o.isConstantOsmoticPressure = True
-o.isConstantSurfaceTension = True
-o.isProteinVariation = False
-o.isShapeVariation = True
-o.isFloatVertex = True
-o.shapeBoundaryCondition = "none"
-o.proteinBoundaryCondition = "none"
-
-o.isEdgeFlip = False
-o.isSplitEdge = False
-o.isCollapseEdge = False
-o.isVertexShift = False
-
 p = dg.Parameters()
-### general ###
-p.pt = [0, 0, 1]
-p.protein0 = [1]
-### bending ###
-p.Kb = 0
-p.Kbc = 8.22e-5
-p.H0c = 20
-### surface tension ###
-p.Ksg = 1e-1
-p.A_res = 0
-p.epsilon = 0
-### osmotic force ###
-p.Kv = 1e-1
-p.V_res = 0
-p.Vt = -1
-p.cam = -1
-### protein binding ###
-p.Bc = 0
-### line tension ###
-p.eta = 0
-
-# o = dg.Options()
-# o.isReducedVolume = True
-# o.isConstantOsmoticPressure = False
-# o.isConstantSurfaceTension = True
-# o.isProteinVariation = True
-# o.isShapeVariation = True
-# o.isFloatVertex = True
-# o.shapeBoundaryCondition = "none"
-# o.proteinBoundaryCondition = "none"
-
-# o.isEdgeFlip = False
-# o.isSplitEdge = False
-# o.isCollapseEdge = False
-# o.isVertexShift = False
-
-# nSub = 0
-# isContinue = False
-# p = dg.Parameters()
-# ### general ###
-# p.pt = [0, 0, 1]
-# p.protein0 = [1, 1, 0.2, 0.1]
-# p.sharpness = 2
-# ### bending ###
-# p.Kb = 8.22e-5
-# p.Kbc = 0
-# p.H0c = 10
-# ### surface tension ###
-# p.Ksg = 1e-4
-# p.A_res = 0
-# p.epsilon = -1e-5
-# ### osmotic force ###
-# p.Kv = 0.02
-# p.V_res = 0
-# p.Vt = 0.6
-# p.cam = -1
-# ### protein binding ###
-# p.Bc = 1
-# ### line tension ###
-# p.eta = 0.001
+p.point.isFloatVertex = True
+p.point.pt = [0, 0, 1]
+p.boundary.shapeBoundaryCondition = "none"
+p.boundary.proteinBoundaryCondition = "none"
+p.variation.isProteinVariation = False
+p.variation.isShapeVariation = True
+p.proteinDistribution.protein0 = [1]
+p.proteinDistribution.sharpness = 2
+p.bending.Kb = 0
+p.bending.Kbc = 8.22e-5
+p.bending.H0c = 1.5
+p.tension.isConstantSurfaceTension = True
+p.tension.Ksg = 1e-1
+p.adsorption.epsilon = 0
+p.osmotic.isConstantOsmoticPressure = True
+p.osmotic.Kv = 1e-1
+p.proteinMobility = 0
+p.dirichlet.eta = 0
 
 
 def myExpFunc(x, a, b):
@@ -118,7 +61,7 @@ pE = np.zeros(nSubSize)
 for i in range(nSubSize):
     n = minSub + i
     faceMatrix, vertexMatrix = dg.getIcosphere(1, n)
-    g = dg.System(faceMatrix, vertexMatrix, p, o)
+    g = dg.System(faceMatrix, vertexMatrix, p)
     g.computeFreeEnergy()
     g.computePhysicalForces()
     g.saveRichData("nSub" + str(n) + ".ply")
@@ -127,38 +70,38 @@ for i in range(nSubSize):
     nsubdivisions[i] = n
 
     # L1 norm
-    normBendingForce[i] = np.sum(abs(g.F.getBendingForce()))
-    normBendingForce_areaGrad[i] = np.sum(abs(g.F.getBendingForce_areaGrad()))
-    normBendingForce_gaussVec[i] = np.sum(abs(g.F.getBendingForce_gaussVec()))
+    normBendingForce[i] = np.sum(abs(g.forces.getBendingForce()))
+    normBendingForce_areaGrad[i] = np.sum(abs(g.forces.getBendingForce_areaGrad()))
+    normBendingForce_gaussVec[i] = np.sum(abs(g.forces.getBendingForce_gaussVec()))
     normBendingForce_schlafliVec[i] = np.sum(
-        abs(g.F.getBendingForce_schlafliVec()))
-    normCapillaryForce[i] = np.sum(abs(g.F.getCapillaryForce()))
-    normOsmoticForce[i] = np.sum(abs(g.F.getOsmoticForce()))
-    # # normLineCapillaryForce[i] = np.sum(abs(g.F.getLineCapillaryForce()))
-    # normAdsorptionForce[i] = np.sum(abs(g.F.getAdsorptionForce()))
-    # normBendingPotential[i] = np.sum(abs(g.F.getBendingPotential()))
-    # normDiffusionPotential[i] = np.sum(abs(g.F.getDiffusionPotential()))
-    # normAdsorptionPotential[i] = np.sum(abs(g.F.getAdsorptionPotential()))
+        abs(g.forces.getBendingForce_schlafliVec()))
+    normCapillaryForce[i] = np.sum(abs(g.forces.getCapillaryForce()))
+    normOsmoticForce[i] = np.sum(abs(g.forces.getOsmoticForce()))
+    # # normLineCapillaryForce[i] = np.sum(abs(g.forces.getLineCapillaryForce()))
+    # normAdsorptionForce[i] = np.sum(abs(g.forces.getAdsorptionForce()))
+    # normBendingPotential[i] = np.sum(abs(g.forces.getBendingPotential()))
+    # normDiffusionPotential[i] = np.sum(abs(g.forces.getDiffusionPotential()))
+    # normAdsorptionPotential[i] = np.sum(abs(g.forces.getAdsorptionPotential()))
 
     # summation
-    # normBendingForce[i] = np.sum(g.F.getBendingForce())
-    # normCapillaryForce[i] = np.sum(g.F.getCapillaryForce())
-    # normOsmoticForce[i] = np.sum(g.F.getOsmoticForce())
-    # normLineCapillaryForce[i] = np.sum(g.F.getLineCapillaryForce())
-    # normAdsorptionForce[i] = np.sum(g.F.getAdsorptionForce())
+    # normBendingForce[i] = np.sum(g.forces.getBendingForce())
+    # normCapillaryForce[i] = np.sum(g.forces.getCapillaryForce())
+    # normOsmoticForce[i] = np.sum(g.forces.getOsmoticForce())
+    # normLineCapillaryForce[i] = np.sum(g.forces.getLineCapillaryForce())
+    # normAdsorptionForce[i] = np.sum(g.forces.getAdsorptionForce())
 
     # L2 norm
-    # normBendingForce[i] = np.linalg.norm(g.F.getBendingForce())
-    # normCapillaryForce[i] = np.linalg.norm(g.F.getCapillaryForce())
-    # normOsmoticForce[i] = np.linalg.norm(g.F.getOsmoticForce())
-    # normLineCapillaryForce[i] = np.linalg.norm(g.F.getLineCapillaryForce())
-    # normAdsorptionForce[i] = np.linalg.norm(g.F.getAdsorptionForce())
+    # normBendingForce[i] = np.linalg.norm(g.forces.getBendingForce())
+    # normCapillaryForce[i] = np.linalg.norm(g.forces.getCapillaryForce())
+    # normOsmoticForce[i] = np.linalg.norm(g.forces.getOsmoticForce())
+    # normLineCapillaryForce[i] = np.linalg.norm(g.forces.getLineCapillaryForce())
+    # normAdsorptionForce[i] = np.linalg.norm(g.forces.getAdsorptionForce())
 
-    BE[i] = g.E.BE
-    sE[i] = g.E.sE
-    pE[i] = g.E.pE
-    # dE[i] = g.E.dE
-    # aE[i] = g.E.aE
+    BE[i] = g.energy.BE
+    sE[i] = g.energy.sE
+    pE[i] = g.energy.pE
+    # dE[i] = g.energy.dE
+    # aE[i] = g.energy.aE
 
 print("normBendingForce: ", normBendingForce)
 # # print("normLineCapillaryForce: ", normLineCapillaryForce)
