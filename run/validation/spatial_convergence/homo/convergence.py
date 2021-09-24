@@ -62,7 +62,7 @@ for i in range(nSubSize):
     n = minSub + i
     faceMatrix, vertexMatrix = dg.getIcosphere(1, n)
     g = dg.System(faceMatrix, vertexMatrix, p)
-    g.computeFreeEnergy()
+    g.computeTotalEnergy()
     g.computePhysicalForces()
     g.saveRichData("nSub" + str(n) + ".ply")
 
@@ -97,9 +97,9 @@ for i in range(nSubSize):
     # normLineCapillaryForce[i] = np.linalg.norm(g.forces.getLineCapillaryForce())
     # normAdsorptionForce[i] = np.linalg.norm(g.forces.getAdsorptionForce())
 
-    BE[i] = g.energy.BE
-    sE[i] = g.energy.sE
-    pE[i] = g.energy.pE
+    BE[i] = g.energy.bendingEnergy
+    sE[i] = g.energy.surfaceEnergy
+    pE[i] = g.energy.pressureEnergy
     # dE[i] = g.energy.dE
     # aE[i] = g.energy.aE
 
