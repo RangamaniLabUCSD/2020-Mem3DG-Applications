@@ -35,16 +35,16 @@ def sizeOf(trajnc):
         return ds.groups["Trajectory"].dimensions['frame'].size
 
 
-# def constructSystem(parameters, trajnc, frame):
-#     with nc.Dataset(trajnc) as ds:
-#         time = np.array(ds.groups['Trajectory'].variables['time'][frame])
-#         coordinates = np.array(
-#             ds.groups['Trajectory'].variables['coordinates'][frame])
-#         topology = np.array(
-#             ds.groups['Trajectory'].variables['topology'][frame])
-#         coordinates = np.reshape(coordinates, (-1, 3))
-#         topology = np.reshape(topology, (-1, 3))
-#         return dg.System(topology, coordinates, parameters)
+def constructSystemByMatrix(parameters, trajnc, frame):
+    with nc.Dataset(trajnc) as ds:
+        time = np.array(ds.groups['Trajectory'].variables['time'][frame])
+        coordinates = np.array(
+            ds.groups['Trajectory'].variables['coordinates'][frame])
+        topology = np.array(
+            ds.groups['Trajectory'].variables['topology'][frame])
+        coordinates = np.reshape(coordinates, (-1, 3))
+        topology = np.reshape(topology, (-1, 3))
+        return dg.System(topology, coordinates, parameters)
 
 
 def constructSystem(parameters, trajnc, frame):
@@ -52,15 +52,19 @@ def constructSystem(parameters, trajnc, frame):
 
 
 if __name__ == "__main__":
-    # Parse the trajectory file
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "data", help="traj.nc file used for visualization of data, such as energy trajectory", type=str,  nargs=2)
-
+        "data", help="traj.nc and parameter setup file used for visualization of data, such as energy trajectory", type=str,  nargs=2)
     args = parser.parse_args()
+
+    """ parse the netCDF trajectory file """
     trajFile = args.data[1]
+
+    """ parse the parameter.py file """
     parameterFile = imp.load_source("module.name", args.data[0])
 
+    """ initialize numpy array """
     frameNum = sizeOf(trajFile)
     time = np.zeros([frameNum, 1])
     kineticEnergy = np.zeros([frameNum, 1])
@@ -68,6 +72,7 @@ if __name__ == "__main__":
     externalWork = np.zeros([frameNum, 1])
     totalEnergy = np.zeros([frameNum, 1])
 
+    """ loop over trajectory and recover data """
     for frame in range(frameNum):
         system = constructSystem(parameterFile.parameters(), trajFile, frame)
         system.computeTotalEnergy()
@@ -78,6 +83,8 @@ if __name__ == "__main__":
                 system.computeIntegratedPower(time[frame] - time[frame-1])
         potentialEnergy[frame] = system.energy.potentialEnergy
     totalEnergy = potentialEnergy + kineticEnergy - externalWork
+
+    """ plotting """
     fig, axs = plt.subplots(2)
     plotStyle(fig)
     axs[0].plot(time, kineticEnergy, label='$E_{kinetic}$')
@@ -86,6 +93,3 @@ if __name__ == "__main__":
     axs[0].plot(time, totalEnergy, label='$E_{total}$')
     axs[0].legend()
     plt.show()
-    # plot(parameters=parameterFile.parameters(), trajnc=trajFile)
-    # constructSystem(parameters = parameterFile.parameters(),
-    #                 trajnc = trajFile, frame = 3)
