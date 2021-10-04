@@ -1,12 +1,12 @@
 import pymem3dg as dg
 import numpy as np
-import parameters.py
+import parameters
 
 ####################################################
 #                 Initialize pathes                #
 ####################################################
 """ Linux """
-outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/temp"
+outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/temp2"
 
 """ Windows """
 # outputDir = (
@@ -42,14 +42,15 @@ p = parameters.parameters()
 #                 Mesh processor                   #
 ####################################################
 mP = dg.MeshProcessor()
-mP.meshMutator.shiftVertex = False
+mP.meshMutator.shiftVertex = True
 mP.meshMutator.flipNonDelaunay = True
 # mP.meshMutator.splitLarge = True
 mP.meshMutator.splitFat = True
 mP.meshMutator.splitSkinnyDelaunay = True
-# mP.meshMutator.splitCurved = True
-# mP.meshMutator.curvTol = 0.005
+mP.meshMutator.splitCurved = True
+mP.meshMutator.curvTol = 0.005
 mP.meshMutator.collapseSkinny = True
+
 # mP.meshRegularizer.Kst = 0.1 # 2e-6
 # mP.meshRegularizer.Ksl = 0
 # mP.meshRegularizer.Kse = 0
@@ -80,17 +81,15 @@ h = 1
 T = 10000000
 eps = 1e-6
 tSave = 300
-rho = 0.99
-c1 = 0.0001
-verbosity = 3
-restartNum = 3
+verbosity = 5
 
 """ Integrator construction """
 fe = dg.Euler(g, h, T, tSave, eps, outputDir)
 
 """ Integrator setups (optional) """
 # fe.tUpdateGeodesics = 50
-fe.processMeshPeriod = 300
+fe.processMeshPeriod = 50
 # fe.isBacktrack = False
-fe.isAdaptiveStep = False
+fe.isAdaptiveStep = True
+fe.verbosity = verbosity
 fe.integrate()
