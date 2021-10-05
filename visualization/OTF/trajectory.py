@@ -68,6 +68,12 @@ if __name__ == "__main__":
     externalWork = np.zeros([frameNum, 1])
     totalEnergy = np.zeros([frameNum, 1])
 
+    dirichletEnergy = np.zeros([frameNum, 1])
+    bendingEnergy = np.zeros([frameNum, 1])
+    surfaceEnergy = np.zeros([frameNum, 1])
+    pressureEnergy = np.zeros([frameNum, 1])
+    adsorptionEnergy = np.zeros([frameNum, 1])
+
     """ loop over trajectory and recover data """
     for frame in range(frameNum):
         system = constructSystem(parameterFile.parameters(), trajFile, frame)
@@ -78,19 +84,31 @@ if __name__ == "__main__":
             externalWork[frame] = externalWork[frame-1] + \
                 system.computeIntegratedPower(time[frame] - time[frame-1])
         potentialEnergy[frame] = system.energy.potentialEnergy
+        dirichletEnergy[frame] = system.energy.dirichletEnergy
+        bendingEnergy[frame] = system.energy.bendingEnergy
+        surfaceEnergy[frame] = system.energy.surfaceEnergy
+        pressureEnergy[frame] = system.energy.pressureEnergy
+        adsorptionEnergy[frame] = system.energy.adsorptionEnergy
     totalEnergy = potentialEnergy + kineticEnergy - externalWork
 
     """ plotting """
-    fig, axs = plt.subplots(2)
-    fig.set_size_inches(7, 10)
+    fig, axs = plt.subplots(1,2)
+    fig.set_size_inches(7, 3)
     # plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
-
-    matplotlibStyle(fig)
+    matplotlibStyle()
     axs[0].plot(time, kineticEnergy, label='$E_{kinetic}$')
     axs[0].plot(time, potentialEnergy, label='$E_{potential}$')
     axs[0].plot(time, externalWork, label='$W$')
     axs[0].plot(time, totalEnergy, label='$E_{total}$')
     axs[0].legend()
+
+    axs[1].plot(time, bendingEnergy, label='$E_b$')
+    axs[1].plot(time, dirichletEnergy, label='$E_d$')
+    axs[1].plot(time, surfaceEnergy, label='$E_s$')
+    axs[1].plot(time, pressureEnergy, label='$E_p$')
+    axs[1].plot(time, adsorptionEnergy, label='$E_a$')
+    axs[1].legend()
+    
     plt.tight_layout()
     # plt.savefig("energy.pdf", transparent=True)
     # plt.savefig("energy.png", transparent=True, dpi=1200)

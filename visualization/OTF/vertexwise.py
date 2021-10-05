@@ -49,7 +49,7 @@ def readMeshDataByPly(ply, dataType, dataName):
 
 def readMeshByNc(ncFrame):
     trajNc, frame = ncFrame
-    with nc.Dataset(trajNc+ ".nc") as ds:
+    with nc.Dataset(trajNc + ".nc") as ds:
         coordinates = np.array(
             ds.groups['Trajectory'].variables['coordinates'][frame])
         topology = np.array(
@@ -70,15 +70,18 @@ def readMeshDataByNc(ncFrame, group, variable, num_col):
         data = np.reshape(data, (-1, num_col))
     return np.squeeze(data)
 
+
 def constructSystemByNc(parameters, ncFrame):
     trajNc, frame = ncFrame
     return dg.System(trajNc + ".nc", frame, parameters, 0, True)
+
 
 def rowwiseScaling(scaling, matrix):
     if np.shape(matrix)[0] == np.size(matrix):
         return matrix * scaling
     else:
         return matrix * scaling[:, None]
+
 
 def rowwiseNorm(matrix):
     if np.shape(matrix)[0] == np.size(matrix):
@@ -95,6 +98,7 @@ def rowwiseNormalize(matrix):
 def rowwiseDotProduct(a, b):
     return np.sum(a*b, axis=1)
 
+
 if __name__ == "__main__":
     """ working directory """
     wd = "../../results/bud_on_vesicle/"
@@ -103,7 +107,8 @@ if __name__ == "__main__":
     ps.init()
 
     """ list all parameters """
-    parametersList = [wd + '0p7_neg/parameters.py', wd + '0p7_neg/parameters.py']
+    parametersList = [wd + '0p7_neg/parameters.py',
+                      wd + '0p7_neg/parameters.py', wd + '0p7/parameters.py']
 
     """ list all meshes """
     """ based on .ply file """
@@ -111,14 +116,18 @@ if __name__ == "__main__":
     #                  '0p8/frame20', '1/frame70', '1/frame140', '1p2/frame166', '1p2/frame332']
 
     """ based on .nc file """
-    meshList = [(wd + '0p7_neg/traj', 14), (wd + '0p7_neg/traj', 27)]
+    meshList = [(wd + '0p7_neg/traj', 14),
+                (wd + '0p7_neg/traj', 27), (wd + '0p7/traj', 200)]
 
     """ loop over meshes """
     for i in range(len(meshList)):
+
+        """ construct a tag """
+        tag = meshList[i][0] + "{}".format(meshList[i][1])
+
         """ read mesh """
-        name = meshList[i][0] + "{}".format(meshList[i][1])
         face, vertex = readMeshByNc(meshList[i])
-        mesh = ps.register_surface_mesh(name, vertex, face)
+        mesh = ps.register_surface_mesh(tag, vertex, face)
 
         """ read parameters """
         parameterFile = imp.load_source("module.name", parametersList[i])
@@ -129,7 +138,14 @@ if __name__ == "__main__":
         """ read protein density """
         proteinDensity = system.getProteinDensity()
         limit = (np.min(proteinDensity), np.max(proteinDensity))
-        mesh.add_scalar_quantity("proteinDensity", proteinDensity, vminmax=limit)
+        mesh.add_scalar_quantity(
+            "proteinDensity", proteinDensity, vminmax=limit)
+
+        """ read spontaneous curvature """
+        spontaneousCurvature = system.getSpontaneousCurvature()
+        limit = (np.min(spontaneousCurvature), np.max(spontaneousCurvature))
+        mesh.add_scalar_quantity(
+            "spontaneousCurvature", spontaneousCurvature, vminmax=limit)
 
         """ compute forces """
         system.computePhysicalForces()
@@ -137,18 +153,20 @@ if __name__ == "__main__":
         """ read line capillary force """
         lineCapillaryForce = system.forces.getLineCapillaryForce()
         mesh.add_vector_quantity("lineCapillaryForce", lineCapillaryForce)
-        mesh.add_scalar_quantity("lineCapillaryForce_norm", rowwiseNorm(lineCapillaryForce))
+        mesh.add_scalar_quantity(
+            "lineCapillaryForce_norm", rowwiseNorm(lineCapillaryForce))
 
         """ read bending force """
         bendingForce = system.forces.getBendingForce()
         mesh.add_vector_quantity("bendingForce", bendingForce)
-        mesh.add_scalar_quantity("bendingForce_norm", rowwiseNorm(bendingForce))
+        mesh.add_scalar_quantity(
+            "bendingForce_norm", rowwiseNorm(bendingForce))
 
         """ color map """
         fig, axs = plt.subplots(1, 1)
         fig.set_size_inches(1, 1)
         fig = getColorMap(fig, limit)
-        fig.savefig(name + ".pdf", transparent=True)
+        fig.savefig(tag + ".pdf", transparent=True)
         # plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
         # fig.savefig(meshFile +"_horizontal.pdf", transparent=True)
 
