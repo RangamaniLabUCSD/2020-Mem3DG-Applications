@@ -8,14 +8,14 @@ import pymem3dg as dg
 import imp
 
 
-def plotStyle(fig):
-    # Font:
+def matplotlibStyle():
+    """ Formatting style of matplotlib """
     plt.rcParams['font.sans-serif'] = "Arial"
     plt.rcParams['font.family'] = "sans-serif"
-    #mpl.rcParams.update({'font.size': 8})
-    SMALL_SIZE = 13
-    MEDIUM_SIZE = 18
-    BIGGER_SIZE = 20
+    # mpl.rcParams.update({'font.size': 8})
+    SMALL_SIZE = 7
+    MEDIUM_SIZE = 9
+    BIGGER_SIZE = 10
     plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
     plt.rc('axes', titlesize=BIGGER_SIZE)     # fontsize of the axes title
     plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
@@ -24,10 +24,6 @@ def plotStyle(fig):
     plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
     plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
     plt.rc('pdf', fonttype=42)
-
-    # Figure:
-    fig.set_size_inches(7, 10)
-    plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
 
 
 def sizeOf(trajnc):
@@ -48,7 +44,7 @@ def constructSystemByMatrix(parameters, trajnc, frame):
 
 
 def constructSystem(parameters, trajnc, frame):
-    return dg.System(trajnc, frame, parameters, 0, 1)
+    return dg.System(trajnc, frame, parameters, 0, True)
 
 
 if __name__ == "__main__":
@@ -86,10 +82,16 @@ if __name__ == "__main__":
 
     """ plotting """
     fig, axs = plt.subplots(2)
-    plotStyle(fig)
+    fig.set_size_inches(7, 10)
+    # plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
+
+    matplotlibStyle(fig)
     axs[0].plot(time, kineticEnergy, label='$E_{kinetic}$')
     axs[0].plot(time, potentialEnergy, label='$E_{potential}$')
     axs[0].plot(time, externalWork, label='$W$')
     axs[0].plot(time, totalEnergy, label='$E_{total}$')
     axs[0].legend()
+    plt.tight_layout()
+    # plt.savefig("energy.pdf", transparent=True)
+    # plt.savefig("energy.png", transparent=True, dpi=1200)
     plt.show()
