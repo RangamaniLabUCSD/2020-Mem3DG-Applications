@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pymem3dg as dg
 import imp
+from scipy.signal import savgol_filter
 
 
 def matplotlibStyle():
@@ -47,6 +48,15 @@ def constructSystem(parameters, trajnc, frame):
     return dg.System(trajnc, frame, parameters, 0, True)
 
 
+def smooth(y, box_pts):
+    """ moving average """
+    box = np.ones(box_pts)/box_pts
+    return np.convolve(y, box, mode='same')
+
+    """ more advanced """
+    # return savgol_filter(y, box_pts+1, 2)
+
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
@@ -61,29 +71,34 @@ if __name__ == "__main__":
     parameterFile = imp.load_source("module.name", args.data[0])
 
     """ initialize numpy array """
-    frameNum = sizeOf(trajFile)
-    time = np.zeros([frameNum, 1])
-    kineticEnergy = np.zeros([frameNum, 1])
-    potentialEnergy = np.zeros([frameNum, 1])
-    externalWork = np.zeros([frameNum, 1])
-    totalEnergy = np.zeros([frameNum, 1])
+    frameLim = (0, sizeOf(trajFile))
+    frameNum = frameLim[1] - frameLim[0]
+    time = np.zeros(frameNum)
+    kineticEnergy = np.zeros(frameNum)
+    potentialEnergy = np.zeros(frameNum)
+    externalWork = np.zeros(frameNum)
+    totalEnergy = np.zeros(frameNum)
 
-    dirichletEnergy = np.zeros([frameNum, 1])
-    bendingEnergy = np.zeros([frameNum, 1])
-    surfaceEnergy = np.zeros([frameNum, 1])
-    pressureEnergy = np.zeros([frameNum, 1])
-    adsorptionEnergy = np.zeros([frameNum, 1])
+    dirichletEnergy = np.zeros(frameNum)
+    bendingEnergy = np.zeros(frameNum)
+    surfaceEnergy = np.zeros(frameNum)
+    pressureEnergy = np.zeros(frameNum)
+    adsorptionEnergy = np.zeros(frameNum)
 
     """ loop over trajectory and recover data """
     for frame in range(frameNum):
-        system = constructSystem(parameterFile.parameters(), trajFile, frame)
-        system.computeTotalEnergy()
+        """ construct the system """
+        system = constructSystem(parameterFile.parameters(), trajFile, frame + frameLim[0])
         time[frame] = system.time
+
+        """ computate energy """
+        system.computeTotalEnergy()
         kineticEnergy[frame] = system.energy.kineticEnergy
+        potentialEnergy[frame] = system.energy.potentialEnergy
         if frame != 0:
             externalWork[frame] = externalWork[frame-1] + \
                 system.computeIntegratedPower(time[frame] - time[frame-1])
-        potentialEnergy[frame] = system.energy.potentialEnergy
+
         dirichletEnergy[frame] = system.energy.dirichletEnergy
         bendingEnergy[frame] = system.energy.bendingEnergy
         surfaceEnergy[frame] = system.energy.surfaceEnergy
@@ -92,7 +107,7 @@ if __name__ == "__main__":
     totalEnergy = potentialEnergy + kineticEnergy - externalWork
 
     """ plotting """
-    fig, axs = plt.subplots(1,2)
+    fig, axs = plt.subplots(1, 2)
     fig.set_size_inches(7, 3)
     # plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
     matplotlibStyle()
