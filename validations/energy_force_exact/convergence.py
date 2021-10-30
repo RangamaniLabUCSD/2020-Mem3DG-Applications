@@ -10,31 +10,53 @@ def myExpFunc(x, a, b):
 
 
 faceMatrix, vertexMatrix = dg.getIcosphere(1, 3)
-####################################################
-#        System: Options and Parameters            #
-####################################################
+
 p = dg.Parameters()
-p.point.isFloatVertex = True
+
+p.proteinMobility = 1
+p.temperature = 0
+
 p.point.pt = [0, 0, 1]
+p.point.isFloatVertex = True
+
+p.proteinDistribution.protein0 = [1, 1, 0.3, 0.2]
+
 p.boundary.shapeBoundaryCondition = "none"
 p.boundary.proteinBoundaryCondition = "none"
+
 p.variation.isProteinVariation = True
 p.variation.isShapeVariation = True
-p.proteinDistribution.protein0 = [1, 1, 0.3, 0.2]
-p.proteinDistribution.sharpness = 2
+p.variation.radius = -1
+
 p.bending.Kb = 8.22e-5
-p.bending.Kbc = 0
-p.bending.H0c = 1
+p.bending.Kbc = 0  # 8.22e-4 #DEFINITION OF LARGE AND SMALL VALUE
+p.bending.H0c = 10
+
 p.tension.isConstantSurfaceTension = True
 p.tension.Ksg = 1e-1
+p.tension.A_res = 0
+p.tension.At = 12.5025
+p.tension.lambdaSG = 0
+
 p.adsorption.epsilon = -1e-1
+
+p.osmotic.isPreferredVolume = False
 p.osmotic.isConstantOsmoticPressure = True
 p.osmotic.Kv = 1e-1
-p.proteinMobility = 1
+p.osmotic.V_res = 0
+p.osmotic.n = 1
+p.osmotic.Vt = -1
+p.osmotic.cam = -1
+p.osmotic.lambdaV = 0
+
 p.dirichlet.eta = 0.1
 
+p.dpd.gamma = 0
 
-nSubSize = 8
+p.external.Kf = 0
+
+
+nSubSize = 5
 maxh = 0.1
 
 H = np.zeros(nSubSize)
@@ -52,7 +74,7 @@ for i in range(nSubSize):
     H[i] = h
 
     g = dg.System(faceMatrix, vertexMatrix, p)
-    g.computeFreeEnergy()
+    g.computeTotalEnergy()
     g.computePhysicalForces()
     p.proteinDistribution.protein0 = g.getProteinDensity()
     # print("new pos: ", np.linalg.norm(h * g.forces.getBendingForce() +
@@ -60,64 +82,64 @@ for i in range(nSubSize):
 
     gNew = dg.System(faceMatrix, h * g.forces.getBendingForce() +
                      vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.BE - gNew.energy.BE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.bendingEnergy - gNew.energy.bendingEnergy
     expected = h * np.linalg.norm(g.forces.getBendingForce())**2
     diffBendingForce[i] = abs(dEnergy - expected)
     print("h is", h, " and dBE: ", dEnergy, " and expected: ", expected)
 
     gNew = dg.System(faceMatrix, h * g.forces.getCapillaryForce() +
                      vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.sE - gNew.energy.sE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.surfaceEnergy - gNew.energy.surfaceEnergy
     expected = h * np.linalg.norm(g.forces.getCapillaryForce())**2
     diffCapillaryForce[i] = abs(dEnergy - expected)
     print("h is", h, " and dsE: ", dEnergy, " and expected: ", expected)
 
     gNew = dg.System(faceMatrix, h * g.forces.getOsmoticForce() +
                      vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.pE - gNew.energy.pE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.pressureEnergy - gNew.energy.pressureEnergy
     expected = h * np.linalg.norm(g.forces.getOsmoticForce())**2
     diffOsmoticForce[i] = abs(dEnergy - expected)
     print("h is", h, " and dpE: ", dEnergy, " and expected: ", expected)
 
     gNew = dg.System(faceMatrix, h * g.forces.getAdsorptionForce() +
                      vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.aE - gNew.energy.aE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.adsorptionEnergy - gNew.energy.adsorptionEnergy
     expected = h * np.linalg.norm(g.forces.getAdsorptionForce())**2
     diffAdsorptionForce[i] = abs(dEnergy - expected)
     print("h is", h, " and daE: ", dEnergy, " and expected: ", expected)
 
     gNew = dg.System(faceMatrix, h * g.forces.getLineCapillaryForce() +
                      vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.dE - gNew.energy.dE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.dirichletEnergy - gNew.energy.dirichletEnergy
     expected = h * np.linalg.norm(g.forces.getLineCapillaryForce())**2
     diffLineCapillaryForce[i] = abs(dEnergy - expected)
     print("h is", h, " and ddE: ", dEnergy, " and expected: ", expected)
 
     p.proteinDistribution.protein0 = g.getProteinDensity() + h * g.forces.getDiffusionPotential()
     gNew = dg.System(faceMatrix, vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.dE - gNew.energy.dE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.dirichletEnergy - gNew.energy.dirichletEnergy
     expected = h * np.linalg.norm(g.forces.getDiffusionPotential())**2
     diffDiffusionPotential[i] = abs(dEnergy - expected)
     print("h is", h, " and ddE: ", dEnergy, " and expected: ", expected)
 
     p.proteinDistribution.protein0 = g.getProteinDensity() + h * g.forces.getBendingPotential()
     gNew = dg.System(faceMatrix, vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.BE - gNew.energy.BE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.bendingEnergy - gNew.energy.bendingEnergy
     expected = h * np.linalg.norm(g.forces.getBendingPotential())**2
     diffBendingPotential[i] = abs(dEnergy - expected)
     print("h is", h, " and dBE: ", dEnergy, " and expected: ", expected)
 
     p.proteinDistribution.protein0 = g.getProteinDensity() + h * g.forces.getAdsorptionPotential()
     gNew = dg.System(faceMatrix, vertexMatrix, p)
-    gNew.computeFreeEnergy()
-    dEnergy = g.energy.aE - gNew.energy.aE
+    gNew.computeTotalEnergy()
+    dEnergy = g.energy.adsorptionEnergy - gNew.energy.adsorptionEnergy
     expected = h * np.linalg.norm(g.forces.getAdsorptionPotential())**2
     diffAdsorptionPotential[i] = abs(dEnergy - expected)
     print("h is", h, " and daE: ", dEnergy, " and expected: ", expected)
@@ -138,45 +160,47 @@ plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
 plt.rc('pdf', fonttype=42)
 # plt.subplots_adjust(left=0.164, bottom=0.07, right=0.988, top=0.988)
 
-fig, axs = plt.subplots(1, 3)
-fig.set_size_inches(7, 4)
+fig, axs = plt.subplots(1, 1)
+fig.set_size_inches(3, 3)
+axs.set_xlabel("Perturbation")
+axs.set_ylabel("Error")
 
 popt, pcov = curve_fit(myExpFunc, H, diffBendingForce)
-axs[0].loglog(H, diffBendingForce,
-              '-o',  label="$f^b, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffBendingForce,
+              '-o',  label="$f^b, $"+"$\mathcal{O}$" + "({order:.1f})".format(order=popt[1]))
 
 popt, pcov = curve_fit(myExpFunc, H, diffCapillaryForce)
-axs[0].loglog(H, diffCapillaryForce,
-              '-o',  label="$f^s, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffCapillaryForce,
+              '-o',  label="$f^s, $"+"$\mathcal{O}$" + "({order:.1f})".format(order=popt[1]))
 
 
 popt, pcov = curve_fit(myExpFunc, H, diffOsmoticForce)
-axs[0].loglog(H, diffOsmoticForce,
-              '-o',  label="$f^p, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffOsmoticForce,
+              '-o',  label="$f^p, $"+"$\mathcal{O}$" + "({order:.1f})".format(order=popt[1]))
 
 
 popt, pcov = curve_fit(myExpFunc, H, diffLineCapillaryForce)
-axs[0].loglog(H, diffLineCapillaryForce,
-              '-o',  label="$f^d, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffLineCapillaryForce,
+              '-o',  label="$f^d, $"+"$\mathcal{O}$" + "({order:.1f})".format(order=popt[1]))
 
 popt, pcov = curve_fit(myExpFunc, H, diffAdsorptionForce)
-axs[0].loglog(H, diffAdsorptionForce,
-              '-o',  label="$f^a, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffAdsorptionForce,
+              '-o',  label="$f^a, $"+"$\mathcal{O}$" + "({order:.1f})".format(order=popt[1]))
 
 popt, pcov = curve_fit(myExpFunc, H, diffDiffusionPotential)
-axs[0].loglog(H, diffDiffusionPotential,
-              '-o',  label="$\mu^d, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffDiffusionPotential,
+              '-o',  label="$\mu^d, $"+"$\mathcal{O}$" + "({order:.1f})".format(order=popt[1]))
 
 popt, pcov = curve_fit(myExpFunc, H, diffBendingPotential)
-axs[0].loglog(H, diffBendingPotential,
-              '-o',  label="$\mu^b, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffBendingPotential,
+              '-o',  label="$\mu^b, $"+"$\mathcal{O}$" + "({order:.1f})".format(order=popt[1]))
 
 print("adsorption error: ", diffAdsorptionPotential)
 popt, pcov = curve_fit(myExpFunc, H, diffAdsorptionPotential)
-axs[0].loglog(H, diffAdsorptionPotential,
-              '-o',  label="$\mu^a, O({{{order: .1f}}})$".format(order=popt[1]))
+axs.loglog(H, diffAdsorptionPotential,
+              '-o',  label="$\mu^a$".format(order=popt[1]))
 
-axs[0].legend()
+axs.legend()
 plt.tight_layout()
 plt.savefig("gradient.pdf", transparent=True)
 
