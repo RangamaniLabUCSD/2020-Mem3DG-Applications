@@ -6,7 +6,7 @@ import parameters
 #                 Initialize pathes                #
 ####################################################
 """ Linux """
-outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/temp2"
+outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/temp3"
 
 """ Windows """
 # outputDir = (
