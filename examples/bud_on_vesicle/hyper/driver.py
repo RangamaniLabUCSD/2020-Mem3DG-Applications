@@ -77,7 +77,7 @@ g = dg.System(icoFace, icoVertex, p, mP, nSub)
 #          Time integration / Optimization
 ####################################################
 """ Integrator setups (essential) """
-h = 1
+h = 0.25
 T = 10000000
 eps = 1e-6
 tSave = 300

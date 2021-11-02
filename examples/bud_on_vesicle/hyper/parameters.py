@@ -18,7 +18,7 @@ def parameters():
     p.variation.radius = -1
     
     p.bending.Kb = 8.22e-5
-    p.bending.Kbc = 0  # 8.22e-4 #DEFINITION OF LARGE AND SMALL VALUE
+    p.bending.Kbc = 8.22e-5  # 8.22e-4 #DEFINITION OF LARGE AND SMALL VALUE
     p.bending.H0c = 10
     
     p.tension.isConstantSurfaceTension = False

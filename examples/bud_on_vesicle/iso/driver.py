@@ -6,7 +6,7 @@ import parameters
 #                 Initialize pathes                #
 ####################################################
 """ Linux """
-outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/temp3"
+outputDir = "/home/cuzhu/2020-Mem3DG-Applications/results/temp2"
 
 """ Windows """
 # outputDir = (
@@ -77,7 +77,7 @@ g = dg.System(icoFace, icoVertex, p, mP, nSub)
 #          Time integration / Optimization
 ####################################################
 """ Integrator setups (essential) """
-h = 1
+h = 0.25
 T = 10000000
 eps = 1e-6
 tSave = 300

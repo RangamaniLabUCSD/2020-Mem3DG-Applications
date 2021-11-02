@@ -34,7 +34,7 @@ def parameters():
     p.osmotic.Kv = 0.5
     p.osmotic.V_res = 0
     p.osmotic.n = 1
-    p.osmotic.Vt = 0.95 * 4.15889  # 1 * 4 * 3.1416 / 3
+    p.osmotic.Vt = 1.2 * 4.15889  # 1 * 4 * 3.1416 / 3
     p.osmotic.cam = -1
     p.osmotic.lambdaV = 0
     
